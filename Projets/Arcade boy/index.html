@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test</title>
+</head>
+<body>
+<style>
+    #app {
+        width: 100%;
+        height: 100%;
+        position: relative;
+    }
+
+    #textbox {
+        position: absolute;
+        left: 10%;
+        right: 10%;
+        z-index: 1000;
+        bottom: 2vh;
+        min-height: 10vh;
+        background: white;
+        border-radius: 3px;
+        outline-style: solid;
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-items: flex-start;
+        word-spacing: 0.2rem;
+        filter: drop-shadow(0 0 0.75rem rgb(112, 112, 112));
+        /* overflow: auto; */
+    }
+
+    .ui-text {
+        margin: 0;
+        user-select: none;
+    }
+
+    #minigame, #game {
+        position: absolute;
+    }
+
+    #minigame {
+        display: none;
+        left: 25vw;
+    }
+
+    video {
+        position: absolute;
+        z-index: 100;
+        width: 16%;
+        left: 36%;
+        top: 10%;
+        padding-top: 7%;
+    }
+
+
+
+    #imgContainer img {
+        width: 40%;
+        display: none;
+        z-index: 100;
+        /* bottom: 21%; */
+        top: 10%;
+        padding-top: -7%;
+        position: absolute;
+        left: 25%;
+    }
+
+</style>
+<div id="app">
+    <div>
+        <p class="note">Tap/Click around to move</p>
+
+        <div id="textbox-container" style="display: none">
+            <div id="textbox">
+                <p id="dialogue" class="ui-text"></p>
+                <div id="choix" class="ui-text"></div>
+                <div class="btn-container">
+                    <button id="close" class="ui-close-btn">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="imgContainer">
+        <img id="appleII" src="sprites/Apple_II_IMG_4212.png">
+        <img id="amstrad_03" src="sprites/Amstradebdo%2003%20-%20Page%2001.jpg">
+    </div>
+    <div id="videoContainer">
+        <video id="video" autoplay>
+            <source id="srcVideo" src="" type="video/mp4">
+        </video>
+    </div>
+    <canvas id="game"></canvas>
+    <canvas id="minigame" width="800" height="600"></canvas>
+</div>
+<script src="pong.js"></script>
+<script src="build.js"></script>
+</body>
+</html>
