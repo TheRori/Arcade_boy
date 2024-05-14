@@ -1,26 +1,6 @@
 import { k } from "./kaboomCtx";
 
-const LVL = [
-    "wwwwwwwwwwwwwwww",
-    "wwwwwwwwwwwwwwww",
-    "wwwwwwwwwwwwwwww",
-    "w             w",
-    "w             w",
-    "w             w",
-    "w             w",
-    "w             w",
-    "w             w",
-    "w             w",
-    "w             w",
-    "w             w",
-    "w             w",
-    "w             w",
-    "w             w",
-    "wwwwwwwwwwwwwwww"
-]
-
-const imgHTML = document.getElementById('imgContainer');
-
+const imgHTML = document.getElementById('appleII');
 
 k.loadSprite("map", "sprites/map.png");
 k.loadSprite("wall1", "sprites/wall.png");
@@ -92,6 +72,16 @@ for (const layer of layers) {
                     k.pos(c*16, r*16),
                     'wall',
                 ]);
+            }
+            else if (id === 2) {
+                map.add([
+                    k.sprite("father"),
+                    k.area(),
+                    k.pos(c*16,r*16),
+                    k.scale(1.5),
+                    k.body({isStatic:true}),
+                    "father",
+                ])
             }
             if (c === 15) {
                 c = 0;
@@ -255,6 +245,15 @@ export function createPlayer(position) {
         player.isInDialogue = true;
         stopAnims();
         player.moveSpeed = 0;
+        k.onDraw(() => {
+            k.drawRect({
+                width: 256 * 2,
+                height: 256 * 2,
+                pos: k.vec2(0),
+                color: k.rgb(127, 96, 58),
+                opacity: 0.5,
+            })
+        })
     })
     k.onCollideUpdate('player', 'magazine', () => {
         readMagazine();
@@ -343,6 +342,7 @@ export function createPlayer(position) {
 k.scene("level1", () => {
     // Créer le personnage
     createMap();
+    k.setBackground(k.BLACK);
 
 });
 
