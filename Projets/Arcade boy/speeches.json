@@ -2,7 +2,7 @@
   "dialogues1": [
     {
       "order": 1,
-      "speaker": "father",
+      "speaker": "father#1",
       "need": [],
       "speech": "Alors ça regarde c’est une machine qui en jette ! Je l’ai acheté dans la boutique spécialisée d’électroniques en ville, regarde ça, c’est vraiment une pépite de technologie, viens seulement tu peux le prendre.",
       "choice": [
@@ -12,7 +12,7 @@
     },
     {
       "order": 2,
-      "speaker": "father",
+      "speaker": "father#1",
       "need": ["0"],
       "speech": "Alors tu vois c’est une machine qui permet de faire plusieurs choses mais il faut évidemment la connecter à un écran j’allais justement le faire ! Tu peux par exemple jouer, ça ça doit sûrement te faire un peu plus sourire, mais aussi la faire calculer pour toi ou composer des documents comme une machine à écrie mais pas besoin de papier !",
       "choice": [
@@ -22,7 +22,7 @@
     },
     {
       "order": 2,
-      "speaker": "father",
+      "speaker": "father#1",
       "need": ["1"],
       "speech":  "Pleins de choses ! D’abord tu peux écrire en éditant directement sur l’écran donc la machine à écrire ne va pas tenir longtemps la comparaison! Tu peux faire de la programmation bien sûr pour utiliser la logique de la mahcine pour qu’elle fassse des calculs à ta place et le meilleurs enfin: tu peux jouer ! tu veux que je te montre ?",
       "choice": [
@@ -32,30 +32,74 @@
     },
     {
       "order": 3,
-      "speaker": "father",
+      "speaker": "father#1",
       "need": ["0", "0"],
       "speech": "Comme tu veux, mais tu sais parfois pour moi ça serait important que tu t’intéresses un peu à des choses que je te montre, je crois que je peux encore t’apprende 2-3 choses..",
       "choice": []
     },
     {
       "order": 3,
-      "speaker": "father",
+      "speaker": "father#1",
       "need": ["0", "1"],
       "speech": "Eh beh, l’enthousiasme peut aller se faire voir mais regarde je vais te faire changer d’avis !",
       "choice": []
     },
     {
       "order": 3,
-      "speaker": "father",
+      "speaker": "father#1",
       "need": ["1","0"],
       "speech": "Eh non, là les capacités de l’écran réduisent évidemment les possibilités mais par contre il suffit de descendre au garage et t’as pas besoin d’utiliser mon argent de poche pour payer ta partie, allez regarde",
       "choice": []
     },
     {
       "order": 3,
-      "speaker": "father",
+      "speaker": "father#1",
       "need": ["1","1"],
       "speech": "Aah Les ados c’est toujours comme ça, jamais 10min pour se poser avec ses parents mais pour les potes faut être là à la minute!",
+      "choice": []
+    },
+    {
+      "order": 1,
+      "speaker": "father#2",
+      "need": [],
+      "speech": "Regarde cette bête elle a pas la puissance de son successeur sorti le mois dernier mais quand même 64kilos octes de mémoire enfermée dans une petite boit comme ça c’est un petit miracle !",
+      "choice": ["Attends, c’est quoi la mahcine qui est sortie ? C’est pas ton caprice dont parle toujours maman ces derniers temps ? Je crois qu’elle partage ton amours des hockey trucs..",
+      "Cool ! Mais tu m’as dit que tu peux jouer ?! moi je croyais que c’était juste pour faire tes codes bizzares, tu me fais toujours des commentaires comme quoi il faut faire attention aux jeux quand je vais à la salle.",
+      "Bon c’est bien gentil tout ça mais moi j’vais rejoindre mes ptes je suis déja en retard en fait.."]
+    },
+    {
+      "order": 2,
+      "speaker": "father#2",
+      "need": ["0"],
+      "speech": "Aaah oui ça… u vois ce petit jeu là, c’est rien de sorcier mais moi ça me détend comme certains ont besoin de leur émission à la télévision !.. Ecoute ta mère à parfois de la peine à saisir ce que cette passion représente pour moi. Je suis toute la journée entrain de bosser avec des câbles et ma boîte à outils c’est toute ma vie je ne connais bien que ce domaine ! Alors quand je peux me changer les idées ici j’ai besoin de toucher à l’électro mais des idées neuves quoi sinon je m’enfermerais dans ma routine du boulot et je perderais la passion pour tout ça, je serais déjà fou ! Je demande pas qu’elle frappe des lignes en BASIC mais juste qu’elle tolère pourquoi je disparais ici, et pourquoi mettre la main sur le MACHINTOSH passe pour moi avant acheter une nouvelle voiture… ",
+      "choice": ["Ouais je vois, eh c’est pas souvent que tu me dit tout ça, les machines on le pouvoir de te faire débiter plus on dirait. Mais là j’entends Maman qui rentre je file sinon elle va encore me demander de nettoyer ma chambre ou je ne sais pas quoi.. TU me laisseras essayé ton jeu pour technicien la prochaine fois!"]
+    },
+    {
+      "order": 2,
+      "speaker": "father#2",
+      "need": ["1"],
+      "speech":"Non regarde je te lance un super jeu : Apple invaders, c’est une reprise de space invaders tu sais je crois que tu as connu quand à la salle ils l’avient encore.. C’est une version ou tu peux aussi te faire tirer dessus je crois, mais je suis pas très doué il faut dire que j’ai toujours plus étà un technicien qu’un gars qui aimais aller sur les terrains peut-être que c’est lié.. si tu me demandes tu pourrais venir y jouer il faut juste que tu me promettes de bien travailler à l’école c’est notre petit contrat d’accord ?",
+      "choice": ["Oh c’est quand même beaucoup moins joli que les jeu à la salle de BOB et en plus vas-y pour que les potes puissent voir ce que tu fais l’écran est tout petit ! Mais bon je reconnais que pouvoir lancer le jeu depuis la maison c’est stylé, Je file je suis déjà en retard mais la prochaine fois je joue pour te donner des pistes mon pauvre tu galères bien !"]
+    },
+    {
+      "order": 2,
+      "speaker": "father#2",
+      "need": ["2"],
+      "speech":" Comme tu veux , je te l’ai à peine montré…",
+      "choice": []
+    },
+    {
+      "order": 3,
+      "speaker": "father#2",
+      "need": ["0","0"],
+      "speech":"Elle n’aurait surement pas tord ceci dit.. Bon allez file à tes jeux pour gars cools, mais quand tu rentres tu obéis si ta mère demande un service !",
+      "choice": []
+    },
+    {
+      "order": 3,
+      "speaker": "father#2",
+      "need": ["1","0"],
+      "speech":"Je ne passe pas tout mon temps à disparaitre sous la fumée et les cris de chez Bob moi, je suis meilleur pour vous ramener un salaire et de quoi vivre peut-être ! Allez va, ta mère arrive je lui ai promis de m’occuper de la haie et si je veux un jour te présenter mon caprice…",
       "choice": []
     }
   ]
