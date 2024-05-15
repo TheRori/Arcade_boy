@@ -1,6 +1,8 @@
 import { k } from "./kaboomCtx";
 
 const imgHTML = document.getElementById('appleII');
+const imgHTMLContainer = document.getElementById('imgContainer');
+
 
 k.loadSprite("map", "sprites/map.png");
 k.loadSprite("wall1", "sprites/wall.png");
@@ -239,7 +241,7 @@ export function createPlayer(position) {
     });
     let wallState = 0;
     k.onCollide('player', 'father', () => {
-        parler('father', 1,() => (player.isInDialogue = false));
+        parler('father#1', 1,1,() => (player.isInDialogue = false));
         // play_minigame('pong');
         //set_video('media/video/space_invaders.mp4')
         player.isInDialogue = true;
@@ -255,77 +257,129 @@ export function createPlayer(position) {
             })
         })
     })
-    k.onCollideUpdate('player', 'magazine', () => {
+    k.onCollide('player', 'magazine', () => {
         readMagazine();
-        console.log('salut');
+        parler('mag#1',1,3,() => (player.isInDialogue = false))
         stopAnims();
         player.moveSpeed = 0
     })
 
+    function decouperTexte(chaine, seuil) {
+        if (chaine.length <= seuil) {
+            return [chaine]; // Retourne la chaîne telle quelle si sa longueur est inférieure ou égale au seuil
+        }
+
+        const mots = chaine.split(' '); // Sépare la chaîne en mots
+        let partieActuelle = '';
+        const parties = [];
+
+        for (let i = 0; i < mots.length; i++) {
+            const mot = mots[i];
+            if (partieActuelle.length + mot.length <= seuil) {
+                partieActuelle += (partieActuelle.length === 0 ? '' : ' ') + mot; // Ajoute le mot à la partie actuelle
+            } else {
+                parties.push(partieActuelle); // Ajoute la partie actuelle au tableau de parties
+                partieActuelle = mot; // Commence une nouvelle partie avec le mot actuel
+            }
+        }
+
+        if (partieActuelle.length > 0) {
+            parties.push(partieActuelle); // Ajoute la dernière partie
+        }
+
+        return parties;
+    }
+
+
     function readMagazine(mag) {
+       imgHTMLContainer.style.display = 'block';
        const m=  document.getElementById("amstrad_03");
        m.style.display = "block";
     }
-    function parler(speaker,numSpe, endSpeech) {
+    let statePlayer = [];
+
+    function parler(speaker,numSpe, idConv, endSpeech) {
 
         const dialogueUI = document.getElementById("textbox-container");
         const dialogue = document.getElementById("dialogue");
         const choix = document.getElementById("choix");
-        let statePlayer = [];
+        let stateMachine ="";
 
         k.loadJSON('speeches','speeches.json').then(dialogues => {
             dialogueUI.style.display = "block";
-            const firstSpeech = dialogues.dialogues1.find(d => d.order === numSpe && d.speaker === speaker);
-            dialogue.innerHTML = firstSpeech.speech;
-            addChoices(firstSpeech);
-            function addChoices(dial) {
-                let choices = dial.choice;
-                let choicesHTML = '';
-                for (let i = 0; i < choices.length; i++) {
-                    choicesHTML += ("<p class='choixVar' id='"+i+"'>"+choices[i]+"</p>");
+            const firstSpeech = dialogues.dialogues1.find(d => d.order === numSpe && d.speaker === speaker && JSON.stringify(d.need) === JSON.stringify(statePlayer));
+            if (firstSpeech) {
+                console.log(firstSpeech);
+                let splitText = decouperTexte(firstSpeech.speech, '150');
+                console.log(splitText)
+                if (splitText.length > 1) {
+                    dialogue.innerHTML = splitText[0];
+                    for (let i = 1; i < splitText.length; i++) {
+                        console.log(splitText[i])
+                        setTimeout(function () {
+                            dialogue.innerHTML = splitText[i];
+                        }, 3000*i);
+                    }
+                } else {
+                    dialogue.innerHTML = firstSpeech.speech;
                 }
-                choix.innerHTML = choicesHTML;
-                const choixVarHTML = document.querySelectorAll(".choixVar");
-                choixVarHTML.forEach((el,idx) => {
-                    el.addEventListener('click', () => {
-                        statePlayer.push(el.id);
-                        console.log(statePlayer);
-                        let nextSpe = dialogues.diag.find(d => d.order === numSpe + 1 && JSON.stringify(d.need) === JSON.stringify(statePlayer));
-                        if (nextSpe) {
-                            numSpe = numSpe + 1;
-
-                            dialogue.innerHTML = nextSpe.speech;
-                            addChoices(nextSpe);
-                        }
-                        else {
-                            dialogue.innerHTML = '';
+                setTimeout(function () {
+                    dialogue.innerHTML = firstSpeech.speech;
+                    addChoices(firstSpeech);
+                }, splitText.length * 3000 + 2000);
+                if (firstSpeech.end === true) {
+                    closeBtn.style.display = 'block';
+                    closeBtn.addEventListener("click",() =>{onCloseBtnClick(firstSpeech.machine)});
+                }
+                function addChoices(dial) {
+                    let choices = dial.choice;
+                    let choicesHTML = '';
+                    for (let i = 0; i < choices.length; i++) {
+                        choicesHTML += ("<p class='choixVar' id='" + i + "'>" + choices[i] + "</p>");
+                    }
+                    choix.innerHTML = choicesHTML;
+                    const choixVarHTML = document.querySelectorAll(".choixVar");
+                    choixVarHTML.forEach((el, idx) => {
+                        el.addEventListener('click', () => {
+                            statePlayer.push(el.id);
                             choix.innerHTML = '';
-                            endSpeech();
-                        }
+                            parler(speaker,numSpe+1,idConv,endSpeech);
+                        })
+                    })
+                }
 
-                    } )
-                })
             }
-
-
+            else  {
+                dialogue.innerHTML = '';
+                choix.innerHTML = '';
+                endSpeech();
+                player.isInDialogue = false;
+            }
         });
         const closeBtn = document.getElementById("close");
-        function onCloseBtnClick() {
-            if (wallState === 0) {
-                wallState += 1;
+        function onCloseBtnClick(mach) {
+            console.log(mach);
+            if (mach !== '') {
+                imgHTMLContainer.style.display = 'block';
                 imgHTML.style.display = 'block';
                 endSpeech();
                 dialogueUI.style.display = "none";
                 dialogue.innerHTML = "";
                 closeBtn.removeEventListener("click", onCloseBtnClick);
-                setTimeout(function() {
-                    parler('father', 1,() => (player.isInDialogue = false));
+                setTimeout(function () {
+                    parler('father#2', 1, 2, () => (player.isInDialogue = false));
                 }, 6000);
                 set_video('media/video/space_invaders.mp4');
             }
+            else {
+                imgHTMLContainer.style.display = 'none';
+                dialogueUI.style.display = "none";
+                endSpeech();
+                dialogue.innerHTML = "";
+            }
         }
 
-        closeBtn.addEventListener("click", onCloseBtnClick);
+
 
         k.onKeyPress('space', () => {
             k.destroy(dialogue);
