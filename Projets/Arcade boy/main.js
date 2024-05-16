@@ -262,6 +262,15 @@ export function createPlayer(position) {
         parler('mag#1',1,3,() => (player.isInDialogue = false))
         stopAnims();
         player.moveSpeed = 0
+        k.onDraw(() => {
+            k.drawRect({
+                width: 256 * 2,
+                height: 256 * 2,
+                pos: k.vec2(0),
+                color: k.rgb(127, 96, 58),
+                opacity: 0.5,
+            })
+        })
     })
 
     function decouperTexte(chaine, seuil) {
@@ -292,10 +301,33 @@ export function createPlayer(position) {
 
 
     function readMagazine(mag) {
-       imgHTMLContainer.style.display = 'block';
-       const m=  document.getElementById("amstrad_03");
-       m.style.display = "block";
+        const prevBtn = document.getElementById('pre-mag');
+        const nextBtn = document.getElementById('next-mag');
+        prevBtn.style.display = 'block';
+        nextBtn.style.display = 'block';
+        prevBtn.addEventListener('click',() => {plusDivs(-1,'amstradebdo')})
+        nextBtn.addEventListener('click',() => {plusDivs(1,'amstradebdo')})
+       showDivs(1,'amstradebdo');
     }
+
+    let slideIndex = 1;
+    function plusDivs(n,mag) {
+        showDivs(slideIndex += n,mag);
+    }
+
+    function showDivs(n,mag) {
+        console.log(slideIndex);
+        let i;
+        let x = document.getElementsByClassName(mag);
+        console.log(x);
+        if (n > x.length) {slideIndex = 1}
+        if (n < 1) {slideIndex = x.length}
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        x[slideIndex-1].style.display = "block";
+    }
+
     let statePlayer = [];
 
     function parler(speaker,numSpe, idConv, endSpeech) {

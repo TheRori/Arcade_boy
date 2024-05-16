@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <meta charset="UTF-8">
     <title>Test</title>
 </head>
@@ -62,9 +63,32 @@
         padding-top: 7%;
     }
 
+    .w3-display-left {
+        left: 43% !important;
+        top:20%;
+        margin-top: 10%;
+        z-index: 100;
+        display: none;
+    }
 
+    .w3-display-right {
+        right: 40% !important;
+        margin-top: 10%;
+        top: 20% !important;
+        z-index: 100;
+        display: none;
+    }
 
-    #imgContainer img {
+    #imgContainer #magazines img {
+        width: 15%;
+        top: 20%;
+        display: none;
+        position: absolute;
+        z-index: 100;
+        margin-left: 44%;
+    }
+
+    #imgContainer #machine img {
         width: 40%;
         display: none;
         z-index: 100;
@@ -96,10 +120,17 @@
         </div>
     </div>
     <div id="imgContainer">
+        <div id="machine">
         <img class="ui-machine" id="appleII" src="sprites/Apple_II_IMG_4212.png">
-        <img id="amstrad_03" src="sprites/Amstradebdo%2003%20-%20Page%2001.jpg">
-        <div class="btn-container">
-            <button id="close-mag" class="ui-close-btn">Close</button>
+        </div>
+        <div id="magazines">
+            <img id="amstrad_03#1" class="amstradebdo" src="sprites/Amstradebdo03_1.jpg">
+            <img id="amstrad_03#2" class="amstradebdo" src="sprites/Amstradebdo03_2.jpg">
+            <img id="amstrad_03#3" class="amstradebdo"src="sprites/Amstradebdo03_3.jpg">
+            <img id="amstrad_03#4" class="amstradebdo" src="sprites/Amstradebdo03_4.jpg">
+            <img id="amstrad_03#5" class="amstradebdo"src="sprites/Amstradebdo03_5.jpg">
+            <button class="w3-button w3-display-left" id="pre-mag">&#10094;</button>
+            <button class="w3-button w3-display-right" id="next-mag">&#10095;</button>
         </div>
     </div>
     <div id="videoContainer">
