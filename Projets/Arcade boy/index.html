@@ -6,6 +6,13 @@
     <title>Test</title>
 </head>
 <style>
+
+    button {
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+
     @font-face {
         font-family: PS2P;
         src: url(fonts/PressStart2P-vaV7.ttf);
@@ -15,6 +22,14 @@
         width: 100%;
         height: 100%;
         position: relative;
+    }
+
+    .ui-text-choices p{
+        cursor: pointer;
+    }
+
+    .ui-text-choices p:hover {
+        color: darkblue;
     }
 
     #textbox {
@@ -103,6 +118,10 @@
         display: none;
     }
 
+    .btn-close-container {
+        margin-left: 95%;
+    }
+
 </style>
 <body>
 <div id="app">
@@ -112,9 +131,11 @@
         <div id="textbox-container" style="display: none">
             <div id="textbox">
                 <p id="dialogue" class="ui-text"></p>
-                <div id="choix" class="ui-text"></div>
-                <div class="btn-container">
-                    <button id="close" class="ui-close-btn">Close</button>
+                <div id="choix" class="ui-text-choices"></div>
+                <div class="btn-close-container">
+                    <button id="close" >
+                        <img src="sprites/close.webp" height="40" width="40" height="90" alt="submit" />
+                    </button>
                 </div>
             </div>
         </div>

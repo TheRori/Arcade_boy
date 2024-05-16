@@ -248,28 +248,34 @@ export function createPlayer(position) {
         stopAnims();
         player.moveSpeed = 0;
         k.onDraw(() => {
-            k.drawRect({
+            if(player.isInDialogue === true) {
+
+                k.drawRect({
+                tag: 'sepia',
                 width: 256 * 2,
                 height: 256 * 2,
                 pos: k.vec2(0),
                 color: k.rgb(127, 96, 58),
                 opacity: 0.5,
-            })
+            })}
         })
     })
     k.onCollide('player', 'magazine', () => {
         readMagazine();
         parler('mag#1',1,3,() => (player.isInDialogue = false))
         stopAnims();
+        player.isInDialogue = true;
         player.moveSpeed = 0
         k.onDraw(() => {
-            k.drawRect({
+            if (player.isInDialogue === true) {
+                k.drawRect({
+                tag: 'sepia',
                 width: 256 * 2,
                 height: 256 * 2,
                 pos: k.vec2(0),
                 color: k.rgb(127, 96, 58),
                 opacity: 0.5,
-            })
+            })}
         })
     })
 
@@ -391,6 +397,7 @@ export function createPlayer(position) {
         const closeBtn = document.getElementById("close");
         function onCloseBtnClick(mach) {
             console.log(mach);
+            player.isInDialogue = false;
             if (mach !== '') {
                 imgHTMLContainer.style.display = 'block';
                 imgHTML.style.display = 'block';
@@ -399,6 +406,7 @@ export function createPlayer(position) {
                 dialogue.innerHTML = "";
                 closeBtn.removeEventListener("click", onCloseBtnClick);
                 setTimeout(function () {
+                    statePlayer = [];
                     parler('father#2', 1, 2, () => (player.isInDialogue = false));
                 }, 6000);
                 set_video('media/video/space_invaders.mp4');
