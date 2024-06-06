@@ -2,14 +2,12 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
     <meta charset="UTF-8">
     <title>Test</title>
 </head>
 <style>
-
-    video {
-        display: none;
-    }
 
     button {
         background: none;
@@ -36,16 +34,19 @@
         color: darkblue;
     }
 
+    #textbox-container{
+        align-self: end;
+    }
+
     #textbox {
-        position: absolute;
-        left: 10%;
-        right: 10%;
+        position: relative;
+        width: 70%;
         z-index: 1000;
-        bottom: 2vh;
-        min-height: 10vh;
+        align-self: end;
         background: white;
         border-radius: 3px;
         outline-style: solid;
+        margin: auto;
         padding: 1rem;
         display: flex;
         flex-direction: column;
@@ -75,13 +76,80 @@
 
     video {
         position: absolute;
-        z-index: 100;
-        width: 16%;
-        left: 36%;
+        z-index: 101;
+        width: 13%;
+        left: 32%;
         top: 10%;
-        padding-top: 7%;
+        margin-left: 10%;
+        margin-top: 8.5%;
+    }
+    /* Style du conteneur de l'inventaire */
+    #inventory-container {
+        padding: 20px;
+        display: none;
+        position: absolute;
+        z-index: 100;
+        border: 2px solid #666;
+        border-radius: 5px;
+        margin: 20px auto;
+        max-width: 600px; /* Ajuster la largeur selon vos besoins */
     }
 
+    /* Style du titre de l'inventaire */
+    .inventory-title {
+        text-align: center;
+        font-family: 'Press Start 2P', cursive;
+        color: #fff;
+    }
+    /* Style de l'inventaire */
+    #inventaire {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        padding: 20px;
+    }
+
+    /* Style de chaque case de l'inventaire */
+    .inventory-item {
+        position: relative;
+        cursor: pointer;
+        border: 2px solid #666; /* Bordure grise */
+        border-radius: 5px;
+        overflow: hidden; /* Masquer le débordement du texte */
+    }
+
+    #container-all {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        display: grid;
+    }
+
+    /* Style de l'image de l'objet dans l'inventaire */
+    .inventory-item img {
+        width: 64px;
+        height: auto;
+        border-radius: 5px;
+    }
+
+    /* Style du texte de l'objet dans l'inventaire */
+    .inventory-item .text {
+        position: absolute;
+        display: none;
+        top: 0;
+        left: -150%; /* Mettre le texte en dehors de la case */
+        width: 150%; /* Largeur du texte pour permettre la transition */
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        color: #fff;
+        padding: 5px;
+        transition: left 0.3s ease; /* Transition pour animer le texte */
+    }
+
+    /* Style pour afficher le texte lorsque la case est survolée */
+    .inventory-item:hover .text {
+        left: 0;
+    }
     .w3-display-left {
         left: 43% !important;
         top:20%;
@@ -98,26 +166,21 @@
         display: none;
     }
 
-    #imgContainer #magazines img {
-        width: 40%;
-        top: 12%;
-        background: darkkhaki;
-        padding: 40px;
-        display: none;
-        position: absolute;
-        z-index: 100;
-        margin-left: 44%;
+    #imgContainer {
+        align-self: end;
     }
 
-    #imgContainer #machine img {
-        width: 40%;
+
+    #imgContainer img {
+        width: 35%;
+        left: 32%;
+        top: 12%;
+        background: darkkhaki;
+        padding: 2%;
         display: none;
-        z-index: 100;
-        /* bottom: 21%; */
-        top: 10%;
-        padding-top: -7%;
         position: absolute;
-        left: 25%;
+        z-index: 100;
+        margin: auto;
     }
 
     #close {
@@ -132,32 +195,36 @@
 <body>
 <div id="app">
     <div>
-        <p class="note">Tap/Click around to move</p>
-
+    </div>
+    <div id="inventory-container">
+        <h1 class="inventory-title">Inventaire</h1>
+        <div id="inventaire" class="inventory">
+        </div>
+    </div>
+    <div id="container-all">
+        <div id="imgContainer">
+            <div id="videoContainer">
+                <video id="video" autoplay muted playsinline style>
+                    <source id="videoMachine" src="" type="video/mp4">
+                </video>
+            </div>
+            <div id="machines">
+                <img class="ui-machine" id="machine" src="">
+            </div>
+            <div id="magazines">
+                <img id="doc" class="doc" src="">
+            </div>
+        </div>
         <div id="textbox-container" style="display: none">
             <div id="textbox">
                 <p id="dialogue" class="ui-text"></p>
                 <div id="choix" class="ui-text-choices"></div>
-                <div class="btn-close-container">
-                    <button id="close" >
-                        <img src="sprites/close.webp" height="40" width="40" height="90" alt="submit" />
-                    </button>
+                <div id="next" class="textbox" style="display: none;">
+                    <input type="text" placeholder="Suivant">
+                    <i class="fas fa-arrow-right"></i>
                 </div>
             </div>
         </div>
-    </div>
-    <div id="imgContainer">
-        <div id="machine">
-        <img class="ui-machine" id="appleII" src="sprites/Apple_II_IMG_4212.png">
-        </div>
-        <div id="magazines">
-            <img id="doc" class="doc" src="">
-        </div>
-    </div>
-    <div id="videoContainer">
-        <video id="video" autoplay>
-            <source id="srcVideo" src="" type="video/mp4">
-        </video>
     </div>
     <canvas id="game"></canvas>
     <canvas id="minigame" width="800" height="600"></canvas>

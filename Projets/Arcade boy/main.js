@@ -2,7 +2,26 @@ import { k } from "./kaboomCtx";
 
 const imgHTML = document.getElementById('appleII');
 const imgHTMLContainer = document.getElementById('imgContainer');
+const dialogueUI = document.getElementById("textbox-container");
+const dialogue = document.getElementById("dialogue");
+const choix = document.getElementById("choix");
+const inventaireUI = document.getElementById('inventory-container');
 
+let statePlayer = [{"Rpapa" : -1},{"Rcamille" : 0},{"Reric" : 0}];
+let objs = []
+
+let inventoryDisplay,chosen = false
+
+let inventoryPlayer = [
+    {
+        id: 999,
+        img: "sprites/construire.png",
+        speech: "«Il y a un moment où tu ne penses plus tout à fait à"
+    }
+];
+
+
+let collide = false;
 
 k.loadSprite("map", "sprites/map.png");
 k.loadSprite("bar", "sprites/bar.png");
@@ -65,7 +84,7 @@ function play_minigame(game) {
 
 function set_video(link) {
     let video = document.getElementById("video");
-    let source = document.getElementById("srcVideo");
+    let source = document.getElementById("videoMachine");
     // Modification de la source de la vidéo
     source.src = link;
     video.load();
@@ -108,7 +127,7 @@ export async function createMap() {
             let c = 0
             for (const id of layer.data) {
                 if (id !== 0) {
-                    map.add([
+                    const perso = map.add([
                         k.area({
                             shape: new k.Rect(k.vec2(0), 32, 32),
                         }),
@@ -116,6 +135,10 @@ export async function createMap() {
                         k.sprite('wall1'),
                         'camille',
                     ]);
+                    perso.name = layer.name;
+                    console.log(perso.name);
+                    perso.idConv = layer.idConv;
+                    perso.type = 'dialogues';
                 }
                 if (c === 37) {
                     c = 0;
@@ -137,17 +160,31 @@ export async function createMap() {
             ]);
         }
 */  if (layer.objects) {
+    let i = 0;
         for (const o of layer.objects) {
-            map.add([
+            const centerX = o.x + (o.width / 2);
+            const centerY = o.y - (o.height / 2);
+
+            const rotatedCenterX = o.x + Math.cos(o.rotation) * (centerX - o.x) - Math.sin(o.rotation) * (centerY - o.y);
+            const rotatedCenterY = o.y + Math.sin(o.rotation) * (centerX - o.x) + Math.cos(o.rotation) * (centerY - o.y);
+
+            const objs= map.add([
                 k.area({
                     shape: new k.Rect(k.vec2(0), o.width, o.height),
                 }),
-                k.body({isStatic: true}),
                 k.sprite('wall1'),
-                k.pos(o.x + o.width/2, o.y - o.height/2),
+                k.pos(rotatedCenterX, rotatedCenterY+150),
                 o.name,
-            ]);}
-    }}
+            ]);
+            objs.name = o.name;
+            objs.idConv = 999 - i;
+            objs.type = 'documents';
+            i += 1;
+        }
+
+        }
+    }
+    console.log(objs)
 
     /*
     for (const layer of layers) {
@@ -329,86 +366,77 @@ export async function createPlayer(posx,posy) {
         }
     });
     let wallState = 0;
-    k.onCollide('player', 'camille', () => {
-        k.onKeyDown("space", () => {
-            if (!player.isInDialogue) {
-                parler("dialogues",'Camille', 1, 1, () => (player.isInDialogue = false));
-                // play_minigame('pong');
-                //set_video('media/video/space_invaders.mp4')
-                player.isInDialogue = true;
-                stopAnims();
-                player.moveSpeed = 0;
-                k.onDraw(() => {
-                    if (player.isInDialogue === true) {
-                        k.drawRect({
-                            tag: 'sepia',
-                            width: 32 * 38,
-                            height: 32 * 23,
-                            pos: k.vec2(0),
-                            color: k.rgb(127, 96, 58),
-                            opacity: 0.3,
-                        })
-                    }
-                })
+    k.onKeyPress("i", () => {
+        if(!inventoryDisplay){
+            inventoryDisplay = true;
+            afficherInventaire()
+        }
+        else {
+            inventaireUI.style.display = "none";
+            inventoryDisplay = false;
+        }
+    })
+    let idd, namee, type;
+    k.onCollide('player', '*', (player,objj) => {
+        dialogueUI.style.display = "block";
+       idd = objj.idConv;
+       namee = objj.name;
+       type = objj.type;
+        console.log('salut'+namee+type);
+        choix.innerHTML = "Inspecter";
+        collide = true;
+        choix.addEventListener('click', () => {
+            choix.innerHTML = '';
+            if (type === 'documents') {
+                console.log('bouh'+type);
+                if(!player.isInDialogue){parler("documents", namee, 1, idd, () => (player.isInDialogue = false));}
+                }
+            else if (type === 'dialogues') {
+                if(!player.isInDialogue)parler("dialogues", namee, 1, idd, () => (player.isInDialogue = false));
             }
+            if (!player.isInDialogue && collide){
+                stopAnims();
+            player.isInDialogue = true;
+            player.moveSpeed = 0
+            k.onDraw(() => {
+                if (player.isInDialogue === true) {
+                    k.drawRect({
+                        tag: 'sepia',
+                        width: 32 * 38,
+                        height: 32 * 23,
+                        pos: k.vec2(0),
+                        color: k.rgb(127, 96, 58),
+                        opacity: 0.3,
+                    })
+                }
+            })
+        }
         })
+
     })
-    k.onCollide('player', 'np_construire', () => {
-        readMagazine('sprites/construire.png');
-        parler("documents",'construire',1,1,() => (player.isInDialogue = false))
-        stopAnims();
-        player.isInDialogue = true;
-        player.moveSpeed = 0
-        k.onDraw(() => {
-            if (player.isInDialogue === true) {
-                k.drawRect({
-                    tag: 'sepia',
-                    width: 32 * 38,
-                    height: 32 * 23,
-                    pos: k.vec2(0),
-                    color: k.rgb(127, 96, 58),
-                    opacity: 0.3,
-                })}
-        })
-    })
-
-
-
-    function readMagazine(src_img) {
-        const doc = document.getElementById('doc');
-        doc.src=src_img
-        doc.style.display = "block";
-    }
+    k.onCollideEnd('player','*',(player, obj) => {collide = false;dialogueUI.style.display='none';idd = null;namee = null;type = null;})
 
     let slideIndex = 1;
     function plusDivs(n,mag) {
         showDivs(slideIndex += n,mag);
     }
 
-    function showDivs(n,mag) {
-        let i;
-        let x = document.getElementsByClassName(mag);
-        if (n > x.length) {slideIndex = 1}
-        if (n < 1) {slideIndex = x.length}
-        for (i = 0; i < x.length; i++) {
-            x[i].style.display = "none";
-        }
-        x[slideIndex-1].style.display = "block";
-    }
-
-
     return player;
+}
+function readMagazine(src_img) {
+    imgHTMLContainer.style.display = 'block';
+    const doc = document.getElementById('doc');
+    doc.src=src_img
+    doc.style.display = "block";
 }
 
 async function parler(categorie,speaker,numSpe, idConv, endSpeech) {
-    const dials = await (await fetch("dials.json")).json();
-    const dialogueUI = document.getElementById("textbox-container");
-    const dialogue = document.getElementById("dialogue");
-    const choix = document.getElementById("choix");
+    console.log(speaker+idConv+categorie);
+    const dials = await (await fetch("dials.json?"+Math.random())).json();
     let curentIndex = 0;
     let stateMachine ="";
     dialogueUI.style.display = "block";
-    let firstSpeech;
+    let data;
     if (idConv === -1){
         imgHTMLContainer.style.display = 'none';
         dialogueUI.style.display = "none";
@@ -418,40 +446,50 @@ async function parler(categorie,speaker,numSpe, idConv, endSpeech) {
         choix.innerHTML = "";
         return;
     }
-    if (categorie === "dialogues"){
-        firstSpeech = dials.dialogues2.find(d => d.order === numSpe && d.speaker === speaker);
+    if (categorie === "dialogues" | categorie === "objet"){
+        console.log(idConv);
+        data = dials.dialogues2.find(d => d.id === idConv && d.speaker === speaker);
     }
     else if (categorie === "documents"){
-        firstSpeech = dials.documents.find(d => d.order === numSpe && d.speaker === speaker);
+        data = dials.objets.find(d => d.id === idConv && d.speaker === speaker);
+        readMagazine("sprites/"+data.img);
     }
-    if (firstSpeech) {
-        let splitText = decouperTexte(firstSpeech.speech, '150');
+    if (data) {
+        let splitText = decouperTexte(data.speech, '150');
+        if (data.machine.length > 0 ){
+            const machine = document.getElementById('machine');
+            const videoM = document.getElementById('videoMachine');
+            machine.style.display = "flex";
+            set_video('media/video/space_invaders.mp4');
+            machine.src = "sprites/"+data.machine[0];
+        }
         if (splitText.length > 1) {
             dialogue.innerHTML = splitText[curentIndex];
-            k.onKeyPress("e",() => {
-                // Vérifiez s'il y a encore des morceaux de texte à afficher
-                if (curentIndex+1 < splitText.length) {
+            const nextArrow = document.getElementById('next');
+            nextArrow.style.display = 'block';
+            function updateDialogue() {
+                if (curentIndex + 1 < splitText.length) {
                     // Affichez le prochain morceau de texte
                     curentIndex = curentIndex + 1;
                     dialogue.innerHTML = splitText[curentIndex];
                 } else {
                     curentIndex = null;
+                    nextArrow.style.display = "none";
                     // Une fois que tous les morceaux de texte ont été affichés, ajoutez les choix
-                    dialogue.innerHTML = firstSpeech.speech;
-                    addChoices(firstSpeech,categorie,speaker,numSpe,endSpeech);
+                    dialogue.innerHTML = data.speech;
+                    addChoices(data, categorie, speaker, numSpe, endSpeech);
                 }
-            })
+            }
+            nextArrow.addEventListener('click', updateDialogue);
+            k.onKeyPress("e", updateDialogue);
         } else {
-            dialogue.innerHTML = firstSpeech.speech;
-            addChoices(firstSpeech,categorie,speaker,numSpe,endSpeech);
-
+            dialogue.innerHTML = data.speech;
+            addChoices(data,categorie,speaker,numSpe,endSpeech);
         }
-        if (firstSpeech.end === true) {
-
+        if (data.end === true) {
             closeBtn.style.display = 'block';
-            closeBtn.addEventListener("click",() =>{onCloseBtnClick(firstSpeech.machine)});
+            closeBtn.addEventListener("click",() =>{onCloseBtnClick(data.machine)});
         }
-        let statePlayer = {"Rpapa" : -1};
     }
     else  {
         dialogue.innerHTML = '';
@@ -485,10 +523,26 @@ async function parler(categorie,speaker,numSpe, idConv, endSpeech) {
     }
 }
 
+// Fonction pour obtenir la valeur d'une clé spécifique dans l'état du joueur
+function getPlayerStateValue(key) {
+    let state = statePlayer.find(obj => obj.hasOwnProperty(key));
+    return state ? state[key] : undefined;
+}
+// Fonction pour mettre à jour la valeur d'une clé spécifique dans l'état du joueur
+function setPlayerStateValue(key, newValue) {
+    let state = statePlayer.find(obj => obj.hasOwnProperty(key));
+    if (state) {
+        state[key] = newValue;
+    } else {
+        let newState = {};
+        newState[key] = newValue;
+        statePlayer.push(newState);
+    }
+}
+
 function addChoices(dial,categorie,speaker,numSpe,endSpeech) {
 
     let choices = dial.choices;
-    let nextId = dial.id;
     let choicesHTML = '';
 
     for (let i = 0; i < choices.length; i++) {
@@ -496,16 +550,14 @@ function addChoices(dial,categorie,speaker,numSpe,endSpeech) {
             const conditions = choices[i].need;
             let allConditionsMet = true;
             for (const condition of conditions) {
-                const { key, operator, value } = condition;
-                const playerValue = statePlayer[key];
+                let { key, operator, value } = condition;
+                const playerValue = statePlayer.find(obj => obj.hasOwnProperty(key))[key];
                 if (playerValue === undefined || operator === undefined || value === undefined) {
                     allConditionsMet = false;
                     break;
                 }
-
                 // Utilise la fonction "new Function" pour évaluer la condition de manière dynamique
                 const conditionMet = new Function('playerValue', 'value', `return playerValue ${operator} value;`)(playerValue, value);
-
                 if (!conditionMet) {
                     allConditionsMet = false;
                     break;
@@ -518,21 +570,47 @@ function addChoices(dial,categorie,speaker,numSpe,endSpeech) {
             choicesHTML += ("<p class='choixVar' id='" + i + "'>" + choices[i].speech + "</p>");
         }
     }
+    if(categorie === "dialogues"){
+        choicesHTML += ("<p class='choixVar' id='obj'>"+ "Essayer un objet…"  + "</p>");
+    }
     choix.innerHTML = choicesHTML;
     const choixVarHTML = document.querySelectorAll(".choixVar");
     choixVarHTML.forEach((el, idx) => {
         el.addEventListener('click', () => {
             choix.innerHTML = '';
-            const nextId = choices[idx].nextId;  // Capture l'ID du choix cliqué
+            if(categorie === "dialogues"){
+            if (choices[idx].modifiers.length > 0) {
+                choices[idx].modifiers.forEach(({ key, operator, value }) => {
+                    const stateValue = getPlayerStateValue(key);
+                    const newValue = new Function('stateValue', 'value', `return stateValue ${operator} value;`)(stateValue, value);
+                    setPlayerStateValue(key, newValue);
+                    console.log(statePlayer);
+                });
+            }}
+            let nextId = choices[idx].nextId;
             if (categorie === 'documents') {
                 if(choices[idx].remember){
-                    console.log(dial.speech)
+                    const documentId = inventoryPlayer.length + 1; // Génère une ID unique pour le document
+                    const documentInfo = {
+                        id: documentId,
+                        speech: dial.speech,
+                        img: dial.img
+                    };
+                    // Ajoute les informations du document à l'inventaire du joueur
+                    inventoryPlayer.push(documentInfo);
+                    console.log("Document ajouté à l'inventaire:", documentInfo);
                 }
             }
-            parler(categorie, speaker, numSpe + 1, nextId, endSpeech);  // Utilisation de nextId dans l'appel de parler
+            if (el.id ==="obj"){
+                categorie = 'objet';
+                afficherInventaire(true,categorie, speaker, numSpe + 1, nextId, endSpeech);
+            }
+            else{ parler(categorie, speaker, numSpe + 1, nextId, endSpeech);  // Utilisation de nextId dans l'appel de parler
+            }
         });
     });
 }
+
 
 function decouperTexte(chaine, seuil) {
     if (chaine.length <= seuil) {
@@ -558,6 +636,63 @@ function decouperTexte(chaine, seuil) {
     }
 
     return parties;
+}
+
+// Fonction pour afficher l'inventaire
+function afficherInventaire(choose,categorie, speaker, numSpe, nextId, endSpeech) {
+    // Sélectionner l'élément HTML où vous voulez afficher l'inventaire
+    const inventaireElement = document.getElementById('inventaire');
+
+    // Vider le contenu de l'élément pour éviter les doublons
+    inventaireElement.innerHTML = '';
+
+    // Parcourir le tableau inventoryPlayer pour chaque élément de l'inventaire
+    inventoryPlayer.forEach((item) => {
+        // Créer un élément div pour chaque élément de l'inventaire
+        const itemElement = document.createElement('div');
+        itemElement.classList.add('inventory-item');
+
+        // Ajouter l'image de l'élément de l'inventaire à l'élément div
+        const imgElement = document.createElement('img');
+        imgElement.src = item.img;
+        imgElement.id = (item.id);
+        itemElement.appendChild(imgElement);
+
+        // Ajouter le texte de l'élément de l'inventaire à l'élément div
+        const textElement = document.createElement('div');
+        textElement.classList.add('text');
+        textElement.textContent = item.speech;
+        itemElement.appendChild(textElement);
+
+        imgElement.addEventListener('click', () => {
+            if (choose){
+                inventaireUI.style.display = "none";
+                parler(categorie, speaker, numSpe + 1, parseInt(imgElement.id), endSpeech);
+            }
+            textElement.style.display = 'block'; // Afficher le texte
+        });
+
+        // Ajouter l'élément div à l'élément d'inventaire
+        inventaireElement.appendChild(itemElement);
+    });
+    inventaireUI.style.display = "block";
+}
+
+function removeAllEventListeners(element) {
+    // Cloner l'élément pour supprimer tous les écouteurs d'événements
+    const clonedElement = element.cloneNode(true);
+    element.parentNode.replaceChild(clonedElement, element);
+
+    // Ajout de la même classe pour conserver les styles si nécessaire
+    clonedElement.className = element.className;
+
+    // Suppression de tous les écouteurs d'événements de l'élément cloné
+    const events = getEventListeners(element);
+    for (const event in events) {
+        events[event].forEach(listener => {
+            clonedElement.removeEventListener(event, listener.listener);
+        });
+    }
 }
 
 
