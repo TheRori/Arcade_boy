@@ -223,6 +223,372 @@
         ]
       },
       {
+      "id": 11,
+      "order": 4,
+      "end": false,
+      "machine": "",
+      "speaker": "Eric",
+      "need": [],
+      "speech": "Eh salut Pierrot, tu viens d'arriver ? regarde ils viennent d'installer cette borne! C'est incroyable on se croirait vraiment dans le film c'est dingue ! Essaie toi même si t'as les 5 balles à mettre pour les 3 crédits.",
+      "choices": [
+        {
+          "need": [{"key": "Reric", "operator": "==", "value": 0}],
+          "speech": "Le regarder jouer.",
+          "response": "",
+          "nextId": 12,
+          "modifiers": []
+        }
+      ]
+    },
+      {
+      "id": 12,
+      "order": 5,
+      "end": false,
+      "machine": ["indiana-jones_station.png","indiana_jones.mp4"],
+      "speaker": "Eric",
+      "need": [],
+      "speech": "Tu vois là tu peux même jouer avec les perspectives, je te jure c'est dingue ça change des jeux tout plats! Et là regarde les animations des ennemis comme c'est bien fait! Et la musique c'est la même que celle du film t'as remarqué! Je te jure j'ai jamais vu ça! Et les autres qui veulent pas décrocher de leur Tetris alala..",
+      "choices": [
+        {
+          "need": [],
+          "speech": "Haha quand t'aimes un truc toi on t'arrête pas, mais là je dois bien reconnaître que tu es dans le vrai, ça va être encore plus dur de rentrer chez les vieux",
+          "response": "Aimer le jeu",
+          "nextId": 13,
+          "modifiers": [{"key": "Reric", "operator": "+", "value": 1}]
+        },
+        {
+          "need": [],
+          "speech": "Désolé de ne pas partager ton enthousiame mon gars mais moi mon truc c'est pas ces jeux ou tu dois rester des plombes pour avancer, il me faut des trucs plus grisants tu comprends ?",
+          "response": "Ne pas aimer le jeu",
+          "nextId": 14,
+          "modifiers": [{"key": "Reric", "operator": "-", "value": 1}]
+        }
+      ]
+    },
+      {
+      "id": 13,
+      "order": 6,
+      "end": false,
+      "machine": "",
+      "speaker": "Eric",
+      "need": [],
+      "speech": "Je me trompe jamais c'est comme quand tu es venu voir le film avec moi d'ailleurs, on est vraiment dans une époque cool si les films deviennet ensuite des jeux imagine un jour un jeu Mad Max...",
+      "choices": [
+        {
+          "need": [],
+          "speech": "Le rêve...",
+          "response": "Salle d'arcade",
+          "nextId": -1,
+          "modifiers": []
+        }
+      ]
+    },
+      {
+      "id": 14,
+      "order": 6,
+      "end": false,
+      "machine": "",
+      "speaker": "Eric",
+      "need": [],
+      "speech": "C'est bon j'ai compris tu vas rejoindre les deux autres qui sont bloiqués depuis la construction de ce bar devant la borne Tetris... Tu sais le jeu vidéo ça peut-être autre chose que battre des records et se tier la bourre toute la soirée, au moins Camille est d'accord avec moi sur ça...",
+      "choices": [
+        {
+          "need": [],
+          "speech": "Il faut pas le prendre comme ça, pour moi le jeu ça doit juste être du jeu tu comprends, sinon je préfère lire ou voir un film...",
+          "response": "Salle d'arcade",
+          "nextId": -1,
+          "modifiers": []
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "order": 7,
+      "end": false,
+      "machine": "",
+      "speaker": "Thomas",
+      "need": [],
+      "speech": "Salut mec! Regarde le nouveau score de malade que j'ai mis y a dix minutes, aha! ça méritait bien de taper dans l'argent de poche généreusement offert par le daron avocat pour me payer cette savoureuse pinte hehe",
+      "choices": [
+        {
+          "need": [],
+          "speech": "[Se rapprocher]",
+          "response": "",
+          "nextId": 17,
+          "modifiers": []
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "order": 8,
+      "end": false,
+      "machine": "",
+      "speaker": "Arnaud",
+      "need": [],
+      "speech": "Oh ça va c'est le jeu je t'offre ta bière d'accord, mais t'es pas obligé d'en remettre une couche sur mon daron, t'es content de me retrouver ici quand le tien il distribue pas de l'argent mais des cris..",
+      "choices": [
+        {
+          "need": [],
+          "speech": "[Les regarder se disputer]",
+          "response": "",
+          "nextId": 18,
+          "modifiers": []
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "order": 9,
+      "end": false,
+      "machine": "",
+      "speaker": "Thomas",
+      "need": [],
+      "speech": "Va pas sur ce terrain ou je te mets le stick dans le nez...",
+      "choices": [
+        {
+          "need": [],
+          "speech": "La vérité c'est que vous êtes les deux aussi ridicules l'un que l'autre ! ça fait des semaines que vous monopolisez cette borne la pauvre elle doit en avoir marre de voir vos tronches.",
+          "response": "Se moquer car ils n'arrivent pas à passer à autre chose que ce jeu depuis 2 mois",
+          "nextId": 19,
+          "modifiers": []
+        },
+        {
+          "need": [],
+          "speech": "Toujours à vous foutre sur la gueule vous deux, sinon quoi de neuf ? C'est quoi ce record ?",
+          "response": "Leur demander quoi de neuf",
+          "nextId": 22,
+          "modifiers": []
+        },
+        {
+          "need": [{"key": "Rcamille", "operator": "<", "value": 0}],
+          "speech": "Tu sais on s'est de nouveau engueulé avec Camille, je comprends pas trop pourquoi elle prend personnellement des choses qui la concernent pas du tout. Quand je viens là c'est pour me vider la tête pas la remplir de tensions en plus, tu comprends ?",
+          "response": "Demander à Arnaud s'il peut lui parler de Camille qui est trop envahissante",
+          "nextId": 21,
+          "modifiers": []
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "order": 12,
+      "end": false,
+      "machine": "",
+      "speaker": "Arnaud",
+      "need": [],
+      "speech": "Pierrot je te connais, tu es à chaud mais je crois surtout qu'elle aimerait parfois avoir plus accès à ton univers et ça serait pas si compliqué que tu fasses quelques concessions parfois j'ai l'impression, je me trompe ?",
+      "choices": [
+        {
+          "need": [],
+          "speech": "Ouais…t'as peut-être un peu raison, je vais y réfléchir",
+          "response": "Accepter qu'il exagère et remercier Arnaud",
+          "nextId": 24,
+          "modifiers": [
+            {"key": "Rarnaud", "operator": "+", "value": 1},
+            {"key": "Rcamille", "operator": "+", "value": 1}
+          ]
+        },
+        {
+          "need": [],
+          "speech": "Ah ben super je cherche du soutien et je me retrouve à un contre deux, c'est de perdre contre Thomas qui te mets dans cette humeur de contradiction",
+          "response": "Se vexer et dire que de toute façon il comprend rien",
+          "nextId": 25,
+          "modifiers": [
+            {"key": "Rarnaud", "operator": "-", "value": 1}
+          ]
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "order": 13,
+      "end": false,
+      "machine": "",
+      "speaker": "Thomas",
+      "need": [],
+      "speech": "10580 mon gars, 10580! Faudra se lever tôt pour l'effacer celui-ci hehe. T'aurais du voir sa tête à Arnaud aussi rouge que quand une fille le regarde haha..",
+      "choices": [
+        {
+          "need": [],
+          "speech": "[Se retourner vers Arnaud]",
+          "response": "",
+          "nextId": 26,
+          "modifiers": []
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "order": 14,
+      "end": false,
+      "machine": "",
+      "speaker": "Arnaud",
+      "need": [],
+      "speech": "On t'emmerde Pierrot va plutôt te chercher une mousse, j'ai déjà un vieux pour les leçons de morale... Bon d'ailleurs t'as vu la nouvelle de la machine de salon qui débarque bientôt ? C'est dans le magazine là.",
+      "choices": [
+        {
+          "need": [],
+          "speech": "Quoi ? Dis en plus pour moi le salon c'était définitivement fini pour les jeux! déjà toute à l'heure mon daron à essayer de me monter qu'on pouvait s'amuser sur un ordinateur, tu imagines un ordinateur avec l'écrant en noir et blanc qui affiche des chiffres et des lettres?!",
+          "response": "Demander ce que c'est cette nouvelle machine",
+          "nextId": 29,
+          "modifiers": []
+        },
+        {
+          "need": [],
+          "speech": "Oh moi vos trucs de connaisseurs là j'ai de la peine, je m'y intéresserais si c'est vraiment bien quand ça sera arrivé ici. Dans ces magazines il y a toujours tout qui fait super envie et au final on revient toujours ici..",
+          "response": "N'est pas intéressé par ça, préfère aller voir ailleurs",
+          "nextId": 30,
+          "modifiers": []
+        }
+      ]
+    },
+    {
+      "id": 24,
+      "order": 15,
+      "end": false,
+      "machine": "",
+      "speaker": "Arnaud",
+      "need": [],
+      "speech": "Allez courage, on va plutôt aller boire un coup et perdre deux trois pièces maintenant.",
+      "choices": [
+        {
+          "need": [],
+          "speech": "Partant!",
+          "response": "Salle d'arcade",
+          "nextId": 28,
+          "modifiers": []
+        }
+      ]
+    },
+    {
+      "id": 25,
+      "order": 16,
+      "end": false,
+      "machine": "",
+      "speaker": "Arnaud",
+      "need": [],
+      "speech": "Oui ça doit être ça, ça doit être ça… va plutôt chercher un coup à boire va ça te changera les idées",
+      "choices": [
+        {
+          "need": [],
+          "speech": "Ciao",
+          "response": "Salle d'arcade",
+          "nextId": 28,
+          "modifiers": []
+        }
+      ]
+    },
+    {
+      "id": 26,
+      "order": 17,
+      "end": false,
+      "machine": "",
+      "speaker": "Arnaud",
+      "need": [],
+      "speech": "Ouais c'est bon ferme là, regarde plutôt ça Pierrot, ça vient de sortir dans le magazine une nouvelle console de salon pour enfin peut-être faire oublier le désastre Atari, incroyable non ?",
+      "choices": [
+        {
+          "need": [],
+          "speech": "Quoi ? Dis en plus pour moi le salon c'était définitivement fini pour les jeux! déjà toute à l'heure mon daron à essayer de me montrer qu'on pouvait s'amuser sur un ordinateur, tu imagines un ordinateur avec l'écran en noir et blanc qui affiche des chiffres et des lettres?!",
+          "response": "Demander ce que c'est cette nouvelle machine",
+          "nextId": 29,
+          "modifiers": [
+            {"key": "Rconsole", "operator": "+", "value": 1}
+          ]
+        },
+        {
+          "need": [],
+          "speech": "Oh moi vos trucs de connaisseurs là j'ai de la peine, je m'y intéresserai si c'est vraiment bien quand ça sera arrivé ici. Dans ces magazines il y a toujours tout qui fait super envie et au final on revient toujours ici..",
+          "response": "N'est pas intéressé par ça, préfère aller voir ailleurs",
+          "nextId": 30,
+          "modifiers": [
+            {"key": "Rconsole", "operator": "-", "value": 1}
+          ]
+        }
+      ]
+    },
+    {
+      "id": 27,
+      "order": 18,
+      "end": false,
+      "machine": "",
+      "speaker": "Arnaud",
+      "need": [],
+      "speech": "Ouais c'est bon ferme là, regarde plutôt ça Pierrot, ça vient de sortir dans le magazine une nouvelle console de salon pour enfin peut-être faire oublier le désastre Atari, incroyable non ?",
+      "choices": [
+        {
+          "need": [],
+          "speech": "Quoi ? Dis en plus pour moi le salon c'était définitivement fini pour les jeux! déjà toute à l'heure mon daron à essayer de me montrer qu'on pouvait s'amuser sur un ordinateur, tu imagines un ordinateur avec l'écran en noir et blanc qui affiche des chiffres et des lettres?!",
+          "response": "Demander ce que c'est cette nouvelle machine",
+          "nextId": 29,
+          "modifiers": [
+            {"key": "Rconsole", "operator": "+", "value": 1}
+          ]
+        },
+        {
+          "need": [],
+          "speech": "Oh moi vos trucs de connaisseurs là j'ai de la peine, je m'y intéresserai si c'est vraiment bien quand ça sera arrivé ici. Dans ces magazines il y a toujours tout qui fait super envie et au final on revient toujours ici..",
+          "response": "N'est pas intéressé par ça, préfère aller voir ailleurs",
+          "nextId": 30,
+          "modifiers": [
+            {"key": "Rconsole", "operator": "-", "value": 1}
+          ]
+        }
+      ]
+    },
+    {
+      "id": 28,
+      "order": 19,
+      "end": true,
+      "machine": "",
+      "speaker": "",
+      "need": [],
+      "speech": "",
+      "choices": []
+    },
+    {
+      "id": 29,
+      "order": 20,
+      "end": false,
+      "machine": "",
+      "speaker": "Arnaud",
+      "need": [],
+      "speech": "C'est complètement fou apparemment ça pourrait faire oublier le four de l'Atari, la machine permet d'afficher carrément des meilleures couleurs et plus de pixels et y aurait directement des jeux faits par les mêmes que ceux qui lancent la console, le Nintendo là. T'imagines avoir comme ici mais dans ton salon direct plus besoin de payer cent sous pour chaque partie ça serait infini !",
+      "choices": [
+        {
+          "need": [],
+          "speech": "Merci pour l'info, on va suivre ça de près c'est sûr!",
+          "response": "Salle d'arcade",
+          "nextId": -1,
+          "modifiers": []
+        }
+      ]
+    },
+    {
+      "id": 30,
+      "order": 21,
+      "end": false,
+      "machine": "",
+      "speaker": "Arnaud",
+      "need": [],
+      "speech": "C'est pour plaire à Camille que tu te donnes ce genre mec blasé de tout ? Pourtant à chaque fois tu reviens ici c'est qu'on doit pas être si nazes...",
+      "choices": [
+        {
+          "need": [],
+          "speech": "ça doit être ça ouais.",
+          "response": "Salle d'arcade",
+          "nextId": -1,
+          "modifiers": []
+        }
+      ]
+    },
+
+
+
+
+
+
+    {
         "id": 999,
         "order": 2,
         "end": false,

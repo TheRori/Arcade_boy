@@ -7,7 +7,7 @@ const dialogue = document.getElementById("dialogue");
 const choix = document.getElementById("choix");
 const inventaireUI = document.getElementById('inventory-container');
 
-let statePlayer = [{"Rpapa" : -1},{"Rcamille" : 0},{"Reric" : 0}];
+let statePlayer = [{"Rpapa" : -1},{"Rcamille" : 0},{"Reric" : 0},{"Rarnaud": 0},{"Rthomas": 0},{"Rconsole":0}];
 let objs = []
 
 let inventoryDisplay,chosen = false
@@ -25,6 +25,8 @@ let collide = false;
 
 k.loadSprite("map", "sprites/map.png");
 k.loadSprite("bar", "sprites/bar.png");
+k.loadSprite("eric_bar", "sprites/eric_bar.png");
+k.loadSprite("thomas_bar", "sprites/thomas_bar.png");
 
 k.loadSprite("wall1", "sprites/wall.png");
 async function loadJSONData(filePath) {
@@ -59,7 +61,7 @@ k.loadSpriteAtlas("sprites/player.png", {
     "teen": {
         x: 0,
         y: 0,
-        width: 72.5,
+        width: 72,
         height: 128,
         sliceX: 3,
         sliceY: 4,
@@ -89,16 +91,21 @@ function set_video(link) {
     source.src = link;
     video.load();
 }
-export async function createMap() {
-    const mapData = await (await fetch("map.json")).json();
-    const mapDataB = await (await fetch("bar.json?"+Math.random())).json();
+
+let mapL, mapR;
+export async function createMap(json,sprite,x,y) {
+    const mapDataB = await (await fetch(json+'?'+Math.random())).json();
 
 
 // const layers = mapData.layers;
     const layersB = mapDataB.layers;
+    mapL = mapDataB.left;
+    mapR = mapDataB.right;
+
+    console.log(mapR);
 
 
-    const map = k.add([k.sprite("bar"), k.pos(0), k.scale(1)]);
+    const map = k.add([k.sprite(sprite), k.pos(0), k.scale(1)]);
     for (const layer of layersB) {
         if (layer.name === "boundaries") {
             let r = 0
@@ -110,7 +117,7 @@ export async function createMap() {
                             shape: new k.Rect(k.vec2(0), 32, 32),
                         }),
                         k.body({isStatic: true}),
-                        k.pos(c * 32, r * 32 - 7 * 32),
+                        k.pos(c * 32, r * 32 - (4 * 32)),
                         'wall',
                     ]);
                 }
@@ -132,12 +139,12 @@ export async function createMap() {
                             shape: new k.Rect(k.vec2(0), 32, 32),
                         }),
                         k.pos(c * 32, r * 32),
-                        k.sprite('wall1'),
                         'camille',
                     ]);
                     perso.name = layer.name;
                     console.log(perso.name);
                     perso.idConv = layer.idConv;
+                    console.log(perso.idConv);
                     perso.type = 'dialogues';
                 }
                 if (c === 37) {
@@ -233,20 +240,21 @@ export async function createMap() {
 
     }
     */
-    createPlayer(0,0);
+    createPlayer(x,y);
 }
 export async function createPlayer(posx,posy) {
     // Créez le personnage avec un sprite et une position
 
     const player = k.add([
         k.sprite('teen'),
-        k.scale(7),
+        k.scale(9),
         k.pos(posx,450),
         k.area(),
         {
             speed: 250,
             direction: 'down',
             isInDialogue: false,
+            readySpeak: false,
         },
         k.body(),
         'player',
@@ -341,7 +349,12 @@ export async function createPlayer(posx,posy) {
             player.flipX = false;
             if (player.curAnim() !== "walksR") player.play("walksR");
             player.direction = "right";
-            player.move(player.speed, 0);
+            player.move(player.speed
+                , 0);
+            if (player.pos.x >= 1200 && mapR !== "") {
+                console.log(player.pos.x);
+                k.go(mapR);
+            }
             return;
         }
 
@@ -349,6 +362,10 @@ export async function createPlayer(posx,posy) {
             if (player.curAnim() !== "walksL") player.play("walksL");
             player.direction = "left";
             player.move(-player.speed, 0);
+            if (player.pos.x < 0 && mapL !== "") {
+                console.log(player.pos.x);
+                k.go(mapL);
+            }
             return;
         }
 
@@ -377,44 +394,65 @@ export async function createPlayer(posx,posy) {
         }
     })
     let idd, namee, type;
+    function handleClick() {
+        player.isInDialogue = true;
+
+        // Retirer l'écouteur d'événements dès que le clic se produit
+        choix.removeEventListener('click', handleClick);
+
+        choix.innerHTML = '';
+
+        if (type === 'documents') {
+            console.log('bouh' + type);
+            parler("documents", 1, idd, () => {
+                player.isInDialogue = false;
+            });
+
+        } else if (type === 'dialogues') {
+            console.log('salut');
+            parler("dialogues", 1, idd, () => {
+                player.isInDialogue = false;
+            });
+        }
+
+        stopAnims();
+        player.moveSpeed = 0;
+
+        k.onDraw(() => {
+            if (player.isInDialogue === true) {
+                k.drawRect({
+                    tag: 'sepia',
+                    width: 32 * 38,
+                    height: 32 * 23,
+                    pos: k.vec2(0),
+                    color: k.rgb(127, 96, 58),
+                    opacity: 0.3,
+                });
+            }
+        });
+    }
+
     k.onCollide('player', '*', (player,objj) => {
-        dialogueUI.style.display = "block";
        idd = objj.idConv;
        namee = objj.name;
        type = objj.type;
-        console.log('salut'+namee+type);
-        choix.innerHTML = "Inspecter";
-        collide = true;
-        choix.addEventListener('click', () => {
-            choix.innerHTML = '';
-            if (type === 'documents') {
-                console.log('bouh'+type);
-                if(!player.isInDialogue){parler("documents", namee, 1, idd, () => (player.isInDialogue = false));}
-                }
-            else if (type === 'dialogues') {
-                if(!player.isInDialogue)parler("dialogues", namee, 1, idd, () => (player.isInDialogue = false));
-            }
-            if (!player.isInDialogue && collide){
-                stopAnims();
-            player.isInDialogue = true;
-            player.moveSpeed = 0
-            k.onDraw(() => {
-                if (player.isInDialogue === true) {
-                    k.drawRect({
-                        tag: 'sepia',
-                        width: 32 * 38,
-                        height: 32 * 23,
-                        pos: k.vec2(0),
-                        color: k.rgb(127, 96, 58),
-                        opacity: 0.3,
-                    })
-                }
-            })
-        }
-        })
+       if(idd !== undefined) {
+           console.log('salut' + idd + namee + type);
+           dialogueUI.style.display = "block";
+           choix.innerHTML = "Inspecter";
+           collide = true;
 
+
+           if (!player.readySpeak && collide) {
+               collide = false;
+               console.log("ajouter");
+               player.readySpeak = true;
+               choix.addEventListener('click', handleClick);
+           }
+       }
     })
-    k.onCollideEnd('player','*',(player, obj) => {collide = false;dialogueUI.style.display='none';idd = null;namee = null;type = null;})
+    k.onCollideEnd('player','*',(player, obj) => {choix.removeEventListener('click', handleClick);
+        dialogueUI.style.display='none';idd = null;namee = null;type = null;player.readySpeak = false;})
 
     let slideIndex = 1;
     function plusDivs(n,mag) {
@@ -430,8 +468,7 @@ function readMagazine(src_img) {
     doc.style.display = "block";
 }
 
-async function parler(categorie,speaker,numSpe, idConv, endSpeech) {
-    console.log(speaker+idConv+categorie);
+async function parler(categorie,numSpe, idConv, endSpeech) {
     const dials = await (await fetch("dials.json?"+Math.random())).json();
     let curentIndex = 0;
     let stateMachine ="";
@@ -447,27 +484,32 @@ async function parler(categorie,speaker,numSpe, idConv, endSpeech) {
         return;
     }
     if (categorie === "dialogues" | categorie === "objet"){
-        console.log(idConv);
-        data = dials.dialogues2.find(d => d.id === idConv && d.speaker === speaker);
+        data = dials.dialogues2.find(d => d.id === idConv);
+        console.log(data)
+
     }
     else if (categorie === "documents"){
-        data = dials.objets.find(d => d.id === idConv && d.speaker === speaker);
+        data = dials.objets.find(d => d.id === idConv);
         readMagazine("sprites/"+data.img);
     }
     if (data) {
+        const speaker = data.speaker;
+        console.log(data);
         let splitText = decouperTexte(data.speech, '150');
         if (data.machine.length > 0 ){
             const machine = document.getElementById('machine');
             const videoM = document.getElementById('videoMachine');
             machine.style.display = "flex";
-            set_video('media/video/space_invaders.mp4');
+            set_video('media/video/'+data.machine[1]);
             machine.src = "sprites/"+data.machine[0];
         }
         if (splitText.length > 1) {
             dialogue.innerHTML = splitText[curentIndex];
+            const speechEntier = data.speech;
             const nextArrow = document.getElementById('next');
             nextArrow.style.display = 'block';
             function updateDialogue() {
+                console.log(splitText)
                 if (curentIndex + 1 < splitText.length) {
                     // Affichez le prochain morceau de texte
                     curentIndex = curentIndex + 1;
@@ -477,7 +519,9 @@ async function parler(categorie,speaker,numSpe, idConv, endSpeech) {
                     nextArrow.style.display = "none";
                     // Une fois que tous les morceaux de texte ont été affichés, ajoutez les choix
                     dialogue.innerHTML = data.speech;
+                    nextArrow.removeEventListener('click', updateDialogue);
                     addChoices(data, categorie, speaker, numSpe, endSpeech);
+                    data = null
                 }
             }
             nextArrow.addEventListener('click', updateDialogue);
@@ -498,29 +542,6 @@ async function parler(categorie,speaker,numSpe, idConv, endSpeech) {
     }
 
     const closeBtn = document.getElementById("close");
-    function onCloseBtnClick(mach) {
-        player.isInDialogue = false;
-        if (mach !== '') {
-            imgHTMLContainer.style.display = 'block';
-            imgHTML.style.display = 'block';
-            endSpeech();
-            dialogueUI.style.display = "none";
-            dialogue.innerHTML = "";
-            closeBtn.removeEventListener("click", onCloseBtnClick);
-            setTimeout(function () {
-                parler("dialogues",'Camille', 1, 2, () => (player.isInDialogue = false));
-            }, 6000);
-            set_video('media/video/space_invaders.mp4');
-        }
-        else {
-            imgHTMLContainer.style.display = 'none';
-            dialogueUI.style.display = "none";
-            endSpeech();
-            dialogue.innerHTML = "";
-            choix.innerHTML = '';
-        }
-
-    }
 }
 
 // Fonction pour obtenir la valeur d'une clé spécifique dans l'état du joueur
@@ -605,7 +626,9 @@ function addChoices(dial,categorie,speaker,numSpe,endSpeech) {
                 categorie = 'objet';
                 afficherInventaire(true,categorie, speaker, numSpe + 1, nextId, endSpeech);
             }
-            else{ parler(categorie, speaker, numSpe + 1, nextId, endSpeech);  // Utilisation de nextId dans l'appel de parler
+            else{
+                console.log(nextId);
+                parler(categorie, numSpe + 1, nextId, endSpeech);  // Utilisation de nextId dans l'appel de parler
             }
         });
     });
@@ -667,7 +690,7 @@ function afficherInventaire(choose,categorie, speaker, numSpe, nextId, endSpeech
         imgElement.addEventListener('click', () => {
             if (choose){
                 inventaireUI.style.display = "none";
-                parler(categorie, speaker, numSpe + 1, parseInt(imgElement.id), endSpeech);
+                parler(categorie, numSpe + 1, parseInt(imgElement.id), endSpeech);
             }
             textElement.style.display = 'block'; // Afficher le texte
         });
@@ -699,18 +722,20 @@ function removeAllEventListeners(element) {
 // Créer la première scène
 k.scene("level1", () => {
     // Créer le personnage
-    createMap();
+    createMap('bar_thomas.json','thomas_bar',1200,0);
     k.setBackground(k.BLACK);
 
 });
 
 // Créer la deuxième scène
 k.scene("level2", () => {
-    k.add([
-        k.text("Félicitations, vous êtes arrivé à la deuxième scène !", 24),
-        k.pos(0, height() / 2),
-    ]);
+    createMap('bar.json','bar',0,0);
+    k.setBackground(k.BLACK);
 });
 
+k.scene("level3", () => {
+    createMap('bar_eric.json','eric_bar',0,0);
+    k.setBackground(k.BLACK);
+});
 // Charger la première scène au démarrage
-k.go("level1");
+k.go("level2");
