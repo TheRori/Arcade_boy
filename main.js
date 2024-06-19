@@ -186,7 +186,6 @@ export async function createMap(numLVL,sprite,x,y) {
                         k.area({
                             shape: new k.Rect(k.vec2(0), 32, 32),
                         }),
-                        k.sprite('wall1'),
                         k.pos(c * 32, r * 32),
                         'camille',
                     ]);

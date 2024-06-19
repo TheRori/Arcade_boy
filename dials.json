@@ -621,14 +621,14 @@
         "speech": "Jouer ? Avec un truc comme ça c’est des jeux bizarres ou de vieux, jamais ça ne peut rivaliser avec les bornes. Écoute papa mes amis m’attendent !",
         "response": "Se montrer sceptique et pressé",
         "nextId": 34,
-        "modifiers": []
+        "modifiers": [{"key": "Rpapa", "operator": "-", "value": 1}]
       },
       {
         "need": [],
         "speech": "Bon comme d’habitude il est beaucoup trop enthousiaste pour un de ses nouveaux joujoux, mais ça va lui faire plaisir si je m’intéresse un peu. Bon, montre-moi 2-3 trucs que tu peux faire avec ton truc.",
         "response": "Faire semblant d’être intéressé",
         "nextId": 35,
-        "modifiers": []
+        "modifiers": [{"key": "Rpapa", "operator": "+", "value": 1}]
       }
     ]
   },
@@ -646,14 +646,14 @@
         "speech": "Oui avec plaisir tu peux jouer à quoi par exemple ? C’est comme la station au bar ?",
         "response": "S’intéresser aux jeux",
         "nextId": 36,
-        "modifiers": []
+        "modifiers": [{"key": "Rpapa", "operator": "+", "value": 1}]
       },
       {
         "need": [],
         "speech": "Tu me montreras la prochaine fois là mes potes m’attendent, je suis déjà en retard !",
         "response": "Refuser gentiment pour partir",
         "nextId": 37,
-        "modifiers": []
+        "modifiers": [{"key": "Rpapa", "operator": "-", "value": 1}]
       }
     ]
   },
@@ -679,7 +679,7 @@
     "id": 35,
     "order": 3,
     "end": "",
-    "machine": "appleII",
+    "machine": ["appleII.png","space_invaders.mp4"],
     "speaker": "Papa",
     "need": [],
     "speech": "Eh beh, l’enthousiasme peut aller se faire voir, mais regarde je vais te faire changer d’avis !",
@@ -697,7 +697,7 @@
     "id": 36,
     "order": 3,
     "end": "",
-    "machine": "appleII",
+    "machine": ["appleII.png","space_invaders.mp4"],
     "speaker": "Papa",
     "need": [],
     "speech": "Ah non, là les capacités de l’écran réduisent évidemment les possibilités, mais par contre il suffit de descendre au garage et tu as pas besoin d’utiliser mon argent de poche pour payer ta partie, allez regarde !",
@@ -818,7 +818,7 @@
         "speech": "Bye",
         "response": "level1",
         "nextId": -10,
-        "modifiers": []
+        "modifiers": [{"key": "Rpapa", "operator": "+", "value": 1}]
       }
     ]
   },
@@ -836,7 +836,7 @@
         "speech": "Bye",
         "response": "level1",
         "nextId": -10,
-        "modifiers": []
+        "modifiers": [{"key": "Rpapa", "operator": "+", "value": 1}]
       }
     ]
   },
