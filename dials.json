@@ -1,9 +1,9 @@
 {
-  "dialogues2": [
+"dialogues2": [
       {
         "id": 1,
         "order": 1,
-        "end": false,
+        "end": "",
         "machine": "",
         "speaker": "Camille",
         "need": [],
@@ -42,7 +42,7 @@
       {
         "id": 2,
         "order": 2,
-        "end": false,
+        "end": "",
         "machine": "",
         "speaker": "Camille",
         "need": [],
@@ -67,7 +67,7 @@
       {
         "id": 3,
         "order": 2,
-        "end": false,
+        "end": "",
         "machine": "",
         "speaker": "Camille",
         "need": [],
@@ -92,7 +92,7 @@
       {
         "id": 4,
         "order": 3,
-        "end": false,
+        "end": "",
         "machine": "",
         "speaker": "Camille",
         "need": [],
@@ -110,7 +110,7 @@
       {
         "id": 5,
         "order": 3,
-        "end": false,
+        "end": "",
         "machine": "",
         "speaker": "Camille",
         "need": [],
@@ -128,7 +128,7 @@
       {
         "id": 6,
         "order": 4,
-        "end": false,
+        "end": "",
         "machine": "",
         "speaker": "Camille",
         "need": [],
@@ -146,7 +146,7 @@
       {
         "id": 7,
         "order": 4,
-        "end": false,
+        "end": "",
         "machine": "",
         "speaker": "Camille",
         "need": [],
@@ -164,7 +164,7 @@
       {
         "id": 8,
         "order": 5,
-        "end": false,
+        "end": "",
         "machine": "",
         "speaker": "Camille",
         "need": [],
@@ -182,7 +182,7 @@
       {
         "id": 9,
         "order": 5,
-        "end": false,
+        "end": "",
         "machine": "",
         "speaker": "Camille",
         "need": [],
@@ -200,7 +200,7 @@
       {
         "id": 10,
         "order": 6,
-        "end": false,
+        "end": "",
         "machine": "",
         "speaker": "Camille",
         "need": [],
@@ -225,7 +225,7 @@
       {
       "id": 11,
       "order": 4,
-      "end": false,
+      "end": "",
       "machine": "",
       "speaker": "Eric",
       "need": [],
@@ -243,7 +243,7 @@
       {
       "id": 12,
       "order": 5,
-      "end": false,
+      "end": "",
       "machine": ["indiana-jones_station.png","indiana_jones.mp4"],
       "speaker": "Eric",
       "need": [],
@@ -268,7 +268,7 @@
       {
       "id": 13,
       "order": 6,
-      "end": false,
+      "end": "",
       "machine": "",
       "speaker": "Eric",
       "need": [],
@@ -286,7 +286,7 @@
       {
       "id": 14,
       "order": 6,
-      "end": false,
+      "end": "",
       "machine": "",
       "speaker": "Eric",
       "need": [],
@@ -294,17 +294,17 @@
       "choices": [
         {
           "need": [],
-          "speech": "Il faut pas le prendre comme ça, pour moi le jeu ça doit juste être du jeu tu comprends, sinon je préfère lire ou voir un film...",
+          "speech": "Il faut pas le prendre comme ça, pour moi le jeu ça doit juste être du fun tu comprends, sinon je préfère lire ou voir un film...",
           "response": "Salle d'arcade",
           "nextId": -1,
           "modifiers": []
         }
       ]
     },
-    {
+      {
       "id": 16,
       "order": 7,
-      "end": false,
+      "end": "",
       "machine": "",
       "speaker": "Thomas",
       "need": [],
@@ -319,10 +319,10 @@
         }
       ]
     },
-    {
+      {
       "id": 17,
       "order": 8,
-      "end": false,
+      "end": "",
       "machine": "",
       "speaker": "Arnaud",
       "need": [],
@@ -337,10 +337,10 @@
         }
       ]
     },
-    {
+      {
       "id": 18,
       "order": 9,
-      "end": false,
+      "end": "",
       "machine": "",
       "speaker": "Thomas",
       "need": [],
@@ -350,7 +350,7 @@
           "need": [],
           "speech": "La vérité c'est que vous êtes les deux aussi ridicules l'un que l'autre ! ça fait des semaines que vous monopolisez cette borne la pauvre elle doit en avoir marre de voir vos tronches.",
           "response": "Se moquer car ils n'arrivent pas à passer à autre chose que ce jeu depuis 2 mois",
-          "nextId": 19,
+          "nextId": 23,
           "modifiers": []
         },
         {
@@ -369,10 +369,10 @@
         }
       ]
     },
-    {
+      {
       "id": 21,
       "order": 12,
-      "end": false,
+      "end": "",
       "machine": "",
       "speaker": "Arnaud",
       "need": [],
@@ -402,7 +402,7 @@
     {
       "id": 22,
       "order": 13,
-      "end": false,
+      "end": "",
       "machine": "",
       "speaker": "Thomas",
       "need": [],
@@ -420,7 +420,7 @@
     {
       "id": 23,
       "order": 14,
-      "end": false,
+      "end": "",
       "machine": "",
       "speaker": "Arnaud",
       "need": [],
@@ -445,7 +445,7 @@
     {
       "id": 24,
       "order": 15,
-      "end": false,
+      "end": "",
       "machine": "",
       "speaker": "Arnaud",
       "need": [],
@@ -463,7 +463,7 @@
     {
       "id": 25,
       "order": 16,
-      "end": false,
+      "end": "",
       "machine": "",
       "speaker": "Arnaud",
       "need": [],
@@ -481,7 +481,7 @@
     {
       "id": 26,
       "order": 17,
-      "end": false,
+      "end": "",
       "machine": "",
       "speaker": "Arnaud",
       "need": [],
@@ -510,7 +510,7 @@
     {
       "id": 27,
       "order": 18,
-      "end": false,
+      "end": "",
       "machine": "",
       "speaker": "Arnaud",
       "need": [],
@@ -539,7 +539,7 @@
     {
       "id": 28,
       "order": 19,
-      "end": true,
+      "end": "",
       "machine": "",
       "speaker": "",
       "need": [],
@@ -549,7 +549,7 @@
     {
       "id": 29,
       "order": 20,
-      "end": false,
+      "end": "",
       "machine": "",
       "speaker": "Arnaud",
       "need": [],
@@ -567,7 +567,7 @@
     {
       "id": 30,
       "order": 21,
-      "end": false,
+      "end": "",
       "machine": "",
       "speaker": "Arnaud",
       "need": [],
@@ -582,16 +582,307 @@
         }
       ]
     },
-
-
-
+  {
+    "id": 31,
+    "order": 1,
+    "end": "",
+    "machine": "",
+    "speaker": "Papa",
+    "need": [],
+    "speech": "Alors ça regarde c’est une machine qui en jette ! Je l’ai achetée dans la boutique spécialisée d’électroniques en ville, regarde ça, jte jure c’est vraiment une pépite de technologie, viens seulement tu peux le prendre.",
+    "choices": [
+      {
+        "need": [],
+        "speech": "C’est quoi ce truc bizarre ? Comment ça peut afficher quelque chose ?",
+        "response": "Questionner l’utilité de la machine",
+        "nextId": 32,
+        "modifiers": []
+      },
+      {
+        "need": [],
+        "speech": "Ouaaah c’est marrant comme truc, et après ça sert à quoi ?",
+        "response": "S’intéresser à l’utilité de la machine",
+        "nextId": 33,
+        "modifiers": []
+      }
+    ]
+  },
+  {
+    "id": 32,
+    "order": 2,
+    "end": "",
+    "machine": "",
+    "speaker": "Papa",
+    "need": [],
+    "speech": "Alors tu vois c’est une machine qui permet de faire plusieurs choses, mais il faut évidemment la connecter à un écran j’allais justement le faire ! Tu peux par exemple jouer, ça doit sûrement te faire un peu plus sourire, mais aussi la faire calculer pour toi ou composer des documents comme une machine à écrire, mais pas besoin de papier !",
+    "choices": [
+      {
+        "need": [],
+        "speech": "Jouer ? Avec un truc comme ça c’est des jeux bizarres ou de vieux, jamais ça ne peut rivaliser avec les bornes. Écoute papa mes amis m’attendent !",
+        "response": "Se montrer sceptique et pressé",
+        "nextId": 34,
+        "modifiers": []
+      },
+      {
+        "need": [],
+        "speech": "Bon comme d’habitude il est beaucoup trop enthousiaste pour un de ses nouveaux joujoux, mais ça va lui faire plaisir si je m’intéresse un peu. Bon, montre-moi 2-3 trucs que tu peux faire avec ton truc.",
+        "response": "Faire semblant d’être intéressé",
+        "nextId": 35,
+        "modifiers": []
+      }
+    ]
+  },
+  {
+    "id": 33,
+    "order": 2,
+    "end": "",
+    "machine": "",
+    "speaker": "Papa",
+    "need": [],
+    "speech": "Pleins de choses ! D’abord, tu peux écrire en éditant directement sur l’écran donc la machine à écrire ne va pas tenir longtemps la comparaison! Tu peux faire de la programmation bien sûr pour utiliser la logique de la machine pour qu’elle fasse des calculs à ta place et le meilleur enfin: tu peux jouer ! tu veux que je te montre ?",
+    "choices": [
+      {
+        "need": [],
+        "speech": "Oui avec plaisir tu peux jouer à quoi par exemple ? C’est comme la station au bar ?",
+        "response": "S’intéresser aux jeux",
+        "nextId": 36,
+        "modifiers": []
+      },
+      {
+        "need": [],
+        "speech": "Tu me montreras la prochaine fois là mes potes m’attendent, je suis déjà en retard !",
+        "response": "Refuser gentiment pour partir",
+        "nextId": 37,
+        "modifiers": []
+      }
+    ]
+  },
+  {
+    "id": 34,
+    "order": 3,
+    "end": "",
+    "machine": "",
+    "speaker": "Papa",
+    "need": [],
+    "speech": "Comme tu veux, mais tu sais parfois pour moi ça serait important que tu t’intéresses un peu à des choses que je te montre, je crois que je peux encore t’apprendre 2-3 choses…",
+    "choices": [
+      {
+        "need": [],
+        "speech": "Bye",
+        "response": "level1",
+        "nextId": -10,
+        "modifiers": []
+      }
+    ]
+  },
+  {
+    "id": 35,
+    "order": 3,
+    "end": "",
+    "machine": "appleII",
+    "speaker": "Papa",
+    "need": [],
+    "speech": "Eh beh, l’enthousiasme peut aller se faire voir, mais regarde je vais te faire changer d’avis !",
+    "choices": [
+      {
+        "need": [],
+        "speech": "Allez !",
+        "response": "voir la démo",
+        "nextId": 38,
+        "modifiers": []
+      }
+    ]
+  },
+  {
+    "id": 36,
+    "order": 3,
+    "end": "",
+    "machine": "appleII",
+    "speaker": "Papa",
+    "need": [],
+    "speech": "Ah non, là les capacités de l’écran réduisent évidemment les possibilités, mais par contre il suffit de descendre au garage et tu as pas besoin d’utiliser mon argent de poche pour payer ta partie, allez regarde !",
+    "choices": [
+      {
+      "need": [],
+      "speech": "Allez !",
+      "response": "voir la démo",
+      "nextId": 38,
+      "modifiers": []
+    }]
+  },
+  {
+    "id": 37,
+    "order": 3,
+    "end": "",
+    "machine": "",
+    "speaker": "Papa",
+    "need": [],
+    "speech": "Aah les ados c’est toujours comme ça, jamais 10min pour se poser avec ses parents, mais pour les potes faut être là à la minute!",
+    "choices": [
+      {
+        "need": [],
+        "speech": "Bye",
+        "response": "level1",
+        "nextId": -10,
+        "modifiers": []
+      }
+    ]
+  },
+  {
+    "id": 38,
+    "order": 1,
+    "end": "",
+    "machine": ["appleII.png","space_invaders.mp4"],
+    "speaker": "Papa",
+    "need": [],
+    "speech": "Regarde cette bête elle a pas la puissance de son successeur sorti le mois dernier, mais quand même 64kilos octets de mémoire enfermée dans une petite boîte comme ça c’est un petit miracle ! D’abord il faut insérer cette petite disquette juste ici et faire 2-3 manips, mais rien de sorcier et tadaaaam regarde ça !",
+    "choices": [
+      {
+        "need": [],
+        "speech": "Attends, c’est quoi la machine qui est sortie ? C’est pas ton caprice dont parle toujours maman ces derniers temps ? Je ne crois pas qu’elle partage ton amour des hocktey-trucs..",
+        "response": "Questionner la nouvelle machine et la réaction de maman",
+        "nextId": 39,
+        "modifiers": []
+      },
+      {
+        "need": [],
+        "speech": "Cool ! Mais tu m’as dit que tu peux jouer ?! Moi je croyais que c’était juste pour faire tes codes bizarres, tu me fais toujours des commentaires comme quoi il faut faire attention aux jeux quand je vais à la salle.",
+        "response": "S’étonner qu’on puisse jouer dessus",
+        "nextId": 40,
+        "modifiers": []
+      },
+      {
+        "need": [],
+        "speech": "Bon c’est bien gentil tout ça mais moi j’vais rejoindre mes potes je suis déjà en retard en fait..",
+        "response": "S’excuser pour partir",
+        "nextId": 41,
+        "modifiers": []
+      }
+    ]
+  },
+  {
+    "id": 39,
+    "order": 2,
+    "end": "",
+    "machine": ["appleII.png","space_invaders.mp4"],
+    "speaker": "Papa",
+    "need": [],
+    "speech": "Aaah oui ça… tu vois ce petit jeu-là, c’est rien de sorcier, mais moi ça me détend comme certains ont besoin de leur émission à la télévision !.. Écoute ta mère à parfois de la peine à saisir ce que cette passion représente pour moi. Je suis toute la journée en train de bosser avec des câbles et ma boîte à outils c’est toute ma vie que je ne connais bien que ce domaine ! Alors quand je peux me changer les idées ici j’ai besoin de toucher à l’électro, mais des idées neuves quoi sinon je m’enfermerais dans ma routine du boulot et je perdrais la passion pour tout ça, je serais déjà fou ! Je demande pas qu’elle frappe des lignes en BASIC, mais juste qu’elle tolère pourquoi je disparais ici, et pourquoi mettre la main sur le MACHINTOSH passe pour moi avant acheter une nouvelle voiture…",
+    "choices": [
+      {
+        "need": [],
+        "speech": "Ouais je vois, eh c’est pas souvent que tu me dis tout ça, les machines on le pouvoir de te faire débiter plus on dirait. Mais là j’entends Maman qui rentre je file sinon elle va encore me demander de nettoyer ma chambre ou je ne sais pas quoi.. TU me laisseras essayer ton jeu pour technicien la prochaine fois!",
+        "response": "Montrer de l’intérêt et filer avant que maman arrive",
+        "nextId": 42,
+        "modifiers": []
+      }
+    ]
+  },
+  {
+    "id": 40,
+    "order": 2,
+    "end": "",
+    "machine": ["appleII.png","space_invaders.mp4"],
+    "speaker": "Papa",
+    "need": [],
+    "speech": "Non regarde je te lance un bon jeu : Apple invaders, c’est une reprise de space invaders tu sais je crois que tu as connu quand à la salle ils l’avaient encore.. C’est une version ou tu peux aussi te faire tirer dessus, je crois, mais je suis pas très doué il faut dire que j’ai toujours plus étà un technicien qu’un gars qui aimait aller sur les terrains peut-être c’est pour ça je fais même pas de foot. Mais je t’encourage pour l’équipe de l’école on se revoit vite là-dessus !",
+    "choices": [
+      {
+        "need": [],
+        "speech": "Space Invaders, ah mais ça je connais bien, et que j’ai presque tout le temps fait un record, je me demande si tu peux m’impressionner avec ta version maison! Je te crois pas vraiment mais vas-y montre !",
+        "response": "Montrer de l'intérêt et comparer avec la borne d'arcade",
+        "nextId": 43,
+        "modifiers": []
+      },
+      {
+        "need": [],
+        "speech": "Bon d'accord mais je dois partir juste après, mes potes m'attendent à la salle d'arcade pour faire quelques parties de Donkey Kong. La version maison a l'air bien mais rien ne vaut l'original!",
+        "response": "Accepter de jouer mais rester sceptique",
+        "nextId": 44,
+        "modifiers": [
+        ]
+      }
+    ]
+  },
+  {
+    "id": 41,
+    "order": 2,
+    "end": "",
+    "machine": "",
+    "speaker": "Papa",
+    "need": [],
+    "speech": "Ahh, tu as raison, file avant que ta mère te tombe dessus! Je te montrerai tout ça une autre fois, promets-moi juste de prendre un peu de temps pour ça la prochaine fois.",
+    "choices": [
+      {
+        "need": [],
+        "speech": "Bye",
+        "response": "level1",
+        "nextId": -10,
+        "modifiers": []
+      }
+    ]
+  },
+  {
+    "id": 42,
+    "order": 3,
+    "end": "",
+    "machine": ["appleII.png","space_invaders.mp4"],
+    "speaker": "Papa",
+    "need": [],
+    "speech": "Héhé, d'accord, file avant que ça chauffe. La prochaine fois, c'est toi qui prends les commandes!",
+    "choices": [
+      {
+        "need": [],
+        "speech": "Bye",
+        "response": "level1",
+        "nextId": -10,
+        "modifiers": []
+      }
+    ]
+  },
+  {
+    "id": 43,
+    "order": 3,
+    "end": "",
+    "machine": ["appleII.png","space_invaders.mp4"],
+    "speaker": "Papa",
+    "need": [],
+    "speech": "Ah tu vas voir, même la version maison peut te surprendre! Installe-toi et prépare-toi à défendre la Terre contre les envahisseurs!",
+    "choices": [
+      {
+        "need": [],
+        "speech": "Bye",
+        "response": "level1",
+        "nextId": -10,
+        "modifiers": []
+      }
+    ]
+  },
+  {
+    "id": 44,
+    "order": 3,
+    "end": "level1",
+    "machine": ["appleII.png","space_invaders.mp4"],
+    "speaker": "Papa",
+    "need": [],
+    "speech": "Je comprends, rien ne vaut une bonne partie entre potes. Passe un bon moment et on verra si cette version peut te convaincre une autre fois.",
+    "choices": [
+      {
+      "need": [],
+      "speech": "Bye",
+      "response": "level1",
+      "nextId": -10,
+      "modifiers": []
+    }
+    ]
+  },
 
 
 
     {
-        "id": 999,
+        "id": 998,
         "order": 2,
-        "end": false,
+        "end": "",
         "machine": "",
         "speaker": "Camille",
         "need": [],
@@ -611,7 +902,7 @@
     {
       "id": 999,
       "order": 1,
-      "end": false,
+      "end": "",
       "machine": "",
       "img": "construire.png",
       "speaker": "np_construire",
@@ -629,7 +920,7 @@
     {
       "id": 998,
       "order": 1,
-      "end": false,
+      "end": "",
       "machine": "",
       "img": "appleII_mag.jpg",
       "speaker": "np_appleII",

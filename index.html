@@ -9,6 +9,10 @@
 </head>
 <style>
 
+    body {
+        font-family: 'PS2P',serif;
+    }
+
     button {
         background: none;
         border: none;
@@ -30,25 +34,116 @@
         cursor: pointer;
     }
 
+    #textbox-container:hover {
+        cursor: pointer;
+    }
+
+    #dialogueUI {
+        display: none;
+        top: 5%;
+        right: 7%;
+
+    }
+
+    #dialogue {
+        animation: fadeIn 5s;
+    }
+
+    @keyframes fadeIn {
+        0% { opacity: 0; }
+        100% { opacity: 1; }
+    }
+
+    #choix {
+        animation: fadeIn 5s;
+        display: none;
+        right: 34%;
+        top: 64%;
+        align-items: center;
+        /* width: 163%; */
+        /* text-align: center; */
+        font-size: 12px;
+    }
+
+    #insp {
+        margin-left : 15px;
+    }
+
+    #next  {
+        width: 100%;
+        font-size: 30px;
+        color: red;
+        padding-right: 51px;
+        display: block;
+        text-align: right;
+    }
+    img.arrowChoice {
+        margin-right: 13px;
+        height: 27px;
+        /* width: 69px; */
+        float: left;
+        top: 35px;
+        /* height: auto; */
+    }
+
     .ui-text-choices p:hover {
         color: darkblue;
     }
 
     #textbox-container{
-        align-self: end;
     }
 
-    #textbox {
+    #info-container {
+        display: none;
+        width: 45%;
+        border-radius: 14px;
+        top: 92.5%;
+        margin-left: auto;
+        margin-right: auto;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
         position: relative;
-        width: 70%;
+        z-index: 1000;
+        line-height: 1.3em;
+        background: silver;
+    }
+
+    img#question {
+        float: left;
+    }
+
+    #info {
+        float: right;
+        right: 48%;
+        font-size: 0.8rem;
+        margin-top: 4%;
+    }
+
+    .textbox {
+        position: absolute;
+        max-width: 60%;
+        min-width: 24%;
         z-index: 1000;
         align-self: end;
+        line-height:1.3em;
         background: white;
-        border-radius: 3px;
+        box-sizing: border-box;
+        box-shadow: 0 -4px white,
+        0 -8px black,
+        4px 0 white,
+        4px -4px black,
+        8px 0 black,
+        0 4px white,
+        0 8px black,
+        -4px 0 white,
+        -4px  4px black,
+        -8px 0 black,
+        -4px -4px black,
+        4px 4px black;
         outline-style: solid;
         margin: auto;
         padding: 1rem;
-        display: flex;
         flex-direction: column;
         flex-wrap: wrap;
         justify-content: flex-start;
@@ -58,12 +153,52 @@
         /* overflow: auto; */
     }
 
-    .ui-text {
-        font-family: 'PS2P',serif;
-        font-size: 9pt;
-        margin: 0;
-        user-select: none;
+    .textbox.left::after {
+        content: '';
+        position: absolute;
+        height: 4px;
+        width: 4px;
+        top: 47px;
+        left: -8px;
+        background: white;
+        box-shadow:
+        -4px -4px white,
+        -4px 0 white,
+        -8px 0 white,
+        0 -8px white,
+        -4px 4px black,
+        -8px 4px black,
+        -12px 4px black,
+        -16px 4px black,
+        -12px 0 black,
+        -8px -4px black,
+        -4px -8px black,
+        0 -4px white;
     }
+
+    .textbox.right::after {
+        content: '';
+        position: absolute;
+        height: 4px;
+        width: 4px;
+        top: 47px;
+        right: -8px;
+        background: white;
+        box-shadow:
+                4px -4px white,
+                4px 0 white,
+                8px 0 white,
+                0 -8px white,
+                4px 4px black,
+                8px 4px black,
+                12px 4px black,
+                16px 4px black,
+                12px 0 black,
+                8px -4px black,
+                4px -8px black,
+                0 -4px white;
+    }
+
 
     #minigame, #game {
         position: absolute;
@@ -78,15 +213,19 @@
         position: absolute;
         z-index: 101;
         width: 13%;
-        left: 32%;
-        top: 10%;
+        left: 0%;
+        top: 0%;
         margin-left: 10%;
         margin-top: 8.5%;
     }
     /* Style du conteneur de l'inventaire */
     #inventory-container {
+        background: darkslategrey;
         padding: 20px;
         display: none;
+        left: 310px;
+        width: 600px;
+        height: 600px;
         position: absolute;
         z-index: 100;
         border: 2px solid #666;
@@ -104,6 +243,7 @@
     /* Style de l'inventaire */
     #inventaire {
         display: grid;
+        border-bottom: 2px solid grey;
         grid-template-columns: repeat(3, 1fr);
         gap: 10px;
         padding: 20px;
@@ -113,7 +253,6 @@
     .inventory-item {
         position: relative;
         cursor: pointer;
-        border: 2px solid #666; /* Bordure grise */
         border-radius: 5px;
         overflow: hidden; /* Masquer le débordement du texte */
     }
@@ -128,28 +267,24 @@
     /* Style de l'image de l'objet dans l'inventaire */
     .inventory-item img {
         width: 64px;
+        border: grey 4px solid;
         height: auto;
         border-radius: 5px;
     }
 
     /* Style du texte de l'objet dans l'inventaire */
-    .inventory-item .text {
-        position: absolute;
+    #textInventory {
+        position: relative;
         display: none;
         top: 0;
-        left: -150%; /* Mettre le texte en dehors de la case */
-        width: 150%; /* Largeur du texte pour permettre la transition */
-        height: 100%;
+        /* left: -150%; */
+        width: 100%;
         background-color: rgba(0, 0, 0, 0.7);
         color: #fff;
         padding: 5px;
         transition: left 0.3s ease; /* Transition pour animer le texte */
     }
 
-    /* Style pour afficher le texte lorsque la case est survolée */
-    .inventory-item:hover .text {
-        left: 0;
-    }
     .w3-display-left {
         left: 43% !important;
         top:20%;
@@ -170,6 +305,23 @@
         align-self: end;
     }
 
+    #machines img {
+        left: 0% !important;
+        top: 0% !important;
+    }
+
+    #magazines img {
+        width: 35%;
+        left: 0% !important;
+        top: 0% !important;
+        background: darkkhaki;
+        padding: 2%;
+        display: none;
+        position: absolute;
+        z-index: 100;
+        margin: auto;
+    }
+
 
     #imgContainer img {
         width: 35%;
@@ -183,6 +335,19 @@
         margin: auto;
     }
 
+    #perso1 {
+        top:0 !important;
+        animation: fadeIn 3.5s;
+        left:0 !important;
+    }
+
+    #perso2 {
+        animation: fadeIn 3.5s;
+        left: auto !important;
+        top: auto !important;
+        bottom: 0;
+        right: 0;
+    }
     #close {
         display: none;
     }
@@ -198,8 +363,8 @@
     </div>
     <div id="inventory-container">
         <h1 class="inventory-title">Inventaire</h1>
-        <div id="inventaire" class="inventory">
-        </div>
+        <div id="inventaire" class="inventory"></div>
+        <div id="textInventory"></div>
     </div>
     <div id="container-all">
         <div id="imgContainer">
@@ -214,16 +379,22 @@
             <div id="magazines">
                 <img id="doc" class="doc" src="">
             </div>
-        </div>
-        <div id="textbox-container" style="display: none">
-            <div id="textbox">
-                <p id="dialogue" class="ui-text"></p>
-                <div id="choix" class="ui-text-choices"></div>
-                <div id="next" class="textbox" style="display: none;">
-                    <input type="text" placeholder="Suivant">
-                    <i class="fas fa-arrow-right"></i>
-                </div>
+            <div id="personnage">
+                <img id="perso1" class="perso" src="">
+                <img id="perso2" class="perso" src="">
             </div>
+        </div>
+        <div id="textbox-container">
+                <div id="info-container">
+                 <img id="question" src="sprites/question.png" width="40px"><p id="info"></p>
+                </div>
+                <div id="dialogueUI" class="textbox left"><p id="dialogue"></p>
+                    <div id="next" class="" style="display: none;">
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </div>
+
+            <div id="choix" class="textbox right"></div>
         </div>
     </div>
     <canvas id="game"></canvas>
