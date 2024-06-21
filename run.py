@@ -2,12 +2,27 @@ import subprocess
 import os
 import threading
 
+def npm_install():
+    try:
+        result = subprocess.run(
+            ["npm", "install"],
+            check=True,
+            shell=True,
+            capture_output=True,
+            text=True
+        )
+        print("esbuild output:", result.stdout)
+    except subprocess.CalledProcessError as e:
+        print("Error during esbuild:", e.stderr)
+        raise
+
 def run_esbuild():
     try:
         # Exécute la commande esbuild pour bundle le fichier game.js
         result = subprocess.run(
             ["esbuild", "main.js", "--bundle", "--outfile=build.js"],
             check=True,
+            shell=True,
             capture_output=True,
             text=True
         )
@@ -22,6 +37,7 @@ def start_http_server():
         result = subprocess.run(
             ["python3", "-m", "http.server", "8000"],
             check=True,
+            shell=True,
             text=True
         )
         print("HTTP server output:", result.stdout)
@@ -37,7 +53,7 @@ def start_http_server_in_thread():
 if __name__ == "__main__":
     # Assure que le script s'exécute dans le bon répertoire
     os.chdir(os.path.dirname(os.path.abspath(__file__)))
-    
+    npm_install()
     # Exécute esbuild
     run_esbuild()
     
