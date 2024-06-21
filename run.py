@@ -16,6 +16,20 @@ def npm_install():
         print("Error during esbuild:", e.stderr)
         raise
 
+def install_esbuild():
+    try:
+        result = subprocess.run(
+            [npm, "install", "-g", "esbuild"],
+            check=True,
+            shell=True,
+            capture_output=True,
+            text=True
+        )
+        print("esbuild installation output:", result.stdout)
+    except subprocess.CalledProcessError as e:
+        print("Error during esbuild installation:", e.stderr)
+        raise
+
 def run_esbuild():
     try:
         # Exécute la commande esbuild pour bundle le fichier game.js
