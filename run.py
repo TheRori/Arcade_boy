@@ -19,7 +19,7 @@ def npm_install():
 def install_esbuild():
     try:
         result = subprocess.run(
-            [npm, "install", "-g", "esbuild"],
+            ["npm", "install", "-g", "esbuild"],
             check=True,
             shell=True,
             capture_output=True,
@@ -68,6 +68,7 @@ if __name__ == "__main__":
     # Assure que le script s'exécute dans le bon répertoire
     os.chdir(os.path.dirname(os.path.abspath(__file__)))
     npm_install()
+    install_esbuild()
     # Exécute esbuild
     run_esbuild()
     
