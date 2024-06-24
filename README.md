@@ -1,24 +1,27 @@
-## Instructions d'Exécution
+# Kaboom Test Project
 
-Suivez ces étapes pour exécuter le script `run.py` :
+Ce projet utilise [Kaboom.js](https://kaboomjs.com/) et [esbuild](https://esbuild.github.io/) pour le développement de jeux. Le serveur live est utilisé pour le développement en temps réel.
 
-1. Clonez ce dépôt ou téléchargez les fichiers nécessaires.
+## Prérequis
 
-2. Ouvrez votre terminal et naviguez jusqu'au répertoire contenant `run.py` et `game.js`.
+Assurez-vous d'avoir [Node.js](https://nodejs.org/) installé sur votre machine.
 
-3. Exécutez le script en utilisant Python 3 :
-    ```bash
-    python3 run.py
+## Installation et démarrage du serveur live
+
+1. Clonez ce dépôt ou téléchargez-le sous forme d'archive ZIP.
+2. Ouvrez un terminal et accédez au répertoire du projet.
+3. Exécutez la commande suivante pour installer les dépendances :
     ```
-
-4. Après l'exécution de la commande, `esbuild` regroupera `game.js` en `build.js` et un serveur HTTP local démarrera sur le port 8000.
-
-5. Vous pouvez accéder au serveur HTTP local en ouvrant un navigateur web et en naviguant vers :
+    npm install
     ```
-    http://localhost:8000
+4. Pour bundler votre fichier `main.js` et produire le fichier `build.js`, utilisez la commande suivante :
     ```
+    npm run build
+    ```
+5. Après avoir bundlé le projet, démarrez le serveur live pour voir votre fichier `index.html` :
+    ```
+    npm run start
+    ```
+Cela démarrera `live-server` et ouvrira automatiquement votre navigateur à l'adresse par défaut (habituellement `http://127.0.0.1:8080`), où vous pourrez voir votre fichier `index.html` en temps réel.
 
-## Arrêt du Serveur
-
-Pour arrêter le serveur, revenez au terminal où le script `run.py` est en cours d'exécution et appuyez sur `Ctrl + C`. Cela interrompra le serveur HTTP et arrêtera le script proprement.
 
