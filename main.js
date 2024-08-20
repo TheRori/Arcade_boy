@@ -329,51 +329,6 @@ export async function createPlayer(posx,posy) {
 
         player.play("stand");
     }
-    k.onMouseDown((mouseBtn) => {
-        if (mouseBtn !== "left" || player.isInDialogue) return;
-
-        const worldMousePos = k.toWorld(k.mousePos());
-        player.moveTo(worldMousePos, player.speed);
-
-        const mouseAngle = player.pos.angle(worldMousePos);
-
-        const lowerBound = 50;
-        const upperBound = 125;
-
-        if (
-            mouseAngle > lowerBound &&
-            mouseAngle < upperBound &&
-            player.curAnim() !== "walksU"
-        ) {
-            player.play("walksU");
-            player.direction = "up";
-            return;
-        }
-
-        if (
-            mouseAngle < -lowerBound &&
-            mouseAngle > -upperBound &&
-            player.curAnim() !== "walksD"
-        ) {
-            player.play("walksD");
-            player.direction = "down";
-            return;
-        }
-
-        if (Math.abs(mouseAngle) > upperBound) {
-            player.flipX = false;
-            if (player.curAnim() !== "walksR") player.play("walksR");
-            player.direction = "right";
-            return;
-        }
-
-        if (Math.abs(mouseAngle) < lowerBound) {
-            if (player.curAnim() !== "walksL") player.play("walksL");
-            player.direction = "left";
-            return;
-        }
-    });
-
     k.onKeyDown((key) => {
         let p = k.getSprite('teen')
         const keyMap = [
@@ -615,11 +570,11 @@ async function parler(categorie,idObj, idConv, endSpeech, mood) {
                     dialogue.innerHTML = data.speaker+' : ';
                     dialogue.innerHTML += splitText[curentIndex];
                 } else {
-                    curentIndex = null;
                     nextArrow.style.display = "none";
+                    console.log(curentIndex)
                     // Une fois que tous les morceaux de texte ont été affichés, ajoutez les choix
                     dialogue.innerHTML = data.speaker+' : ';
-                    dialogue.innerHTML += data.speech;
+                    dialogue.innerHTML += splitText[curentIndex];
                     nextArrow.removeEventListener('click', updateDialogue);
                     addChoices(data, categorie, speaker, idObj, endSpeech,mood);
                     data = null
