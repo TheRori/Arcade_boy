@@ -1239,7 +1239,7 @@ k.scene("mainMenu", () => {
 
     // Navigate to the level on any click (to preserve original functionality)
     k.onClick("start", () => {
-        k.go("level0");
+        k.go("loadScreen1");
 
     });
     k.onHover("start", () => {
