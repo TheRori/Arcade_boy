@@ -1,7 +1,24 @@
 { "compressionlevel":-1,
  "height":23,
  "infinite":false,
- "layers":[
+  "objects":[
+    {
+      "gid":875,
+      "height":90.787330316742,
+      "id":4,
+      "name":"np_kingsquest",
+      "activation": 24,
+      "isDeleted": false,
+      "rotation":0,
+      "type":"",
+      "visible":true,
+      "width":83.235294117647,
+      "x":690.122171945701,
+      "y":742.226244343892
+    }],
+
+  "layers":[
+
         {
          "data":[211, 212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222, 223, 224, 225, 226, 227, 228, 229, 230, 231, 232, 233, 234, 235, 236, 237, 238, 239, 240, 241, 242, 243, 244, 245, 246, 247, 248,
             253, 254, 255, 256, 257, 258, 259, 260, 261, 262, 263, 264, 265, 266, 267, 268, 269, 270, 271, 272, 273, 274, 275, 276, 277, 278, 279, 280, 281, 282, 283, 284, 285, 286, 287, 288, 289, 290,
@@ -104,7 +121,32 @@
          "width":38,
          "x":0,
          "y":0
+        },
+    {
+      "draworder":"topdown",
+      "idConv":9,
+      "name":"newspaper",
+      "objects":[
+        {
+          "gid":875,
+          "height":90.787330316742,
+          "id":995,
+          "name":"np_kingsquest",
+          "activation": 24,
+          "isDeleted": true,
+          "rotation":0,
+          "type":"",
+          "visible":true,
+          "width":83.235294117647,
+          "x":890.122171945701,
+          "y":742.226244343892
         }],
+      "opacity":1,
+      "type":"objectgroup",
+      "visible":true,
+      "x":0,
+      "y":0
+    }],
  "nextlayerid":4,
  "nextobjectid":1,
  "orientation":"orthogonal",

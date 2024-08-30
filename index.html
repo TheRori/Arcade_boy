@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -65,11 +66,22 @@
         font-size: 12px;
     }
 
+    .relation-img {
+        width: 24px;  /* Largeur de l'icône */
+        height: 24px; /* Hauteur de l'icône */
+        margin-right: 10px; /* Espace entre l'image et les cœurs */
+        vertical-align: middle; /* Aligne l'image au centre par rapport aux cœurs */
+    }
+
+    .choixVar:hover {
+        color: red;
+    }
+
     #insp {
         margin-left : 15px;
     }
 
-    #next  {
+    .arrow  {
         width: 100%;
         font-size: 30px;
         color: red;
@@ -104,7 +116,7 @@
         align-items: center;
         text-align: center;
         position: relative;
-        z-index: 1000;
+        z-index: 80;
         line-height: 1.3em;
         background: silver;
     }
@@ -124,7 +136,7 @@
         position: absolute;
         max-width: 60%;
         min-width: 24%;
-        z-index: 1000;
+        z-index: 80;
         align-self: end;
         line-height:1.3em;
         background: white;
@@ -199,6 +211,27 @@
                 0 -4px white;
     }
 
+    .close-button {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        cursor: pointer;
+        font-size: 24px;
+        color: #000; /* Choisissez la couleur de la croix selon vos préférences */
+        z-index: 10; /* S'assure que la croix est au-dessus du contenu de l'inventaire */
+    }
+
+    .textbox.center {
+        bottom: 10%;
+        margin-left: 3%;
+        text-align: justify;
+        max-width: 95vw !important;
+    }
+
+    .textbox.center p {
+        margin: 0;
+    }
+
 
     #minigame, #game {
         position: absolute;
@@ -211,7 +244,7 @@
 
     video {
         position: absolute;
-        z-index: 101;
+        z-index: 65;
         width: 13%;
         left: 0%;
         top: 0%;
@@ -237,7 +270,8 @@
     /* Style du titre de l'inventaire */
     .inventory-title {
         text-align: center;
-        font-family: 'Press Start 2P', cursive;
+        font-size: 1.8rem;
+        font-family: 'PS2P', cursive;
         color: #fff;
     }
     /* Style de l'inventaire */
@@ -289,7 +323,7 @@
         left: 43% !important;
         top:20%;
         margin-top: 10%;
-        z-index: 100;
+        z-index: 50;
         display: none;
     }
 
@@ -297,7 +331,7 @@
         right: 40% !important;
         margin-top: 10%;
         top: 20% !important;
-        z-index: 100;
+        z-index: 50;
         display: none;
     }
 
@@ -318,7 +352,7 @@
         padding: 2%;
         display: none;
         position: absolute;
-        z-index: 100;
+        z-index: 50;
         margin: auto;
     }
 
@@ -331,9 +365,11 @@
         padding: 2%;
         display: none;
         position: absolute;
-        z-index: 100;
+        z-index: 50;
         margin: auto;
     }
+
+
 
     #perso1 {
         top:0 !important;
@@ -356,6 +392,39 @@
         margin-left: 95%;
     }
 
+    /* CSS pour la lightbox */
+    .lightbox {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+    }
+
+    .lightbox-img {
+        max-width: 80%;
+        max-height: 80%;
+    }
+
+    .lightbox-close {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        font-size: 30px;
+        color: white;
+        cursor: pointer;
+    }
+
+    #showFullDialogue {
+        display: none;
+    }
+
+
 </style>
 <body>
 <div id="app">
@@ -365,6 +434,7 @@
         <h1 class="inventory-title">Inventaire</h1>
         <div id="inventaire" class="inventory"></div>
         <div id="textInventory"></div>
+        <div id="relations"></div>
     </div>
     <div id="container-all">
         <div id="imgContainer">
@@ -389,17 +459,29 @@
                  <img id="question" src="sprites/question.png" width="40px"><p id="info"></p>
                 </div>
                 <div id="dialogueUI" class="textbox left"><p id="dialogue"></p>
-                    <div id="next" class="" style="display: none;">
+                    <button id="showFullDialogue" style="display: none;">Afficher tout</button>
+                    <div id="next" class="arrow" style="display: none;">
                         <i class="fas fa-arrow-right"></i>
                     </div>
                 </div>
-
+            <div id="loadScrren" style="display: none;"  class="textbox center">
+                <p></p>
+                <div id="go" class="arrow" style="display: none;">
+                    <i class="fas fa-arrow-right"></i>
+                </div>
+            </div>
             <div id="choix" class="textbox right"></div>
         </div>
     </div>
     <canvas id="game"></canvas>
     <canvas id="minigame" width="800" height="600"></canvas>
 </div>
+
+<div id="lightbox" class="lightbox" style="display: none;">
+    <span id="lightbox-close" class="lightbox-close">&times;</span>
+    <img id="lightbox-img" class="lightbox-img" src="" alt="Image en grand">
+</div>
+
 <script src="pong.js"></script>
 <script src="build.js"></script>
 </body>

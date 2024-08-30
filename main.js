@@ -1,5 +1,6 @@
 import { k } from "./kaboomCtx";
 k.loadFont("PressStart2P", "fonts/PressStart2p-vaV7.ttf");
+k.volume(0.1);
 
 
 const imgHTMLContainer = document.getElementById('imgContainer');
@@ -14,11 +15,14 @@ const infoUI = document.getElementById("info-container");
 const info = document.getElementById("info");
 const doc = document.getElementById('doc');
 const inventaireUI = document.getElementById('inventory-container');
+const showFullDialogueButton = document.getElementById('showFullDialogue');
 
+let isInDialogue= false;
 let resize = [];
-let statePlayer = [{"Rpapa" : -1},{"Rcamille" : 0},{"Reric" : 0},{"Rarnaud": 0},{"Rthomas": 0},{"Rconsole":0}];
+let statePlayer = [{"Rpapa" : null},{"Rcamille" : null},{"Reric" : null},{"Rarnaud": null},{"Rthomas": null},{"Rconsole":null}];
+let initialStatePlayer = [];
 let objs = []
-let idd,idObj, namee, type;
+let idd,idObj, namee, type, targetObj;
 let map, musicBackground, musicDial = [];
 
 let lvlJson = 'bar.json';
@@ -38,12 +42,15 @@ async function fetchDataAndProcess() {
 
 
 let inventoryDisplay,chosen = false
+let levelEnd = false;
 
-let inventoryPlayer = [
-];
+let inventoryPlayer = [];
 
 
 let collide = false;
+k.loadSprite('ld1', 'sprites/ld1.png');
+k.loadSprite('ld2', 'sprites/ld2.png');
+k.loadSprite('ld3', 'sprites/ld3.png');
 k.loadSprite("garage", "sprites/garage.png");
 k.loadSprite("map", "sprites/map.png");
 k.loadSprite("bar", "sprites/bar.png");
@@ -51,6 +58,9 @@ k.loadSprite("eric_bar", "sprites/eric_bar.png");
 k.loadSprite("thomas_bar", "sprites/thomas_bar.png");
 k.loadSprite("np_construire", "sprites/np_construire.png");
 k.loadSprite("np_appleII", "sprites/np_appleII.png");
+k.loadSprite("np_coin", "sprites/np_coin.png");
+k.loadSprite("np_kingsquest", "sprites/np_kingsquest.png");
+k.loadSprite("np_nesad", "sprites/np_nesad.png");
 
 k.loadSound('lvl1', 'music/The_Great_Machine.mp3')
 k.loadSound('dial', 'music/dial.mp3')
@@ -62,6 +72,10 @@ k.loadSound('Thomas', 'music/Thomas.mp3')
 k.loadSound('lvl2', 'music/bar.mp3')
 k.loadSound('np_construire', 'music/documents.mp3')
 k.loadSound('np_appleII', 'music/documents.mp3')
+k.loadSound('np_coin', 'music/documents.mp3')
+k.loadSound('np_nesad', 'music/documents.mp3')
+k.loadSound('np_kingsquest', 'music/documents.mp3')
+
 
 
 
@@ -144,16 +158,7 @@ export async function createMap(numLVL,sprite,x,y) {
 
     map = k.add([k.sprite(sprite), k.pos(0), k.scale(1)]);
     resizeBackground();
-    function resizeBackground() {
-        resize.push(k.width() / map.width);
-        resize.push(k.height() / map.height);
 
-        // Mettre à jour la taille de l'image de fond
-        map.scale = k.vec2(
-            resize[0],
-            resize[1]
-        );
-    }
     for (const layer of layersB) {
         if (layer.name === "boundaries") {
             let r = 0
@@ -217,25 +222,41 @@ export async function createMap(numLVL,sprite,x,y) {
 */  if (layer.objects) {
     let i = 0;
         for (const o of layer.objects) {
-            if (!o.isDeleted) {
-                const centerX = o.x + (o.width / 2);
-                const centerY = o.y - (o.height / 2);
-                console.log(centerX, centerY)// Changer le signe '-' en '+' pour le centerY
 
+            let centerX = o.x + (o.width / 2);
+            let centerY = o.y - (o.height / 2);
+            console.log(o);
+            if (!o.isDeleted) {
                 objs.push(map.add([
                     k.sprite(o.name),
                     k.area({
-                        shape: new k.Rect(k.vec2(0), o.width, o.height),
+                        shape: new k.Rect(k.vec2(0), 32, 32),
                     }),
                     k.pos(centerX - 70, centerY - 60),
                     k.scale(2),
                 ]));
                 objs[i].name = o.name;
+                objs[i].target = o.target;
+                objs[i].activation = o.activation;
                 objs[i].idObjs = i;
                 objs[i].idConv = o.id;
                 objs[i].type = 'documents';
-                i += 1;
             }
+            else{
+                objs.push({
+                    name: o.name,
+                    target: o.target,
+                    activation: o.activation,
+                    idObjs: i,
+                    idConv: o.id,
+                    x: o.x,
+                    y: o.y,
+                    width:o.width,
+                    height:o.height,
+                    type: 'documents',
+                });
+            }
+            i += 1;
         }
         }
     }
@@ -301,7 +322,6 @@ export async function createPlayer(posx,posy) {
         {
             speed: 250,
             direction: 'down',
-            isInDialogue: false,
             readySpeak: false,
         },
         k.body(),
@@ -348,7 +368,7 @@ export async function createPlayer(posx,posy) {
             stopAnims();
         });
         if (nbOfKeyPressed > 1) return;
-        if (player.isInDialogue === true) return;
+        if (isInDialogue === true) return;
         if (keyMap[0]) {
             player.flipX = true;
             if (player.curAnim() !== "walksR"){ player.play("walksR",);}
@@ -390,6 +410,7 @@ export async function createPlayer(posx,posy) {
     let wallState = 0;
     k.onKeyPress("i", () => {
         if(!inventoryDisplay){
+            console.log(inventoryPlayer);
             inventoryDisplay = true;
             afficherInventaire()
         }
@@ -399,7 +420,7 @@ export async function createPlayer(posx,posy) {
         }
     })
     function handleClick() {
-        player.isInDialogue = true;
+        isInDialogue = true;
         infoUI.style.display = 'none';
         k.play('dial')
         musicDial.push(k.play(namee,{loop: true}));
@@ -411,13 +432,13 @@ export async function createPlayer(posx,posy) {
         if (type === 'documents') {
             console.log('bouh' + type);
             parler("documents", idObj, idd, () => {
-                player.isInDialogue = false;
+                isInDialogue = false;
             },'');
 
         } else if (type === 'dialogues') {
             console.log('salut');
             parler("dialogues", idObj, idd, () => {
-                player.isInDialogue = false;
+                isInDialogue = false;
                 musicDial.paused = true;
             },'');
         }
@@ -428,7 +449,7 @@ export async function createPlayer(posx,posy) {
     }
 
     k.onDraw(() => {
-        if (player.isInDialogue === true) {
+        if (isInDialogue === true) {
             k.drawRect({
                 tag: 'sepia',
                 width: 32 * 38 * resize[0],
@@ -444,7 +465,9 @@ export async function createPlayer(posx,posy) {
     k.onCollide('player', '*', (player,objj) => {
        idd = objj.idConv;
        idObj = objj.idObjs;
+       targetObj = objj.target;
        namee = objj.name;
+       console.log(objj)
        type = objj.type;
        let posBubblex, posBubbley;
        if(idd !== undefined) {
@@ -460,9 +483,7 @@ export async function createPlayer(posx,posy) {
                if(resize[0] < 1 || resize[1] < 1){ posBubbley = player.pos.y + (player.pos.y - 70)  * resize[1]}
                if(resize[0] > 1 || resize[1] > 1){ posBubbley += player.pos.y - (player.pos.y + 50)  * resize[1]}
 
-               console.log(posBubblex,posBubbley,resize);
                collide = false;
-               console.log("ajouter");
                player.readySpeak = true;
                info.addEventListener('click', handleClick);
            }
@@ -487,8 +508,24 @@ export async function createPlayer(posx,posy) {
 }
 function readMagazine(src_img) {
     imgHTMLContainer.style.display = 'block';
+
     doc.src=src_img
     doc.style.display = "block";
+
+    // Ajouter un écouteur de clic pour afficher l'image dans la lightbox
+    doc.addEventListener('click', () => {
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        lightboxImg.src = doc.src; // Utiliser la source de l'image actuelle
+        lightbox.style.display = 'flex'; // Affiche la lightbox
+    });
+
+    // Ajoutez ce listener pour fermer la lightbox au clic sur le bouton de fermeture
+    const lightboxClose = document.getElementById('lightbox-close');
+    lightboxClose.addEventListener('click', () => {
+        const lightbox = document.getElementById('lightbox');
+        lightbox.style.display = 'none'; // Cache la lightbox
+    });
 }
 
 async function parler(categorie,idObj, idConv, endSpeech, mood) {
@@ -496,14 +533,17 @@ async function parler(categorie,idObj, idConv, endSpeech, mood) {
     let curentIndex = 0;
     let stateMachine ="";
     let speaker;
+    let showFullDialogue = false;
     musicBackground.paused = true;
     dialogueUI.style.display = 'block'
     choix.style.display = 'none';
+    console.log(categorie)
     let data;
     if (idConv === -1){
         imgHTMLContainer.style.display = 'none';
         dialogueUI.style.display = "none";
         doc.src = "";
+
         perso1.src = "";
         curentIndex = null;
         dialogue.innerHTML = "";
@@ -512,37 +552,97 @@ async function parler(categorie,idObj, idConv, endSpeech, mood) {
         musicDial[musicDial.length -1].paused = true;
         musicBackground.paused = false;
         endSpeech();
-        return;
+        if (levelEnd) {
+            console.log('hein ??'+levelEnd)
+            parler(categorie,idObj, 49, endSpeech, mood);
+        }
+        console.log('helloreturn1');
+        return 1;
     }
     else if (idConv === -10){
         imgHTMLContainer.style.display = 'none';
         dialogueUI.style.display = "none";
         endSpeech();
         doc.src = "";
+        perso1.src = '';
         curentIndex = null;
         dialogue.innerHTML = "";
         choix.innerHTML = "";
         musicDial[musicDial.length -1].paused = true;
         musicBackground.paused = true;
         musicBackground = k.play('lvl2',{loop: true});
-        k.go('level2');
+        resize = [];
+        k.go('loadScreen2');
         return;
     }
-    if (categorie === "dialogues" | categorie === "objet"){
+    else if (idConv === -20){
+        imgHTMLContainer.style.display = 'none';
+        dialogueUI.style.display = "none";
+        endSpeech();
+        doc.src = "";
+        perso1.src = '';
+        curentIndex = null;
+        dialogue.innerHTML = "";
+        choix.innerHTML = "";
+        musicDial[musicDial.length -1].paused = true;
+        musicBackground.paused = true;
+        musicBackground = k.play('lvl2',{loop: true});
+        resize = [];
+        k.go('loadScreen3');
+        return;
+    }
+    if (categorie === "dialogues" || categorie === "objet"){
         data = dials.dialogues2.find(d => d.id === idConv);
         console.log(data)
         speaker = data.speaker;
         perso1.src = '/sprites/'+speaker+mood+'.png';
         imgHTMLContainer.style.display = 'block';
-        perso1.style.display = 'block';
+        if (data.speaker !== ""){
+            perso1.style.display = 'block';
+        } else {
+            perso1.style.display = 'none';
+        }
     }
     else if (categorie === "documents"){
+        console.log("Categorie is 'documents', processing document...");
         data = dials.objets.find(d => d.id === idConv);
         speaker = data.speaker;
         console.log(idObj + speaker)
         readMagazine("sprites/"+data.img);
     }
     if (data) {
+        console.log(objs)
+        objs.forEach((o, index) => {
+            console.log(o);
+            console.log(idConv);
+            let centerX = o.x + (o.width / 2);
+            let centerY = o.y - (o.height / 2);
+
+            // Vérifier si l'objet doit être remplacé
+            if (o.activation === idConv) {
+                // Créer un nouvel objet avec map.add()
+                const newObject = map.add([
+                    k.sprite(o.name),
+                    k.area({
+                        shape: new k.Rect(k.vec2(0), o.width, o.height),
+                    }),
+                    k.pos(centerX - 70, centerY - 60),
+                    k.scale(2),
+                ]);
+
+                // Ajouter les propriétés supplémentaires à l'objet créé
+                newObject.name = o.name;
+                newObject.target = o.target;
+                newObject.activation = o.activation;
+                newObject.idObjs = o.idObjs; // Utiliser l'index actuel
+                newObject.idConv = o.idConv;   // Mettre à jour idConv si nécessaire
+                newObject.type = 'documents';
+
+                // Remplacer l'ancien objet par le nouvel objet
+                objs[index] = newObject;
+            }
+        });
+
         let splitText = decouperTexte(data.speech, '175');
         if (data.machine.length > 0 ){
             imgHTMLContainer.style.display = "block";
@@ -561,7 +661,11 @@ async function parler(categorie,idObj, idConv, endSpeech, mood) {
             const speechEntier = data.speech;
             const nextArrow = document.getElementById('next');
             nextArrow.style.display = 'block';
+
+            showFullDialogueButton.style.display = 'none';
+
             function updateDialogue() {
+
                 console.log(splitText)
                 k.play('dial');
                 if (curentIndex + 1 < splitText.length) {
@@ -576,9 +680,27 @@ async function parler(categorie,idObj, idConv, endSpeech, mood) {
                     dialogue.innerHTML = data.speaker+' : ';
                     dialogue.innerHTML += splitText[curentIndex];
                     nextArrow.removeEventListener('click', updateDialogue);
-                    addChoices(data, categorie, speaker, idObj, endSpeech,mood);
-                    data = null
+                    showFullDialogueButton.style.display = 'block';
+                    showFullDialogueButton.addEventListener('click', toggleFullDialogue);
+                    addChoices(data, categorie, speaker, idConv, idObj, endSpeech,mood);
                 }
+
+                // Fonction pour basculer l'affichage complet du dialogue
+                function toggleFullDialogue() {
+                    console.log(showFullDialogue)
+                    showFullDialogue = !showFullDialogue; // Inverser l'état
+
+                    if (showFullDialogue) {
+                        dialogue.innerHTML = data.speech; // Afficher tout l'historique
+                        showFullDialogueButton.textContent = "Masquer";
+                    } else {
+                        dialogue.innerHTML = data.speaker + ' : ' + splitText[curentIndex]; // Afficher uniquement le morceau courant
+                        showFullDialogueButton.textContent = "Afficher tout";
+                    }
+                }
+
+
+
             }
             nextArrow.addEventListener('click', updateDialogue);
             k.onKeyPress("e", updateDialogue);
@@ -596,6 +718,13 @@ async function parler(categorie,idObj, idConv, endSpeech, mood) {
     const closeBtn = document.getElementById("close");
 }
 
+function initializeInitialPlayerState() {
+    initialStatePlayer = statePlayer.map(stateObj => {
+        let key = Object.keys(stateObj)[0];
+        return { [key]: stateObj[key] }; // Copy initial state value
+    });
+}
+
 // Fonction pour obtenir la valeur d'une clé spécifique dans l'état du joueur
 function getPlayerStateValue(key) {
     let state = statePlayer.find(obj => obj.hasOwnProperty(key));
@@ -604,25 +733,45 @@ function getPlayerStateValue(key) {
 // Fonction pour mettre à jour la valeur d'une clé spécifique dans l'état du joueur
 function setPlayerStateValue(key, newValue) {
     let state = statePlayer.find(obj => obj.hasOwnProperty(key));
+    if(state === null){state = 0};
     if (state) {
+
         state[key] = newValue;
     } else {
         let newState = {};
         newState[key] = newValue;
         statePlayer.push(newState);
+
     }
 }
 
-function addChoices(dial,categorie,speaker,idObj,endSpeech,mood) {
+// Object to keep track of selected choices for each conversation
+const selectedChoices = {};
 
+// Function to add choices to the dialogue
+function addChoices(dial, categorie, speaker, idConv, idObj, endSpeech, mood) {
     let choices = dial.choices;
+    console.log(categorie);
     perso2.src = '/sprites/Pierre.png';
     perso2.style.display = 'block';
     let choicesHTML = '';
     choix.style.display = 'block';
+
+    // Ensure the selectedChoices object has an entry for the current conversation
+    if (!selectedChoices[idConv]) {
+        selectedChoices[idConv] = new Set();
+    }
+
     for (let i = 0; i < choices.length; i++) {
-        if (choices[i].need && choices[i].need.length > 0) {
-            const conditions = choices[i].need;
+        const choice = choices[i];
+
+        // Check if the choice has been selected before, and if it should always be shown
+        if (selectedChoices[idConv].has(i) && !choice.alwaysVisible) {
+            continue; // Skip this choice if it has been selected before and is not marked as always visible
+        }
+
+        if (choice.need && choice.need.length > 0) {
+            const conditions = choice.need;
             let allConditionsMet = true;
             for (const condition of conditions) {
                 let { key, operator, value } = condition;
@@ -631,7 +780,7 @@ function addChoices(dial,categorie,speaker,idObj,endSpeech,mood) {
                     allConditionsMet = false;
                     break;
                 }
-                // Utilise la fonction "new Function" pour évaluer la condition de manière dynamique
+                // Use "new Function" to evaluate the condition dynamically
                 const conditionMet = new Function('playerValue', 'value', `return playerValue ${operator} value;`)(playerValue, value);
                 if (!conditionMet) {
                     allConditionsMet = false;
@@ -640,67 +789,98 @@ function addChoices(dial,categorie,speaker,idObj,endSpeech,mood) {
             }
             if (allConditionsMet) {
                 choicesHTML += '<img class="arrowChoice" src="sprites/arrow_choice.png">';
-                choicesHTML += ("<p class='choixVar' id='" + i + "'>" + choices[i].speech + "</p>");
+                choicesHTML += ("<p class='choixVar' id='" + i + "'>" + choice.speech + "</p>");
             }
         } else {
             choicesHTML += '<img class="arrowChoice" src="sprites/arrow_choice.png">';
-            choicesHTML += ("<p class='choixVar' id='" + i + "'>" + choices[i].speech + "</p>");
+            choicesHTML += ("<p class='choixVar' id='" + i + "'>" + choice.speech + "</p>");
         }
     }
-    if(categorie === "dialogues"){
-        choicesHTML += '<img class="arrowChoice" src="sprites/arrow_choice.png">'
-        choicesHTML += ("<p class='choixVar' id='obj'>"+ "Essayer un objet…"  + "</p>");
-    }
+
     choix.innerHTML = choicesHTML;
     const choixVarHTML = document.querySelectorAll(".choixVar");
     choixVarHTML.forEach((el, idx) => {
         el.addEventListener('click', () => {
-            choix.innerHTML = '';
+            showFullDialogueButton.style.display = 'none';
             k.play('choice');
-            if(categorie === "dialogues"){
-            if (choices[idx].modifiers.length > 0) {
-                choices[idx].modifiers.forEach(({ key, operator, value }) => {
-                    const stateValue = getPlayerStateValue(key);
-                    const newValue = new Function('stateValue', 'value', `return stateValue ${operator} value;`)(stateValue, value);
-                    if (newValue < stateValue) {
-                        mood = '_angry';
+
+            // Mark the choice as selected, unless it's always visible
+            const choiceIndex = parseInt(el.id);
+            if (!choices[choiceIndex].alwaysVisible) {
+                selectedChoices[idConv].add(choiceIndex);
+            }
+
+            if (categorie === "dialogues") {
+                console.log(choices[el.id].modifiers.length);
+                if (choices[el.id].modifiers.length > 0) {
+                    choices[el.id].modifiers.forEach(({ key, operator, value }) => {
+                        const stateValue = getPlayerStateValue(key);
+                        const newValue = new Function('stateValue', 'value', `return stateValue ${operator} value;`)(stateValue, value);
+                        if (newValue < stateValue) {
+                            mood = '_angry';
+                        } else if (newValue > stateValue) {
+                            mood = '_happy';
+                        } else {
+                            mood = '';
+                        }
+                        setPlayerStateValue(key, newValue);
+                    });
+
+// Check state values of Rcamille, Reric, Rarnaud, and Rthomas
+                    const stateKeys = ['Rcamille', 'Reric', 'Rarnaud', 'Rthomas'];
+                    let changedKeysCount = 0;
+
+                    stateKeys.forEach(key => {
+                        const value = getPlayerStateValue(key);
+                        console.log(key + ': ' + value);
+
+                        // Check if the value has changed from its initial null state
+                        if (value !== null) {
+                            changedKeysCount++;
+                        }
+                    });
+
+// If at least 3 out of the 4 keys have changed, set levelEnd to true
+                    if (changedKeysCount >= 3) {
+                        console.log('At least 3 out of 4 keys have changed');
+                        levelEnd = true;
                     }
-                    else if (newValue > stateValue) {
-                        mood = '_happy';
-                    }
-                    else {mood = '';}
-                    setPlayerStateValue(key, newValue);
-                    console.log(statePlayer);
-                });
-            }}
-            let nextId = choices[idx].nextId;
+                }
+            }
+
+            let nextId = choices[el.id].nextId;
             if (categorie === 'documents') {
-                if(choices[idx].remember){
-                    const documentId = inventoryPlayer.length + 1; // Génère une ID unique pour le document
+                if (choices[el.id].remember) {
+                    const documentId = inventoryPlayer.length + 1; // Generate a unique ID for the document
                     const documentInfo = {
                         id: dial.id,
                         speech: dial.speech,
-                        img: 'sprites/'+dial.img
+                        activation: dial.activation,
+                        targetObj: dial.target,
+                        img: 'sprites/' + dial.img
                     };
-                    // Ajoute les informations du document à l'inventaire du joueur
+                    // Add document info to the player's inventory
                     inventoryPlayer.push(documentInfo);
-                    console.log('dial'+dial.speaker)
                     k.destroy(objs[idObj]);
                     markObjectAsDeleted(speaker);
-                    console.log("Document ajouté à l'inventaire:", documentInfo);
                 }
             }
-            if (el.id ==="obj"){
-                categorie = 'objet';
-                afficherInventaire(true,categorie, speaker, idObj, nextId, endSpeech,mood);
-            }
-            else{
+
+            if (nextId === 0) {
+                afficherInventaire(true, categorie, speaker, idConv, idObj, nextId, endSpeech, mood);
+            } else {
                 console.log(nextId);
-                parler(categorie, idObj, nextId, endSpeech,mood);  // Utilisation de nextId dans l'appel de parler
+                choix.innerHTML = '';
+                parler(categorie, idObj, nextId, endSpeech, mood); // Use nextId in the call to parler
             }
+        });
+
+        el.addEventListener('mouseover', () => {
+            k.play('choice');
         });
     });
 }
+
 
 async function markObjectAsDeleted(name) {
     let objectsB
@@ -745,12 +925,28 @@ function decouperTexte(chaine, seuil) {
 }
 
 // Fonction pour afficher l'inventaire
-function afficherInventaire(choose,categorie, speaker, idObj, nextId, endSpeech,mood) {
+function afficherInventaire(choose, categorie, speaker, idConv, idObj, nextId, endSpeech, mood) {
     // Sélectionner l'élément HTML où vous voulez afficher l'inventaire
     const inventaireElement = document.getElementById('inventaire');
 
     // Vider le contenu de l'élément pour éviter les doublons
     inventaireElement.innerHTML = '';
+
+    // Créer le bouton de fermeture
+    const closeButton = document.createElement('div');
+    closeButton.classList.add('close-button');
+    closeButton.innerHTML = '&times;'; // Symbole de croix
+    closeButton.style.position = 'absolute';
+    closeButton.style.top = '10px';
+    closeButton.style.right = '10px';
+    closeButton.style.cursor = 'pointer';
+    closeButton.style.fontSize = '24px';
+    closeButton.style.color = '#000'; // Couleur de la croix
+    closeButton.addEventListener('click', () => {
+        inventaireUI.style.display = "none"; // Masque l'inventaire
+    });
+
+    inventaireElement.appendChild(closeButton);
 
     // Parcourir le tableau inventoryPlayer pour chaque élément de l'inventaire
     inventoryPlayer.forEach((item) => {
@@ -761,26 +957,114 @@ function afficherInventaire(choose,categorie, speaker, idObj, nextId, endSpeech,
         // Ajouter l'image de l'élément de l'inventaire à l'élément div
         const imgElement = document.createElement('img');
         imgElement.src = item.img;
-        imgElement.id = (item.id);
+        imgElement.id = item.id;
         itemElement.appendChild(imgElement);
 
         // Ajouter le texte de l'élément de l'inventaire à l'élément div
         const textElement = document.getElementById("textInventory");
         textElement.textContent = item.speech;
-        imgElement.addEventListener('mouseenter',() => {textElement.style.display = 'block'})
-        imgElement.addEventListener('mouseleave',() => {textElement.style.display = 'none'})
+        imgElement.addEventListener('mouseenter', () => { textElement.style.display = 'block'; });
+        imgElement.addEventListener('mouseleave', () => { textElement.style.display = 'none'; });
         imgElement.addEventListener('click', () => {
-            if (choose){
+            console.log(targetObj + '   ' + idConv);
+            if (choose && idConv === item.targetObj) {
                 inventaireUI.style.display = "none";
-                parler(categorie, idObj, parseInt(imgElement.id), endSpeech,mood);
+                parler(categorie, idObj, parseInt(imgElement.id), endSpeech, mood);
+            } else {
+                dialogue.innerHTML = "C'est gentil mais je n'en ai pas besoin.";
+                inventaireUI.style.display = "none";
             }
             textElement.style.display = 'block'; // Afficher le texte
         });
+        if (!isInDialogue){
+        imgElement.addEventListener('click', () => {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            lightboxImg.src = imgElement.src;
+            lightbox.style.display = 'flex'; // Affiche la lightbox
+        });}
 
         // Ajouter l'élément div à l'élément d'inventaire
         inventaireElement.appendChild(itemElement);
     });
+
+    // Gestionnaire de clic pour fermer la lightbox
+    const lightboxClose = document.getElementById('lightbox-close');
+    lightboxClose.addEventListener('click', () => {
+        const lightbox = document.getElementById('lightbox');
+        lightbox.style.display = 'none'; // Cache la lightbox
+    });
+
+    // Sélectionner le conteneur des relations et vider son contenu pour éviter les doublons
+    const relationElementContainer = document.getElementById('relations');
+    relationElementContainer.innerHTML = ''; // Vider le contenu du conteneur des relations
+
+    // Fonction pour transformer les clés en noms d'images
+    function getImageName(key) {
+        // Supprime le premier caractère (le "R") et met la première lettre en majuscule
+        return key.substring(1, 2).toUpperCase() + key.substring(2) + ".png";
+    }
+
+    // Parcours chaque objet dans le tableau statePlayer
+    statePlayer.forEach((rel) => {
+        for (let key in rel) {
+            let value = rel[key];
+
+            // Vérifie si la valeur est null
+            if (value === null) {
+                continue; // Passe à la prochaine itération si value est null
+            }
+
+            let relElement = document.createElement('div');
+            relElement.className = 'relation';
+
+            // Crée un élément <img> pour représenter la personne
+            let imgRelHTML = document.createElement('img');
+            imgRelHTML.className = 'relation-img';
+            imgRelHTML.src = '/sprites/' + getImageName(key); // Utilise le nom de fichier généré
+            imgRelHTML.alt = key;
+
+            let relationValueHTML = document.createElement('span');
+            relationValueHTML.className = 'relationValue';
+
+            // Ajouter les cœurs remplis ou non remplis en fonction de la valeur
+            if (value >= 0) {
+                // Ajouter des cœurs remplis pour les valeurs positives ou nulles
+                for (let i = 0; i < value; i++) {
+                    let heart = document.createElement('span');
+                    heart.className = 'heart filled';
+                    heart.innerHTML = '♥'; // Coeur rempli
+                    relationValueHTML.appendChild(heart);
+                }
+            } else {
+                // Ajouter des cœurs non remplis pour les valeurs négatives
+                for (let i = 0; i < Math.abs(value); i++) {
+                    let heart = document.createElement('span');
+                    heart.className = 'heart empty';
+                    heart.innerHTML = '♡'; // Coeur non rempli
+                    relationValueHTML.appendChild(heart);
+                }
+            }
+
+            relElement.appendChild(imgRelHTML);
+            relElement.appendChild(relationValueHTML);
+            relationElementContainer.appendChild(relElement);
+        }
+    });
+
     inventaireUI.style.display = "block";
+}
+
+
+function resizeBackground() {
+    resize.push(k.width() / map.width);
+    resize.push(k.height() / map.height);
+
+    // Mettre à jour la taille de l'image de fond
+    map.scale = k.vec2(
+        resize[0],
+        resize[1]
+    );
 }
 
 function removeAllEventListeners(element) {
@@ -800,11 +1084,71 @@ function removeAllEventListeners(element) {
     }
 }
 
+k.scene('loadScreen1',() => {
+    map = k.add([k.sprite('ld1'), k.pos(0), k.scale(1)]);
+    const textBox = document.getElementById('loadScrren');
+    const nextArrow = document.getElementById('go');
+
+    textBox.style.display = 'block';
+    resizeBackground();
+
+    textBox.querySelector("p").innerHTML = '1986, petite ville du centre de l\'Europe, Pierre est un jeune adolescent passioné d\'électronique domaine dans lequel il effectue son apprentissage. Mais passé du temps derrière les bornes d\'arcades et surtout, passé du temps avec sa bande d\'amis derrière les bornes d\'arcades de la salle de jeu de sa ville, ça c\'est ce qui habite le plus joyeusement sa vie d\'ado. Son père vient de l\'appeler dans son garage, connu également comme son refuge pour bricoler ses câbles dont il a réussi à transmettre sa passion à son fils. Il veut lui montrer quelque chose...'
+    nextArrow.style.display = 'block';
+    nextArrow.addEventListener('click', () => {
+        textBox.style.display = 'none';
+        nextArrow.style.display = 'none';
+        resize = [];
+        k.go('level0');
+    })
+
+})
+
+k.scene('loadScreen2',() => {
+    map = k.add([k.sprite('ld2'), k.pos(0), k.scale(1)]);
+    const textBox = document.getElementById('loadScrren');
+    const nextArrow = document.getElementById('go');
+
+    textBox.style.display = 'block';
+    resizeBackground();
+
+    textBox.querySelector("p").innerHTML =
+        "Pierre enfile sa veste en cuir, attrape les clés de son appartement, et claque la porte derrière lui. En descendant les marches de l'escalier familier, il ressent une légère excitation monter en lui. La fraîcheur de la soirée lui pique le visage alors qu'il traverse le jardin de ses parents, éclairé par la lueur jaune des réverbères. Le grincement du portail en fer est presque couvert par le bruissement des feuilles agitées par le vent. Il marche d'un pas rapide le long des trottoirs qu'il connaît par cœur, ses chaussures frappant le pavé avec régularité. Les rires étouffés et les échos des conversations animées s'échappent des fenêtres entrouvertes, tandis que Pierre se dirige vers le bar où l'attendent déjà ses amis, devant le bar ou déjà à l'oeuvre derrière les bornes.";
+    nextArrow.style.display = 'block';
+    nextArrow.addEventListener('click', () => {
+        textBox.style.display = 'none';
+        nextArrow.style.display = 'none';
+        resize = [];
+        k.go('level2');
+    })
+
+})
+
+k.scene('loadScreen3',() => {
+    map = k.add([k.sprite('ld3'), k.pos(0), k.scale(1)]);
+    const textBox = document.getElementById('loadScrren');
+    const nextArrow = document.getElementById('go');
+
+    textBox.style.display = 'block';
+    resizeBackground();
+
+    textBox.querySelector("p").innerHTML =
+        "Il monte sur son vélomoteur, allume le moteur et se met en mouvement pour emprunter les 800 mètres de bitume qu'il connaît par cœur et qui le séparent de chez lui. Les pétarades du Peugeot s'éloignent dans la nuit tombante, tandis que le bruit des sticks matraqués et des voix électroniques annonçant un game over ou un meilleur score retentissent encore.";    nextArrow.style.display = 'block';
+    nextArrow.addEventListener('click', () => {
+        textBox.style.display = 'none';
+        nextArrow.style.display = 'none';
+        resize = [];
+        k.go('mainMenu');
+    })
+
+})
+
+
 
 // Créer la première scène
 k.scene("level1", () => {
     // Créer le personnage
     idLVL = 1;
+    objs = [];
     doc.src = "";
     set_video('');
     machine.src = '';
@@ -847,6 +1191,7 @@ k.scene("level0", () => {
 k.scene("level3", () => {
     idLVL = 3;
     doc.src = "";
+    objs = [];
     idd = null;namee = null;type = null;
     set_video('');
     machine.src = '';
@@ -855,7 +1200,7 @@ k.scene("level3", () => {
     createMap(3,'eric_bar',k.width()/2,k.height());
     k.setBackground(k.BLACK);
 });
-// Charger la première scène au démarrage
+
 
 // Ajouter une option de menu
 function addMenuOption(text, position, tag) {
@@ -869,6 +1214,8 @@ function addMenuOption(text, position, tag) {
         k.color(255, 255, 0),
         tag
     ]);
+
+
 }
 
 // Menu principal
@@ -881,15 +1228,73 @@ k.scene("mainMenu", () => {
             size: 32,
         }),
         k.pos(k.width() / 2.6, 30),
-        k.color(0, 255, 30)
+        k.color(0, 255, 30),
     ]);
 
-    addMenuOption("PRESS ANYWHERE TO START", k.vec2(300, 205), "start");
+    // Add "PRESS ANYWHERE TO START" option
+    addMenuOption("START", k.vec2(k.width()/2 -200, k.height()/2 - 80), "start");
 
-    k.onClick(() => {
+    // Add "Comment jouer ?" option
+    addMenuOption("COMMENT JOUER ?", k.vec2(k.width()/2 -200, k.height()/2 + 20), "howToPlay");
+
+    // Navigate to the level on any click (to preserve original functionality)
+    k.onClick("start", () => {
         k.go("level0");
+
+    });
+    k.onHover("start", () => {
+        k.color(k.RED);
+    })
+
+    // Navigate to the How to Play scene when "Comment jouer ?" is clicked
+    k.onClick("howToPlay", () => {
+        k.go("howToPlay");
     });
 });
+
+// Scene to show how to play the game
+k.scene("howToPlay", () => {
+    k.setBackground(k.BLACK);
+
+    k.add([
+        k.text("COMMENT JOUER ?", {
+            font: "PressStart2P",
+            size: 24,
+        }),
+        k.pos(k.width() / 2.8, 30),
+        k.color(0, 255, 30),
+    ]);
+
+    // Instructions for controls
+    k.add([
+        k.text("Utilisez les touches fléchées pour vous déplacer.\n" +
+            "Appuyez sur 'I' pour ouvrir l'inventaire.\n" +
+            "Interagissez avec les personnages et objets\n" +
+            "pour faire évoluer les relations et progresser\n" +
+            "dans le jeu.", {
+            font: "PressStart2P",
+            size: 16,
+        }),
+        k.pos(50, 100),
+        k.color(255, 255, 255),
+    ]);
+
+    // Instruction to go back to the main menu
+    k.add([
+        k.text("Appuyez sur n'importe quelle touche pour revenir au menu principal.", {
+            font: "PressStart2P",
+            size: 16,
+        }),
+        k.pos(50, 300),
+        k.color(255, 255, 0),
+    ]);
+
+    // Return to the main menu on any key press
+    k.onKeyPress(() => {
+        k.go("mainMenu");
+    });
+});
+
 
 fetchDataAndProcess();
 k.go("mainMenu");

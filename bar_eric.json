@@ -112,7 +112,47 @@
          "width":38,
          "x":0,
          "y":0
-        }],
+        },
+      {
+     "draworder":"topdown",
+     "idConv":9,
+     "name":"newspaper",
+     "objects":[
+       {
+         "gid":875,
+         "height":79.7072594924257,
+         "id":996,
+         "activation": 13,
+         "name":"np_nesad",
+         "isDeleted": true,
+         "rotation":0,
+         "type":"",
+         "visible":true,
+         "width":57.289592760181,
+         "x":49.398190045249,
+         "y":425.625811528625
+       }],
+     "opacity":1,
+     "type":"objectgroup",
+     "visible":true,
+     "x":0,
+     "y":0
+   }],
+  "objects":[
+    {
+      "gid":875,
+      "height":79.7072594924257,
+      "id":996,
+      "activation": 13,
+      "name":"np_nesad",
+      "isDeleted": false,
+      "rotation":0,
+      "type":"",
+      "visible":true,
+      "width":57.289592760181,
+      "x":49.398190045249,
+      "y":425.625811528625
+    }],
  "nextlayerid":4,
  "nextobjectid":1,
  "orientation":"orthogonal",
