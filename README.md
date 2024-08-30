@@ -1,24 +1,34 @@
 ## Instructions d'Exécution
 
-Suivez ces étapes pour exécuter le script `run.py` :
+Pour lancer le jeu, suivez ces étapes après avoir cloné le dépôt :
 
-1. Clonez ce dépôt ou téléchargez les fichiers nécessaires.
+1. **Cloner le Dépôt** : Clonez ce dépôt ou téléchargez les fichiers nécessaires.
 
-2. Ouvrez votre terminal et naviguez jusqu'au répertoire contenant `run.py` et `game.js`.
+2. **Naviguer dans le Répertoire du Jeu** : Ouvrez votre terminal et naviguez jusqu'au répertoire contenant les fichiers du jeu.
 
-3. Exécutez le script en utilisant Python 3 :
+3. **Installer les Dépendances** : Exécutez la commande suivante pour installer les dépendances nécessaires :
     ```bash
-    python3 run.py
+    npm install
     ```
 
-4. Après l'exécution de la commande, `esbuild` regroupera `game.js` en `build.js` et un serveur HTTP local démarrera sur le port 8000.
-
-5. Vous pouvez accéder au serveur HTTP local en ouvrant un navigateur web et en naviguant vers :
-    ```
-    http://localhost:8000
+4. **Construire le Projet** : Exécutez la commande suivante pour regrouper et préparer les fichiers JavaScript :
+    ```bash
+    npm run build
     ```
 
-## Arrêt du Serveur
+5. **Démarrer un Serveur Local** : Ouvrez le fichier `index.html` sur un serveur local. Vous pouvez utiliser un outil comme Live Server dans Visual Studio Code pour cela.
 
-Pour arrêter le serveur, revenez au terminal où le script `run.py` est en cours d'exécution et appuyez sur `Ctrl + C`. Cela interrompra le serveur HTTP et arrêtera le script proprement.
+6. **Accéder au Jeu** : Ouvrez votre navigateur web et accédez à l'adresse :
+    ```
+    http://localhost:5500
+    ```
+   (ou le port que vous avez configuré dans Live Server)
 
+---
+
+### Remarques :
+
+- **Live Server** : Si vous utilisez Visual Studio Code, vous pouvez installer l'extension "Live Server" pour lancer rapidement un serveur local en cliquant avec le bouton droit sur le fichier `index.html` et en sélectionnant "Open with Live Server".
+- **Dépôt** : Assurez-vous que tous les fichiers nécessaires sont présents dans le répertoire du jeu avant d'exécuter les commandes.
+
+Ces instructions devraient vous guider à travers le processus de configuration et de démarrage du jeu. Si vous avez besoin d'aide supplémentaire ou de précisions, n'hésitez pas à demander !
