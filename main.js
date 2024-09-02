@@ -485,7 +485,7 @@ export async function createPlayer(posx,posy) {
 
                collide = false;
                player.readySpeak = true;
-               info.addEventListener('click', handleClick);
+               infoUI.addEventListener('click', handleClick);
            }
        }
     })

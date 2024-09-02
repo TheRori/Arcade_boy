@@ -9,6 +9,7 @@
   },
   "private": true,
   "dependencies": {
+    "build": "^0.1.4",
     "kaboom": "^3000.1.17"
   },
   "devDependencies": {
