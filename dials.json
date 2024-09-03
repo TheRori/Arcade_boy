@@ -1066,7 +1066,7 @@
     "machine": [],
     "speaker": "",
     "need": [],
-    "speech": "Pierre enfile sa veste en cuir, attrape les clés de son appartement, et claque la porte derrière lui. En descendant les marches de l'escalier familier, il ressent une légère excitation monter en lui. La fraîcheur de la soirée lui pique le visage alors qu'il traverse le jardin de ses parents, éclairé par la lueur jaune des réverbères. Le grincement du portail en fer est presque couvert par le bruissement des feuilles agitées par le vent. Il marche d'un pas rapide le long des trottoirs qu'il connaît par cœur, ses chaussures frappant le pavé avec régularité. Les rires étouffés et les échos des conversations animées s'échappent des fenêtres entrouvertes, tandis que Pierre se dirige vers le bar où l'attendent déjà ses amis, devant le bar ou déjà à l'oeuvre derrière les bornes.",
+    "speech": "Pierre enfile sa veste en cuir, attrape les clés de son appartement, et claque la porte derrière lui. En descendant les marches de l'escalier familier, il ressent une légère excitation monter en lui. La fraîcheur de la soirée lui pique le visage alors qu'il traverse le jardin de ses parents, éclairé par la lueur jaune des réverbères. Le grincement du portail en fer est presque couvert par le bruissement des feuilles agitées par le vent. Il marche d'un pas rapide le long des trottoirs qu'il connaît par cœur, ses chaussures frappant le pavé avec régularité. Les rires étouffés et les échos des conversations animées s'échappent des fenêtres entrouvertes, tandis que Pierre se dirige vers le bar où l'attendent déjà ses amis, sans doute déjà occupés derrière les bornes.",
     "choices": [
     ]
   },
@@ -1095,14 +1095,14 @@
         "speech": "Rester",
         "response": "Rester",
         "nextId": -1,
-        "modifiers": [{"key": "Reric", "operator": "+", "value": 2}]
+        "modifiers": []
       },
       {
         "need": [],
         "speech": "Rentrer",
         "response": "Rentrer",
         "nextId": -20,
-        "modifiers": [{"key": "Reric", "operator": "+", "value": 2}]
+        "modifiers": []
       }
     ]
   },
@@ -1117,6 +1117,7 @@
     "choices": [
       {
         "need": [],
+        "alwaysVisible": true,
         "speech": "Avec plaisir !",
         "response": "Avec plaisir !",
         "nextId": 13,
@@ -1135,6 +1136,7 @@
     "choices": [
       {
         "need": [],
+        "alwaysVisible": true,
         "speech": "Avec plaisir !",
         "response": "Avec plaisir !",
         "nextId": -1,
@@ -1154,6 +1156,7 @@
           {
             "need": [],
             "speech": "Parler d'autre chose",
+            "alwaysVisible": true,
             "response": "Lui promettre de l'emmener dans le garage de son père",
             "nextId": 1,
             "modifiers": [{"key": "Rcamille", "operator": "+", "value": 2}]
@@ -1171,6 +1174,7 @@
     "choices": [
       {
         "need": [],
+        "alwaysVisible": true,
         "speech": "Parler d'autre chose",
         "response": "Lui promettre de l'emmener dans le garage de son père",
         "nextId": 27,

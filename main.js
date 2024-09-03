@@ -19,6 +19,7 @@ const showFullDialogueButton = document.getElementById('showFullDialogue');
 
 let isInDialogue= false;
 let resize = [];
+let videoPlaying = false;
 let statePlayer = [{"Rpapa" : null},{"Rcamille" : null},{"Reric" : null},{"Rarnaud": null},{"Rthomas": null},{"Rconsole":null}];
 let initialStatePlayer = [];
 let objs = []
@@ -137,11 +138,19 @@ function play_minigame(game) {
 }
 
 function set_video(link) {
+    
     let video = document.getElementById("video");
     let source = document.getElementById("videoMachine");
-    // Modification de la source de la vidéo
+    if (link === ''){
+        videoPlaying = false;
+    }
+    if (!videoPlaying){
     source.src = link;
     video.load();
+    }
+    if (link !== '') {
+        videoPlaying = true;
+    }
 }
 
 let mapL, mapR;
@@ -543,7 +552,6 @@ async function parler(categorie,idObj, idConv, endSpeech, mood) {
         imgHTMLContainer.style.display = 'none';
         dialogueUI.style.display = "none";
         doc.src = "";
-
         perso1.src = "";
         curentIndex = null;
         dialogue.innerHTML = "";
@@ -861,6 +869,7 @@ function addChoices(dial, categorie, speaker, idConv, idObj, endSpeech, mood) {
                     };
                     // Add document info to the player's inventory
                     inventoryPlayer.push(documentInfo);
+                    console.log(inventoryPlayer);
                     k.destroy(objs[idObj]);
                     markObjectAsDeleted(speaker);
                 }
@@ -950,6 +959,7 @@ function afficherInventaire(choose, categorie, speaker, idConv, idObj, nextId, e
 
     // Parcourir le tableau inventoryPlayer pour chaque élément de l'inventaire
     inventoryPlayer.forEach((item) => {
+        console.log(item);
         // Créer un élément div pour chaque élément de l'inventaire
         const itemElement = document.createElement('div');
         itemElement.classList.add('inventory-item');
