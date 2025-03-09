@@ -100,7 +100,7 @@ export function handleCollisions(player) {
 
             if (isClickListenerAttached) {
                 console.log("Suppression de l'événement click");
-                info.removeEventListener("click", handleClick); // Retirer le gestionnaire
+                infoUI.removeEventListener("click", handleClick); // Retirer le gestionnaire
                 isClickListenerAttached = false;
             }
         }

@@ -2,9 +2,9 @@ import {decouperTexte, getPlayerStateValue, hideMachineDisplay, setupMachineDisp
 import {
     choix,
     dialogue,
-    dialogueUI, doc, getIsGameLaunched,
+    dialogueUI, direction, doc, getIsGameLaunched,
     imgHTMLContainer, infoUI, levelEnd, lvlMusic,
-    perso1, resize, setCurrentBackgroundMusic, setInDialogue,
+    perso1, resize, setCurrentBackgroundMusic, setDirection, setInDialogue,
     showFullDialogueButton
 } from "./globals";
 import {addChoices} from "./choices";
@@ -214,6 +214,7 @@ export function resetDialogueUI() {
 
 export function transitionLevel(screen) {
     resize.length = 0;
+    setDirection('');
     k.go(screen);
 }
 

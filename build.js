@@ -4466,6 +4466,7 @@ vec4 frag(vec2 pos, vec2 uv, vec4 color, sampler2D tex) {
   }
   function transitionLevel(screen) {
     resize.length = 0;
+    setDirection("");
     k.go(screen);
   }
 
@@ -4709,7 +4710,7 @@ vec4 frag(vec2 pos, vec2 uv, vec4 color, sampler2D tex) {
         infoUI2.style.display = "none";
         if (isClickListenerAttached) {
           console.log("Suppression de l'\xE9v\xE9nement click");
-          info.removeEventListener("click", handleClick);
+          infoUI2.removeEventListener("click", handleClick);
           isClickListenerAttached = false;
         }
       }
