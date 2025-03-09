@@ -5250,5 +5250,5 @@ vec4 frag(vec2 pos, vec2 uv, vec4 color, sampler2D tex) {
   );
   mainMenuScene();
   howToPlayScene();
-  k.go("mainMenu");
+  k.go("loadScreen1");
 })();
