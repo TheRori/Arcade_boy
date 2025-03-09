@@ -1,0 +1,2012 @@
+{
+  "dialogues2": [
+    {
+      "id": 280,
+      "order": 1,
+      "end": "",
+      "machine": "",
+      "speaker": "Professeur",
+      "need": [],
+      "speech": "On vous attend dans cinq minutes dans la salle pour la démo, soyez à l'heure !",
+      "choices": [
+        {
+          "speech": "Parler à Éric",
+          "response": "Tu te diriges vers Éric.",
+          "nextId": 285
+        },
+        {
+          "speech": "Parler à Camille",
+          "response": "Tu te diriges vers Camille.",
+          "nextId": 281
+        }
+      ]
+    },
+    {
+      "id": 281,
+      "order": 1,
+      "end": "",
+      "machine": "",
+      "speaker": "Camille",
+      "need": [],
+      "speech": "Salut Pierre ! Toujours en forme après hier soir ? Je crois que tu es en train de battre le record du plus de temps passé à la salle d’arcade !",
+      "choices": [
+        {
+          "need": [{ "key": "Rcamille", "operator": ">", "value": 0 }],
+          "speech": "Oh, Camille, faut dire que j’étais dans un bon jour ! Toi aussi, t’étais pas mal sur Space Invaders, non ? Je crois que tu pourras bientôt le montrer sur le nouveau joujou de mon vieux !",
+          "nextId": 282
+        },
+        {
+          "need": [{ "key": "Rcamille", "operator": "<=", "value": 0 }],
+          "speech": "Hier soir ? Disons que j’ai vu mieux… Enfin, c’est pas comme si c’était une surprise.",
+          "nextId": 283
+        },
+        {
+          "need": [],
+          "speech": "Et toi, t’es encore stressée par tes fiches ou ça avance enfin ?",
+          "nextId": 284,
+          "modifiers": []
+        },
+        {
+          "need": [],
+          "speech": "Bon, je te laisse, on se reparle plus tard !",
+          "alwaysVisible": true,
+          "nextId": -1,
+          "modifiers": []
+        }
+      ]
+    },
+    {
+      "id": 282,
+      "order": 2,
+      "end": "",
+      "machine": "",
+      "speaker": "Camille",
+      "need": [],
+      "speech": "Haha, merci ! Je m’améliore, mais t’as encore une sacrée avance. Allez, tu me donneras quelques astuces !",
+      "choices": [
+        {
+          "need": [],
+          "speech": "Évidemment, compte sur moi ! Bon, je te laisse pour l’instant.",
+          "nextId": -1,
+          "modifiers": []
+        }
+      ]
+    },
+    {
+      "id": 283,
+      "order": 2,
+      "end": "",
+      "machine": "",
+      "speaker": "Camille",
+      "need": [],
+      "speech": "Ouais, t’as l’air d’avoir passé une bonne soirée toi. Enfin, c’est pas comme si j’avais le temps de m’amuser autant.",
+      "choices": [
+        {
+          "need": [],
+          "speech": "Allez, ne fais pas la tête ! On se reparle plus tard.",
+          "nextId": -1,
+          "modifiers": []
+        }
+      ]
+    },
+    {
+      "id": 284,
+      "order": 2,
+      "end": "",
+      "machine": "",
+      "speaker": "Camille",
+      "need": [],
+      "speech": "Ça avance doucement… Mais je sens que j’y arriverai. Tu sais, le Technicum, c’est vraiment important pour moi.",
+      "choices": [
+        {
+          "need": [],
+          "speech": "Tu vas y arriver, c’est sûr ! À plus tard.",
+          "nextId": -1,
+          "modifiers": []
+        }
+      ]
+    },
+    {
+      "id": 285,
+      "order": 4,
+      "end": "",
+      "machine": "",
+      "speaker": "Éric",
+      "need": [],
+      "speech": "Eh, Pierre ! T’as vu la nouvelle borne qu’ils ont installée ? Franchement, on vit une époque incroyable pour les joueurs comme nous !",
+      "choices": [
+        {
+          "need": [{ "key": "Réric", "operator": ">", "value": 0 }],
+          "speech": "Ah ouais, c’est fou ! C’est quoi comme jeu ? T’as déjà battu le record, j’imagine ?",
+          "nextId": 286
+        },
+        {
+          "need": [{ "key": "Réric", "operator": "<=", "value": 0 }],
+          "speech": "Encore une borne… Comme si on avait pas assez de distractions ici.",
+          "nextId": 287
+        },
+        {
+          "need": [],
+          "speech": "Je te regarde jouer un moment.",
+          "nextId": 288,
+          "modifiers": []
+        },
+        {
+          "need": [],
+          "speech": "À plus tard, Éric !",
+          "nextId": -1,
+          "modifiers": []
+        }
+      ]
+    },
+    {
+      "id": 286,
+      "order": 5,
+      "end": "",
+      "machine": "",
+      "speaker": "Éric",
+      "need": [],
+      "speech": "Haha, pas encore, mais ça viendra ! Viens, je te montre !",
+      "choices": [
+        {
+          "need": [],
+          "speech": "Tu vas voir, je vais te battre à ce jeu aussi ! Mais pas tout de suite, je file.",
+          "nextId": -1,
+          "modifiers": []
+        }
+      ]
+    },
+    {
+      "id": 287,
+      "order": 5,
+      "end": "",
+      "machine": "",
+      "speaker": "Éric",
+      "need": [],
+      "speech": "Oh, allez, Pierre… Si t’aimes pas, t’as qu’à rester sur tes classiques, vieux grincheux.",
+      "choices": [
+        {
+          "need": [],
+          "speech": "On verra bien si tes « classiques » tiennent face à mon talent ! Bon, je file.",
+          "nextId": -1,
+          "modifiers": []
+        }
+      ]
+    },
+    {
+      "id": 288,
+      "order": 5,
+      "end": "",
+      "machine": "",
+      "speaker": "Éric",
+      "need": [],
+      "speech": "Regarde ça, et dis-moi que c’est pas incroyable !",
+      "choices": [
+        {
+          "need": [],
+          "speech": "C’est vrai, pas mal… Allez, à plus tard, Éric !",
+          "nextId": -1,
+          "modifiers": []
+        }
+      ]
+    },
+
+
+    {
+      "id": 301,
+      "order": 1,
+      "end": "",
+      "machine": ["smaky_demo.png", "smaky_demo.mp4"],
+      "speaker": "Professeur",
+      "need": [],
+      "speech": "Bienvenue à cette démonstration du Smaky ! C'est un ordinateur suisse révolutionnaire. Regardez cet écran : il permet d'afficher du texte et des graphiques avec une qualité inégalée pour l'époque !",
+      "choices": [
+        {
+          "speech": "[Continuer à regarder]",
+          "response": "Je reste attentif à l'explication.",
+          "nextId": 302
+        }
+      ]
+    },
+    {
+      "id": 302,
+      "order": 2,
+      "end": "",
+      "machine": ["smaky_demo.png", "smaky_demo.mp4"],
+      "speaker": "Professeur",
+      "need": [],
+      "speech": "Avec cette machine, nous pouvons écrire des documents, programmer des logiciels simples, et même générer des animations graphiques ! Imaginez ce que cela représente pour les chercheurs et les ingénieurs !",
+      "choices": [
+        {
+          "speech": "[Continuer à écouter]",
+          "response": "Je reste concentré sur la démonstration.",
+          "nextId": 303
+        }
+      ]
+    },
+    {
+      "id": 303,
+      "order": 3,
+      "end": "",
+      "machine": [],
+      "speaker": "Thomas",
+      "need": [],
+      "speech": "Ah ouais, super ! Moi, je vois surtout une machine pour les intellos, pas pour nous les vrais joueurs. Franchement, Pierre, tu te vois utiliser ça ?",
+      "choices": [
+        {
+          "speech": "[Ignorer Thomas et continuer à regarder]",
+          "response": "Je décide de ne pas réagir à Thomas.",
+          "nextId": 304
+        }
+      ]
+    },
+    {
+      "id": 304,
+      "order": 4,
+      "end": "",
+      "machine": [],
+      "speaker": "Arnaud",
+      "need": [],
+      "speech": "Attends, attends... Le professeur vient de dire qu'on pouvait créer des jeux là-dessus ? C'est quoi cette blague ? Ça n'a pas l'air capable de faire tourner autre chose qu'un pong en noir et blanc.",
+      "choices": [
+        {
+          "speech": "[Continuer à regarder]",
+          "response": "Je reste silencieux pour entendre la suite.",
+          "nextId": 305
+        }
+      ]
+    },
+    {
+      "id": 305,
+      "order": 5,
+      "end": "",
+      "machine": [],
+      "speaker": "Professeur",
+      "need": [],
+      "speech": "Le Smaky ouvre la voie à une nouvelle ère de l'informatique accessible : non seulement pour les professionnels, mais aussi pour les passionnés. Avec un peu de programmation, vous pouvez même développer des jeux ou des outils innovants !",
+      "choices": [
+        {
+          "speech": "Poser des questions sur la machine et son fonctionnement.",
+          "response": "Je décide d'approfondir mes connaissances.",
+          "nextId": 306
+        },
+        {
+          "speech": "Se moquer avec Thomas et Arnaud.",
+          "response": "Je décide de me joindre aux moqueries.",
+          "nextId": 307
+        },
+        {
+          "modifiers": [{"key": "Scamille", "operator": "==", "value": true}],
+          "speech": "C'est bien beau tout ça, mais est-ce que ça me concerne vraiment ? Jamais on pourra toucher ce genre de trucs avant un bail de toute façon",
+          "response": "Je reste neutre et continue d'observer.",
+          "nextId": 308
+        }
+      ]
+    },
+    {
+      "id": 306,
+      "order": 6,
+      "end": "",
+      "machine": [],
+      "speaker": "Professeur",
+      "need": [],
+      "speech": "Ah, une question pertinente ! Le Smaky est particulièrement innovant parce qu'il combine simplicité et puissance. Vous savez, avec un peu de logique et de programmation en BASIC, on peut créer des choses impressionnantes. Voulez-vous essayer ?",
+      "choices": [
+        {
+          "speech": "Oui, pourquoi pas ! Montrez-moi.",
+          "response": "Pierre se montre enthousiaste à l'idée d'essayer une démo BASIC.",
+          "action": "displayBasicGame",
+          "nextId": 314
+        },
+        {
+          "modifiers": [{"key": "Sarnaud", "operator": "==", "value": true}],
+          "speech": "Non merci, je préfère continuer à regarder.",
+          "response": "Pierre décline poliment et revient à observer la démonstration.",
+          "nextId": 311
+        }
+      ]
+    },
+    {
+      "id": 307,
+      "order": 6,
+      "end": "",
+      "machine": [],
+      "speaker": "Camille",
+      "need": [],
+      "speech": "Tu sais, Pierre, je trouve ça blessant. Cette machine représente peut-être mon futur. J'ai envie de devenir ingénieure, et si tout va bien, c'est ce genre de choses qui seront mon quotidien. Pourquoi tu ne peux pas simplement essayer de comprendre ?",
+      "choices": [
+        {
+          "speech": "Tu as raison, Camille. Désolé, je n'avais pas réfléchi à ce que ça pouvait représenter pour toi.",
+          "response": "Tu as raison, Camille. Désolé, je n'avais pas réfléchi à ce que ça pouvait représenter pour toi.",
+          "nextId": 315,
+          "modifiers": [
+            {
+              "key": "Rcamille",
+              "operator": "+",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "speech": "Oh, allez, Camille ! Tout le monde ne peut pas être à fond sur ces trucs d'ingénieurs. Essaye de t'amuser avec des vrais jeux pour une fois !",
+          "response": "Oh, allez, Camille ! Tout le monde ne peut pas être à fond sur ces trucs d'ingénieurs. Essaye de t'amuser avec des vrais jeux pour une fois !",
+          "nextId": 316,
+          "modifiers": [
+            {
+              "key": "Rcamille",
+              "operator": "-",
+              "value": 2
+            },
+            {"key": "Scamille", "operator": "==", "value": true}
+          ]
+        }
+      ]
+    },
+    {
+      "id": 308,
+      "order": 6,
+      "end": "",
+      "machine": [],
+      "speaker": "Camille",
+      "need": [],
+      "speech": "Tu sais, Pierre, ce genre de machine, c'est pas juste pour les profs ou les ingénieurs. Moi, je vois ça comme une porte vers plein de nouvelles possibilités. Imagine ce qu'on pourrait faire si on s'y mettait !",
+      "choices": [
+        {
+          "speech": "C'est impressionnant de te voir aussi passionnée, Camille. Ça donne envie d'essayer.",
+          "response": "C'est impressionnant de te voir aussi passionnée, Camille. Ça donne envie d'essayer.",
+          "nextId": 315,
+          "modifiers": [{"key": "Rcamille", "operator": "+", "value": 1}]
+        },
+        {
+          "speech": "Je sais pas, Camille... Ces trucs me dépassent un peu. T'es sûre que c'est pas juste un jouet pour intellos ?",
+          "response": "Je sais pas, Camille... Ces trucs me dépassent un peu. T'es sûre que c'est pas juste un jouet pour intellos ?",
+          "nextId": 307,
+          "modifiers": []
+        }
+      ]
+    },
+    {
+      "id": 311,
+      "order": 9,
+      "end": "",
+      "machine": "",
+      "speaker": "Arnaud",
+      "need": [],
+      "speech": "Bon, ok, mais… à part tout ça, on peut jouer à quoi, en fait ? Parce que bon, des machines qui font des calculs, hein… pas sûr que ce soit aussi fun que les bornes.",
+      "choices": [
+        {
+          "need": [],
+          "speech": "Ah, Arnaud… toujours à ramener ça aux jeux ! T’as vraiment aucune imagination, hein ? Regarde ça, c’est bien plus qu’une borne.",
+          "response": "Pierre se montre condescendant et dévalorise Arnaud, tout en soutenant Camille.",
+          "nextId": 312,
+          "modifiers": [
+            {
+              "key": "Rarnaud",
+              "operator": "-",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "need": [],
+          "speech": "Allez, Arnaud, sois pas comme ça. Moi aussi je suis curieux de savoir s'il y a des jeux dessus !",
+          "response": "Pierre soutient Arnaud tout en essayant de tempérer la situation.",
+          "nextId": 313,
+          "modifiers": [
+            {
+              "key": "Rarnaud",
+              "operator": "+",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "need": [
+            {
+              "key": "Scamille",
+              "operator": "==",
+              "value": true
+            }
+          ],
+          "speech": "Aller parler à ses amis.",
+          "response": "Pierre décide d'aller discuter avec ses amis pour changer d'ambiance.",
+          "nextId": 400
+        }
+      ]
+    },
+    {
+      "id": 314,
+      "order": 10,
+      "end": "",
+      "machine": [],
+      "speaker": "Professeur",
+      "need": [],
+      "speech": "Regarde ce petit programme en BASIC. Que crois-tu qu'il fait ?",
+      "choices": [
+        {
+          "speech": "Il demande à deviner un nombre avec des indices.",
+          "response": "Bonne réponse ! Tu as tout compris. Essayons le programme.",
+          "nextId": 351,
+          "modifiers": [],
+          "action": "launchBasicGame"
+        },
+        {
+          "speech": "Il affiche juste un texte en boucle.",
+          "response": "Pas tout à fait. Dommage, c'était un jeu pour deviner un nombre.",
+          "nextId": 352,
+          "modifiers": []
+        },
+        {
+          "speech": "Il calcule un résultat mathématique.",
+          "response": "Non, ce n'était pas ça. C'était un jeu plus petit/plus grand.",
+          "nextId": 353,
+          "modifiers": []
+        }
+      ]
+    },
+    {
+      "id": 351,
+      "order": 10,
+      "end": "",
+      "machine": [],
+      "speaker": "Professeur",
+      "need": [],
+      "speech": "Bonne réponse ! Tu as tout compris. Essayons le programme.",
+      "choices": [
+        {
+          "speech": "Tadaaaam",
+          "response": "Bonne réponse ! Tu as tout compris. Essayons le programme.",
+          "nextId": 354,
+          "modifiers": []
+        }
+      ]
+    },
+    {
+      "id": 352,
+      "order": 10,
+      "end": "",
+      "machine": [],
+      "speaker": "Professeur",
+      "need": [],
+      "speech": "Pas tout à fait. Dommage, c'était un jeu pour deviner un nombre.",
+      "choices": [
+        {
+          "speech": "Dommage...",
+          "response": "Pas tout à fait. Dommage, c'était un jeu pour deviner un nombre.",
+          "nextId": 311,
+          "modifiers": []
+        }
+      ]
+    },
+    {
+      "id": 353,
+      "order": 10,
+      "end": "",
+      "machine": [],
+      "speaker": "Professeur",
+      "need": [],
+      "speech": "Non, ce n'était pas ça. C'était un jeu plus petit/plus grand.",
+      "choices": [
+        {
+          "speech": "Dommage...",
+          "response": "Non, ce n'était pas ça. C'était un jeu plus petit/plus grand.",
+          "nextId": 311,
+          "modifiers": []
+        }
+      ]
+    },
+    {
+      "id": 354,
+      "order": 10,
+      "end": "",
+      "machine": [],
+      "speaker": "Professeur",
+      "need": [],
+      "speech": "Félicitations, tu vois quelques lignes de code et déjà une possibilité de s'amuser. C'est très efficace et pas si dur le BASIC !",
+      "choices": [
+        {
+          "speech": "[Mon père sera fier quand je lui dirai que je connais ce language !]",
+          "response": "Non, ce n'était pas ça. C'était un jeu plus petit/plus grand.",
+          "nextId": 311,
+          "modifiers": [{"key": "Rpapa", "operator": "+", "value": 1}]
+        }
+      ]
+    },
+    {
+      "id": 315,
+      "order": 7,
+      "end": "",
+      "machine": "",
+      "speaker": "Camille",
+      "need": [],
+      "speech": "Merci, Pierre. Ça me fait plaisir que tu comprennes. Parfois, j'ai l'impression d'être seule à rêver de quelque chose de différent, mais c'est important pour moi.",
+      "choices": [
+        {
+          "need": [],
+          "speech": "Parler à ses amis.",
+          "response": "Je vais rejoindre les autres pour discuter.",
+          "nextId": 400
+        }
+      ]
+    },
+    {
+      "id": 316,
+      "order": 7,
+      "end": "",
+      "machine": "",
+      "speaker": "Camille",
+      "need": [],
+      "speech": "C'est bon, Pierre ! Si tu ne veux pas essayer de comprendre, arrête au moins de juger. Ça m'énerve que tu ne prennes rien au sérieux en dehors des bornes d'arcade.",
+      "choices": [
+        {
+          "need": [],
+          "speech": "Parler à ses amis.",
+          "response": "Je vais rejoindre les autres pour discuter.",
+          "nextId": 400
+        }
+      ]
+    },
+    {
+      "id": 312,
+      "order": 10,
+      "end": "",
+      "machine": "",
+      "speaker": "Arnaud",
+      "need": [],
+      "speech": "Ouais, c’est bon, Pierre, j’ai compris. Moi, je disais ça juste comme ça. Pas besoin de me faire passer pour un idiot devant tout le monde…",
+      "choices": [
+        {
+          "need": [{"key": "Scamille", "operator": "==", "value": true}],
+          "speech": "Aller parler à ses amis.",
+          "response": "Pierre décide de changer de sujet et de parler à ses amis.",
+          "nextId": 400
+        },
+        {
+          "need": [{"key": "Scamille", "operator": "==", "value": false}],
+          "modifiers": [{"key": "Scamille", "operator": "==", "value": true}],
+          "speech": "Retourner à écouter la démo.",
+          "response": "Pierre choisit d’ignorer la tension et retourne écouter la démonstration.",
+          "nextId": 308
+        }
+      ]
+    },
+    {
+      "id": 313,
+      "order": 10,
+      "end": "",
+      "machine": "",
+      "speaker": "Arnaud",
+      "need": [],
+      "speech": "Ah, merci Pierre ! Enfin quelqu’un qui est d’accord avec moi. Franchement, je vois pas comment ça pourrait rivaliser avec les bornes d’arcade. Mais bon, ça reste marrant de voir ce qu’ils essayent de faire.",
+      "choices": [
+        {
+          "need": [{"key": "Scamille", "operator": "==", "value": true}],
+          "speech": "Aller parler à ses amis.",
+          "response": "Pierre décide de changer de sujet et de parler à ses amis.",
+          "nextId": 400
+        },
+        {
+          "need": [{"key": "Scamille", "operator": "==", "value": false}],
+          "modifiers": [{"key": "Scamille", "operator": "==", "value": true}],
+          "speech": "Retourner à écouter la démo.",
+          "response": "Pierre choisit de revenir vers la démonstration et d’écouter Camille.",
+          "nextId": 308
+        }
+      ]
+    },
+    {
+      "id": 400,
+      "order": 1,
+      "end": "",
+      "machine": "",
+      "speaker": "Professeur",
+      "need": [],
+      "speech": "Prenez le temps de partager vos impressions ensemble. J'espère avoir éveillé votre curiosité et nourri votre enthousiasme pour l'avenir.",
+      "choices": [
+        {
+          "need": [{ "key": "Rarnaud", "operator": ">", "value": 0 }],
+          "speech": "Arnaud ! Alors, ça t’a plu cette démo ? Toujours sceptique ou un peu impressionné ?",
+          "response": "",
+          "nextId": 401
+        },
+        {
+          "need": [{ "key": "Rarnaud", "operator": "<=", "value": 0 }],
+          "speech": "Arnaud, toujours en train de râler ou t’as trouvé un truc qui te plaît cette fois ?",
+          "response": "",
+          "nextId": 402
+        },
+        {
+          "need": [{ "key": "Rcamille", "operator": ">", "value": 0 }],
+          "speech": "Camille, ça t’a inspirée cette démonstration, non ? C’est tout à fait ton style.",
+          "response": "",
+          "nextId": 403
+        },
+        {
+          "need": [{ "key": "Rcamille", "operator": "<=", "value": 0 }],
+          "speech": "Camille, je suppose que tu dois avoir plein de choses à dire sur cette démo, non ?",
+          "response": "",
+          "nextId": 404
+        },
+        {
+          "need": [{ "key": "Rthomas", "operator": ">", "value": 0 }],
+          "speech": "Thomas, tu t’es déjà imaginé bidouiller ce genre de trucs ou c’est encore trop « intello » pour toi ?",
+          "response": "",
+          "nextId": 405
+        },
+        {
+          "need": [{ "key": "Rthomas", "operator": "<=", "value": 0 }],
+          "speech": "Thomas, alors, toujours en train de critiquer ou cette fois tu t’intéresses un peu ?",
+          "response": "",
+          "nextId": 406
+        },
+        {
+          "need": [{ "key": "Réric", "operator": ">", "value": 0 }],
+          "speech": "Éric, alors, convaincu par cette démo ou tu préfères encore tes jeux de niche ?",
+          "response": "",
+          "nextId": 407
+        },
+        {
+          "need": [{ "key": "Réric", "operator": "<=", "value": 0 }],
+          "speech": "Éric, toujours à critiquer ou tu as vu quelque chose qui t’a plu ?",
+          "response": "",
+          "nextId": 408
+        }
+      ]
+    },
+    {
+      "id": 401,
+      "order": 2,
+      "end": "",
+      "machine": "",
+      "speaker": "Arnaud",
+      "need": [],
+      "speech": "C’était pas mal, mais tu sais bien, rien ne vaut nos bornes. Mais ouais, j’avoue, y’a du potentiel dans ces trucs.",
+      "choices": [
+        {
+          "speech": "Continuer à parler avec Arnaud.",
+          "response": "Tu échanges quelques commentaires avec Arnaud sur la démo.",
+          "nextId": -100
+        }
+      ]
+    },
+    {
+      "id": 402,
+      "order": 2,
+      "end": "",
+      "machine": "",
+      "speaker": "Arnaud",
+      "need": [],
+      "speech": "Ouais, ouais, c’est bien beau tout ça, mais honnêtement, c’est pas mon truc. Je préfère rester fidèle à nos jeux classiques.",
+      "choices": [
+        {
+          "speech": "Changer de sujet.",
+          "response": "Tu décides de parler d’autre chose avec Arnaud.",
+          "nextId": -100
+        }
+      ]
+    },
+    {
+      "id": 403,
+      "order": 2,
+      "end": "",
+      "machine": "",
+      "speaker": "Camille",
+      "need": [],
+      "speech": "Pierre, c’est génial de te voir aussi curieux et intéressé ! Franchement, ça me touche. Tu sais, ce genre de choses, c’est tellement important pour moi, et te voir y prêter attention, ça me fait chaud au cœur.",
+      "choices": [
+        {
+          "speech": "C’est grâce à toi, Camille. T’as une manière de parler de tout ça qui donne envie d’en savoir plus.",
+          "response": "Pierre, un peu ému, partage son admiration pour Camille.",
+          "nextId": -100,
+          "modifiers": []
+        }
+      ]
+    },
+    {
+      "id": 404,
+      "order": 1,
+      "end": "",
+      "machine": "",
+      "speaker": "Camille",
+      "need": [],
+      "speech": "Franchement, Pierre, j’ai du mal avec toi. C’est comme si tu ne comprenais jamais ce qui m’intéresse.",
+      "choices": [
+        {
+          "speech": "Je suis désolé… Je vais essayer d’être plus attentif à l’avenir.",
+          "response": "",
+          "nextId": -100
+        }
+      ]
+    },
+    {
+      "id": 405,
+      "order": 1,
+      "end": "",
+      "machine": "",
+      "speaker": "Thomas",
+      "need": [],
+      "speech": "Haha, Pierre ! Sérieusement, c’était cool. Bon, pas de quoi remplacer les bornes, mais sympa quand même.",
+      "choices": [
+        {
+          "speech": "Je savais que tu finirais par apprécier. On en parle autour d’une partie ?",
+          "response": "",
+          "nextId": -100
+        }
+      ]
+    },
+    {
+      "id": 406,
+      "order": 1,
+      "end": "",
+      "machine": "",
+      "speaker": "Thomas",
+      "need": [],
+      "speech": "Tsss, Pierre… Sérieux, t’appelles ça une révolution ? Moi, je vois juste un truc pour les geeks.",
+      "choices": [
+        {
+          "speech": "Allez, Thomas, essaye de voir au-delà des bornes pour une fois.",
+          "response": "",
+          "nextId": -100
+        }
+      ]
+    },
+    {
+      "id": 408,
+      "order": 1,
+      "end": "",
+      "machine": "",
+      "speaker": "Arnaud",
+      "need": [],
+      "speech": "Bof, Pierre, toujours pas convaincu. Ces trucs-là, c’est trop loin de moi. Je préfère nos soirées arcade.",
+      "choices": [
+        {
+          "speech": "Comme tu veux, Arnaud, mais tu devrais au moins leur laisser une chance.",
+          "response": "",
+          "nextId": -100
+        }
+      ]
+    },
+    {
+      "id": 407,
+      "order": 1,
+      "end": "",
+      "machine": "",
+      "speaker": "Arnaud",
+      "need": [],
+      "speech": "Ouais, Pierre, c’était pas mal. Franchement, je m’attendais à pire. T’as peut-être raison, y’a un truc à creuser.",
+      "choices": [
+        {
+          "speech": "Content que tu sois un peu convaincu. On s’en reparle plus tard !",
+          "response": "",
+          "nextId": -100
+        }
+      ]
+    },
+    {
+        "id": 1,
+        "order": 1,
+        "end": "",
+        "machine": "",
+        "speaker": "Camille",
+        "need": [],
+        "speech": "Eh bonjour toi, tu as même le temps de passer dire bonjour à une pauvre stressée par ses examens alors que tu es dans ton antre du plaisir.. c'est gentil",
+        "choices": [
+          {
+            "need": [{"key": "Rpapa", "operator": "==", "value": 1}],
+            "speech": "Mon vieux m'a montré sa nouvelle trouvaille, une machine ordinateur où il y a ses trucs à lui bizarres d'ingénieurs mais aussi un jeu !",
+            "response": "Lui parler de la nouvelle passion de son père, en étant impressionné",
+            "nextId": 2,
+            "modifiers": []
+          },
+          {
+            "need": [{"key": "Rpapa", "operator": "<", "value": 1}],
+            "speech": "Mon père a de nouveau essayé de me convaincre qu'il avait des passions qui pourraient m'intéresser... c'est fou à chaque fois je dois faire un peu semblant sinon il se vexe, moi ce que j'aime c'est être ici avec mes potes c'est tout..",
+            "response": "Lui parler de la nouvelle passion de son père, en étant blasé",
+            "nextId": 3,
+            "modifiers": []
+          },
+          {
+            "need": [],
+            "speech": "Fais pas ta demoiselle en détresse perdue dans un endroit inconnu, je sais qu'au fond tu aimes bien être là. Comment ça se passe alors avec tes fiches ?",
+            "response": "Lui demander comment vont ses révisions",
+            "nextId": 4,
+            "modifiers": []
+          },
+          {
+            "need": [{"key": "Réric", "operator": "<", "value": 0}],
+            "speech": "Eric commence vraiment à me gonfler, il a toujours besoin de se différencier même dans les jeux, toujours plus intéressants que les nôtres",
+            "response": "Se plaindre d'Eric qui se la ramène trop",
+            "nextId": 5,
+            "modifiers": []
+          },
+          {
+            "need": [],
+            "speech": " À plus tard ! [Partir]",
+            "alwaysVisible": true,
+            "response": "[partir]",
+            "nextId": -1,
+            "modifiers": []
+          }
+        ]
+      },
+    {
+        "id": 2,
+        "order": 2,
+        "end": "",
+        "machine": "",
+        "speaker": "Camille",
+        "need": [],
+        "speech": "Oh ça fait plaisir de te voir comme ça moi qui croyais que plus rien d'autre que les potes, les bières et les bornes pouvaient allumer de lumière dans tes yeux. Promets-moi que tu m'y emmèneras pour voir, tu sais à quel point la technologie ça m'intéresse !",
+        "choices": [
+          {
+            "need": [],
+            "speech": "Tu t'oublies toi dans ta liste des supers choses… Oui allez c'est promis on ira dans la cabane du sorcier !",
+            "response": "Lui promettre de l'emmener dans le garage de son père",
+            "nextId": 6,
+            "modifiers": [{"key": "Rcamille", "operator": "+", "value": 1}]
+          },
+          {
+            "need": [],
+            "speech": "Je sais pas trop écoute…Tu sais comme parfois je suis pas encore vraiment à l'aise moi-même avec mes parents ces temps alors t'y emmener…c'est un peu tôt je crois",
+            "response": "Botter en touche car gêné de lui faire voir le monde bizarre du papa",
+            "nextId": 7,
+            "modifiers": [{"key": "Rcamille", "operator": "-", "value": 1}]
+          },
+          {
+            "need": [],
+            "speech": " À plus tard ! [Partir]",
+            "alwaysVisible": true,
+            "response": "[partir]",
+            "nextId": -1,
+            "modifiers": []
+          }
+        ]
+      },
+    {
+        "id": 3,
+        "order": 2,
+        "end": "",
+        "machine": "",
+        "speaker": "Camille",
+        "need": [],
+        "speech": "Fidèle à toi-même, toujours à trouver tout ennuyeux ou pas assez bien pour toi.. Je te préfère quand tu t'amuses juste sur une borne avec nous là au moins y a de la passion et moins de masque.. m'enfin si moi je te dis que toutes \"ces machines bizarres\" ça peut m'intéresser beaucoup, je me prépare pour aller au Technicum si tu n'as pas oublié..",
+        "choices": [
+          {
+            "need": [],
+            "speech": "Non si je te dis que vraiment ça m'intéresse pas et que vraiment je préfère être ici, c'est pas pour recevoir une deuxième leçon de toi, pfff",
+            "response": "Lui promettre que c'est pas pour se donner un genre",
+            "nextId": 8,
+            "modifiers": [{"key": "Rcamille", "operator": "-", "value": 1}]
+          },
+          {
+            "need": [],
+            "speech": "Écoute moi c'est pas trop mon truc et tu peux pas m'obliger à m'intéresser mais si tu me dis que toi tu aimerais d'aller causer petite boîte électronique et code avec mon père, c'est autre chose t'as qu'à passer une fois ça serait l'occasion de vous connaître autour de votre super passion de gros cerveaux",
+            "response": "Avouer qu'il aimerait bien l'emmener pour lui montrer si elle est intéressée",
+            "nextId": 9,
+            "modifiers": [{"key": "Rcamille", "operator": "+", "value": 1}]
+          }
+        ]
+      },
+    {
+        "id": 4,
+        "order": 3,
+        "end": "",
+        "machine": "",
+        "speaker": "Camille",
+        "need": [],
+        "speech": "Ça va, c'est pas encore tout à fait au point mais je suis sûre de pouvoir y arriver, ça serait incroyable pour moi de pouvoir aller au Technicum, malgré ce qu'en pensent mes parents d'ailleurs... Oh d'ailleurs, si tu tombes sur des brochures de journaux qui abordent l'actualité informatique je suis preneuse ! C'est pour un de mes travaux justement...",
+        "choices": [
+          {
+            "need": [],
+            "speech": "Courage !",
+            "response": "Courage !",
+            "nextId": -1,
+            "modifiers": []
+          },
+          {
+            "need": [],
+            "speech": "Ouvrir l'inventaire...",
+            "response": "Ouvrir l'inventaire...",
+            "nextId": 0,
+            "modifiers": []
+          }
+        ]
+      },
+    {
+        "id": 5,
+        "order": 3,
+        "end": "",
+        "machine": "",
+        "speaker": "Camille",
+        "need": [],
+        "speech": "Je sais comment il est, mais juge-le pas trop, c'est qu'il n'est pas aussi doué que vous sur les autres bornes et donc il trouve son compte ailleurs voilà tout",
+        "choices": [
+          {
+            "need": [],
+            "speech": "Mouais",
+            "response": "",
+            "nextId": 10,
+            "modifiers": []
+          }
+        ]
+      },
+    {
+        "id": 6,
+        "order": 4,
+        "end": "",
+        "machine": "",
+        "speaker": "Camille",
+        "need": [],
+        "speech": "T'es vraiment le meilleur des mecs, j'en ai jamais eu aucun doute ! Pour te remercier tiens, dans mes études on a accès à de la presse qui parle d'informatique et j'ai pensé à toi en lisant cet article qui parle de toi et les autres quand vous êtes en transe devant votre machine. Il est au bout du comptoir.",
+        "choices": [
+          {
+            "need": [],
+            "speech": "*rougir*, merci je vais y jeter un oeil.",
+            "response": "",
+            "nextId": -1,
+            "modifiers": []
+          }
+        ]
+      },
+    {
+        "id": 7,
+        "order": 4,
+        "end": "",
+        "machine": "",
+        "speaker": "Camille",
+        "need": [],
+        "speech": "C'est bête de toujours se dégonfler au dernier moment... Je suis plutôt patiente mais pas en surplus d'attention tu as le droit de faire des efforts de temps en temps tu sais…",
+        "choices": [
+          {
+            "need": [],
+            "speech": "Je sais… juste là c'est pas le moment",
+            "response": "",
+            "nextId": -1,
+            "modifiers": []
+          }
+        ]
+      },
+    {
+        "id": 8,
+        "order": 5,
+        "end": "",
+        "machine": "",
+        "speaker": "Camille",
+        "need": [],
+        "speech": "Bon quand tu es comme ça on ne peut rien faire, je te connais, va te changer les idées avec un stick et des amis qui te comprennent mieux je t'en supplie.",
+        "choices": [
+          {
+            "need": [],
+            "speech": "Pffff",
+            "response": "",
+            "nextId": -1,
+            "modifiers": []
+          }
+        ]
+      },
+    {
+        "id": 9,
+        "order": 5,
+        "end": "",
+        "machine": "",
+        "speaker": "Camille",
+        "need": [],
+        "speech": "Ah ben tu vois quand tu veux, je vais volontairement ignorer les pointes d'ironie ci et là et accepter avec enthousiasme ton invitation",
+        "choices": [
+          {
+            "need": [],
+            "speech": "Salle d'arcade",
+            "response": "",
+            "nextId": -1,
+            "modifiers": []
+          }
+        ]
+      },
+    {
+        "id": 10,
+        "order": 6,
+        "end": "",
+        "machine": "",
+        "speaker": "Camille",
+        "need": [],
+        "speech": "Fidèle à toi-même, toujours à trouver tout ennuyeux ou pas assez bien pour toi.. Je te préfère quand tu t'amuses juste sur une borne avec nous là au moins y a de la passion et moins de masque.. Mais si je te dis que toutes 'ces machines bizarres' m'intéressent vraiment, je me prépare pour aller au Technicum si tu n'as pas oublié..",
+        "choices": [
+          {
+            "need": [],
+            "speech": "Non si je te dis que vraiment ça m'intéresse pas et que vraiment je préfère être ici, c'est pas pour recevoir une deuxième leçon de toi, pfff",
+            "response": "Lui promettre que c'est pas pour se donner un genre",
+            "nextId": -1,
+            "modifiers": [{"key": "Rcamille", "operator": "-", "value": 1}]
+          },
+          {
+            "need": [],
+            "speech": "Écoute moi c'est pas trop mon truc et tu peux pas m'obliger à m'intéresser mais si tu me dis que toi tu aimerais d'aller causer petite boîte électronique et code avec mon père, c'est autre chose t'as qu'à passer une fois ça serait l'occasion de vous connaître autour de votre super passion de gros cerveaux",
+            "response": "Avouer qu'il aimerait bien l'emmener pour lui montrer si elle est intéressée",
+            "nextId": -1,
+            "modifiers": [{"key": "Rcamille", "operator": "+", "value": 1}]
+          }
+        ]
+      },
+    {
+      "id": 11,
+      "order": 4,
+      "end": "",
+      "machine": "",
+      "speaker": "Éric",
+      "need": [],
+      "speech": "Eh salut Pierrot, tu viens d'arriver ? regarde ils viennent d'installer cette borne! C'est incroyable on se croirait vraiment dans le film c'est dingue ! Essaie toi même si t'as les 5 balles à mettre pour les 3 crédits.",
+      "choices": [
+        {
+          "need": [],
+          "speech": "Le regarder jouer.",
+          "response": "",
+          "nextId": 12,
+          "modifiers": []
+        },
+        {
+          "need": [],
+          "speech": " À plus tard ! [Partir]",
+          "alwaysVisible": true,
+          "response": "[partir]",
+          "nextId": -1,
+          "modifiers": []
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "order": 5,
+      "end": "",
+      "machine": ["indiana-jones_station.png","indiana_jones.mp4"],
+      "speaker": "Éric",
+      "need": [],
+      "speech": "Tu vois, là tu peux même jouer avec les perspectives ! Je te jure, c'est dingue, ça change des jeux tout plats ! Et là, regarde les animations des ennemis comme c'est bien fait ! Et la musique, c'est la même que celle du film, t'as remarqué ? Je te jure, j'ai jamais vu ça ! Et les autres qui veulent pas décrocher de leur Tetris, alala...",
+      "choices": [
+        {
+          "need": [],
+          "speech": "Haha quand t'aimes un truc toi on t'arrête pas, mais là je dois bien reconnaître que tu es dans le vrai, ça va être encore plus dur de rentrer chez les vieux",
+          "response": "Aimer le jeu",
+          "nextId": 13,
+          "modifiers": [{"key": "Réric", "operator": "+", "value": 1}]
+        },
+        {
+          "need": [],
+          "speech": "Désolé de ne pas partager ton enthousiasme mon gars mais moi mon truc c'est pas ces jeux ou tu dois rester des plombes pour avancer, il me faut des trucs plus grisants tu comprends ?",
+          "response": "Ne pas aimer le jeu",
+          "nextId": 14,
+          "modifiers": [{"key": "Réric", "operator": "-", "value": 1}]
+        },
+        {
+          "need": [],
+          "speech": "D'ailleurs j'ai peut être quelque chose de semblable...",
+          "response": "Ouvrir l'inventaire",
+          "nextId": 0,
+          "modifiers": []
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "order": 6,
+      "end": "",
+      "machine": "",
+      "speaker": "Éric",
+      "need": [],
+      "speech": "Je me trompe jamais, c'est comme quand tu es venu voir le film avec moi, d'ailleurs. On est vraiment dans une époque cool ! Si les films deviennent ensuite des jeux, imagine un jour un jeu Mad Max... Oh, d'ailleurs, t'as vu ? Il paraît qu'on aura bientôt accès aux jeux dans notre salon. Une nouvelle bécane sort bientôt et, aux States, elle fait pas mal de bruit. Arnaud est déjà convaincu, super enthousiaste ! Regarde ce flyer que mon père a ramené de New York.",
+      "choices": [
+        {
+          "need": [],
+          "speech": "Mad Max, le rêve... Merci pour le flyers il fera sûrement plaisir à Arnaud...",
+          "response": "Salle d'arcade",
+          "nextId": -1,
+          "modifiers": []
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "order": 6,
+      "end": "",
+      "machine": "",
+      "speaker": "Éric",
+      "need": [],
+      "speech": "C'est bon, j'ai compris, tu vas rejoindre les deux autres qui sont bloqués depuis la construction de ce bar devant la borne Tetris... Tu sais, le jeu vidéo, ça peut être autre chose que battre des records et se tirer la bourre toute la soirée. Au moins, Camille est d'accord avec moi sur ça...",
+      "choices": [
+        {
+          "need": [],
+          "speech": "Il faut pas le prendre comme ça, pour moi le jeu ça doit juste être du fun tu comprends, sinon je préfère lire ou voir un film...",
+          "response": "Salle d'arcade",
+          "nextId": -1,
+          "modifiers": []
+        }
+      ]
+    },
+  {
+      "id": 16,
+      "order": 7,
+      "end": "",
+      "machine": "",
+      "speaker": "Thomas",
+      "need": [],
+    "speech": "Salut mec ! Regarde le nouveau score de malade que j'ai mis il y a dix minutes, aha ! Ça méritait bien de taper dans l'argent de poche généreusement offert par le daron avocat pour me payer cette savoureuse pinte, hehe.",
+    "choices": [
+        {
+          "need": [],
+          "speech": "[Se rapprocher]",
+          "alwaysVisible": true,
+          "response": "",
+          "nextId": 17,
+          "modifiers": []
+        },
+        {
+          "need": [],
+          "speech": "[Partir]",
+          "alwaysVisible": true,
+          "response": "[partir]",
+          "nextId": -1,
+          "modifiers": []
+        }
+      ]
+    },
+  {
+      "id": 17,
+      "order": 8,
+      "end": "",
+      "machine": "",
+      "speaker": "Arnaud",
+      "need": [],
+      "speech": "Oh, ça va, c'est le jeu. Je t'offre ta bière, d'accord, mais t'es pas obligé d'en remettre une couche sur mon daron. T'es content de me retrouver ici quand le tien, lui, distribue pas de l'argent mais des cris...",
+      "choices": [
+        {
+          "need": [],
+          "speech": "[Les regarder se disputer]",
+          "alwaysVisible": true,
+          "response": "",
+          "nextId": 18,
+          "modifiers": []
+        }
+      ]
+    },
+  {
+      "id": 18,
+      "order": 9,
+      "end": "",
+      "machine": "",
+      "speaker": "Thomas",
+      "need": [],
+      "speech": "Va pas sur ce terrain ou je te mets le stick dans le nez...",
+      "choices": [
+        {
+          "need": [],
+          "speech": "La vérité c'est que vous êtes les deux aussi ridicules l'un que l'autre ! ça fait des semaines que vous monopolisez cette borne la pauvre elle doit en avoir marre de voir vos tronches.",
+          "response": "Se moquer car ils n'arrivent pas à passer à autre chose que ce jeu depuis 2 mois",
+          "nextId": 23,
+          "modifiers": []
+        },
+        {
+          "need": [],
+          "speech": "Toujours à vous foutre sur la gueule vous deux, sinon quoi de neuf ? C'est quoi ce record ?",
+          "response": "Leur demander quoi de neuf",
+          "nextId": 22,
+          "modifiers": []
+        },
+        {
+          "need": [{"key": "Rcamille", "operator": "<", "value": 0}],
+          "speech": "Tu sais on s'est de nouveau engueulé avec Camille, je comprends pas trop pourquoi elle prend personnellement des choses qui la concernent pas du tout. Quand je viens là c'est pour me vider la tête pas la remplir de tensions en plus, tu comprends ?",
+          "response": "Demander à Arnaud s'il peut lui parler de Camille qui est trop envahissante",
+          "nextId": 21,
+          "modifiers": []
+        },
+        {
+          "need": [],
+          "speech": "Eh les gars ! Écoutez ça plutôt. [ouvrir l'inventaire]",
+          "response": "Ouvrir l'inventaire...",
+          "nextId": 0,
+          "modifiers": []
+        }
+      ]
+    },
+  {
+      "id": 21,
+      "order": 12,
+      "end": "",
+      "machine": "",
+      "speaker": "Arnaud",
+      "need": [],
+      "speech": "Pierrot je te connais, tu es à chaud mais je crois surtout qu'elle aimerait parfois avoir plus accès à ton univers et ça serait pas si compliqué que tu fasses quelques concessions parfois j'ai l'impression, je me trompe ?",
+      "choices": [
+        {
+          "need": [],
+          "speech": "Ouais…t'as peut-être un peu raison, je vais y réfléchir",
+          "response": "Accepter qu'il exagère et remercier Arnaud",
+          "nextId": 24,
+          "modifiers": [
+            {"key": "Rarnaud", "operator": "+", "value": 1}
+          ]
+        },
+        {
+          "need": [],
+          "speech": "Ah ben super je cherche du soutien et je me retrouve à un contre deux, c'est de perdre contre Thomas qui te mets dans cette humeur de contradiction",
+          "response": "Se vexer et dire que de toute façon il comprend rien",
+          "nextId": 25,
+          "modifiers": [
+            {"key": "Rarnaud", "operator": "-", "value": 1}
+          ]
+        }
+      ]
+    },
+  {
+      "id": 22,
+      "order": 13,
+      "end": "",
+      "machine": "",
+      "speaker": "Thomas",
+      "need": [],
+      "speech": "10580 mon gars, 10580! Faudra se lever tôt pour l'effacer celui-ci hehe. T'aurais du voir sa tête à Arnaud aussi rouge que quand une fille le regarde haha..",
+      "choices": [
+        {
+          "need": [],
+          "speech": "[Se retourner vers Arnaud]",
+          "response": "",
+          "nextId": 26,
+          "modifiers": []
+        },
+        {
+          "need": [],
+          "speech": "[Se tourner vers Thomas]",
+          "response": "",
+          "nextId": 50,
+          "modifiers": []
+        }
+      ]
+    },
+  {
+    "id": 50,
+    "order": 14,
+    "end": "",
+    "machine": "",
+    "speaker": "Thomas",
+    "need": [],
+    "speech": "Tu sais, ici c'est mon refuge. À la maison, c'est pas toujours facile... Les disputes, le boulot, tout ça. Ici, je peux oublier un peu tout ça, tu comprends?",
+    "choices": [
+      {
+        "need": [],
+        "speech": "Je comprends... Tout le monde a besoin d'un endroit pour souffler. Tu fais bien de venir ici.",
+        "response": "Compatir et rassurer Thomas",
+        "nextId": 51,
+        "modifiers": [
+          {"key": "Rthomas", "operator": "+", "value": 1}
+        ]
+      },
+      {
+        "need": [],
+        "speech": "Ouais, mais tu en fais toujours trop, mec. T'as vraiment besoin de prendre les choses un peu moins à cœur.",
+        "response": "Lui dire qu'il en fait toujours trop",
+        "nextId": 52,
+        "modifiers": [
+          {"key": "Rthomas", "operator": "-", "value": 1}
+        ]
+      }
+    ]
+  },
+  {
+    "id": 51,
+    "order": 15,
+    "end": "",
+    "machine": "",
+    "speaker": "Thomas",
+    "need": [],
+    "speech": "Merci, ça fait du bien de l'entendre... Parfois, j'ai juste besoin de savoir que quelqu'un comprend. Allez, on se refait une partie ?",
+    "choices": [
+      {
+        "need": [],
+        "speech": "[Fin de la conversation]",
+        "response": "",
+        "nextId": -1,
+        "modifiers": []
+      }
+    ]
+  },
+  {
+    "id": 52,
+    "order": 16,
+    "end": "",
+    "machine": "",
+    "speaker": "Thomas",
+    "need": [],
+    "speech": "Merci du soutiens Pierrot ça fait plaisir, je vais faire comme d'hab fermer ma gueule et jouer à ces foutus machines.",
+    "choices": [
+      {
+        "need": [],
+        "speech": "[Fin de la conversation]",
+        "response": "",
+        "nextId": -1,
+        "modifiers": []
+      }
+    ]
+  },
+  {
+      "id": 23,
+      "order": 14,
+      "end": "",
+      "machine": "",
+      "speaker": "Arnaud",
+      "need": [],
+      "speech": "On t'emmerde, Pierrot. Va plutôt te chercher une mousse, j'ai déjà un vieux pour les leçons de morale... Bon, d'ailleurs, t'as vu la nouvelle de la machine de salon qui débarque bientôt ? C'est dans le magazine, là.",
+      "choices": [
+        {
+          "need": [],
+          "speech": "Quoi ? Dis en plus pour moi le salon c'était définitivement fini pour les jeux! déjà toute à l'heure mon daron à essayer de me monter qu'on pouvait s'amuser sur un ordinateur, tu imagines un ordinateur avec l'écrant en noir et blanc qui affiche des chiffres et des lettres?!",
+          "response": "Demander ce que c'est cette nouvelle machine",
+          "nextId": 29,
+          "modifiers": []
+        },
+        {
+          "need": [],
+          "speech": "Oh moi vos trucs de connaisseurs là j'ai de la peine, je m'y intéresserais si c'est vraiment bien quand ça sera arrivé ici. Dans ces magazines il y a toujours tout qui fait super envie et au final on revient toujours ici..",
+          "response": "N'est pas intéressé par ça, préfère aller voir ailleurs",
+          "nextId": 30,
+          "modifiers": []
+        }
+      ]
+    },
+  {
+      "id": 24,
+      "order": 15,
+      "end": "",
+      "machine": "",
+      "speaker": "Arnaud",
+      "need": [],
+      "speech": "Allez courage, on va plutôt aller boire un coup et perdre deux trois pièces maintenant. D'ailleurs tiens je te donne ce manuel de jeu que le magazinier m'a donné, c'est un truc d'aventures qui tourne sur ordi je crois moi ça m'intéresse pas trop ce genre de d'aventures à histoire et chevaliers mais peut-être que ça parle à Éric. ",
+      "choices": [
+        {
+          "need": [],
+          "speech": "Partant!",
+          "response": "Salle d'arcade",
+          "nextId": -1,
+          "modifiers": []
+        }
+      ]
+    },
+  {
+      "id": 25,
+      "order": 16,
+      "end": "",
+      "machine": "",
+      "speaker": "Arnaud",
+      "need": [],
+      "speech": "Oui ça doit être ça, ça doit être ça… va plutôt chercher un coup à boire va ça te changera les idées",
+      "choices": [
+        {
+          "need": [],
+          "speech": "Ciao",
+          "response": "Salle d'arcade",
+          "nextId": -1,
+          "modifiers": []
+        }
+      ]
+    },
+  {
+      "id": 26,
+      "order": 17,
+      "end": "",
+      "machine": "",
+      "speaker": "Arnaud",
+      "need": [],
+      "speech": "Ouais c'est bon ferme là, regarde plutôt ça Pierrot, ça vient de sortir dans le magazine une nouvelle console de salon pour enfin peut-être faire oublier le désastre Atari, incroyable non ?",
+      "choices": [
+        {
+          "need": [],
+          "speech": "Quoi ? Dis en plus pour moi le salon c'était définitivement fini pour les jeux! déjà toute à l'heure mon daron à essayer de me montrer qu'on pouvait s'amuser sur un ordinateur, tu imagines un ordinateur avec l'écran en noir et blanc qui affiche des chiffres et des lettres?!",
+          "response": "Demander ce que c'est cette nouvelle machine",
+          "nextId": 29
+        },
+        {
+          "need": [],
+          "speech": "Oh moi vos trucs de connaisseurs là j'ai de la peine, je m'y intéresserai si c'est vraiment bien quand ça sera arrivé ici. Dans ces magazines il y a toujours tout qui fait super envie et au final on revient toujours ici..",
+          "response": "N'est pas intéressé par ça, préfère aller voir ailleurs",
+          "nextId": 30
+        }
+      ]
+    },
+  {
+      "id": 29,
+      "order": 20,
+      "end": "",
+      "machine": "",
+      "speaker": "Arnaud",
+      "need": [],
+      "speech": "C'est complètement fou ! Apparemment, ça pourrait faire oublier le four de l'Atari. La machine permet d'afficher carrément de meilleures couleurs et plus de pixels, et il y aurait directement des jeux faits par les mêmes que ceux qui lancent la console, le Nintendo, là. T'imagines ? Avoir comme ici, mais dans ton salon ! Plus besoin de payer cent sous pour chaque partie, ça serait infini !",
+      "choices": [
+        {
+          "need": [],
+          "speech": "Merci pour l'info, on va suivre ça de près c'est sûr!",
+          "response": "Salle d'arcade",
+          "nextId": -1,
+          "modifiers": []
+        },
+        {
+          "need": [],
+          "speech": "D'ailleurs j'ai peut-être quelque chose à te montrer.",
+          "response": "Ouvrir l'inventaire...",
+          "nextId": 0,
+          "modifiers": []
+        }
+      ]
+    },
+  {
+      "id": 30,
+      "order": 21,
+      "end": "",
+      "machine": "",
+      "speaker": "Arnaud",
+      "need": [],
+      "speech": "C'est pour plaire à Camille que tu te donnes ce genre de mec blasé de tout ? Pourtant, à chaque fois, tu reviens ici, c'est qu'on doit pas être si nazes...",
+      "choices": [
+        {
+          "need": [],
+          "speech": "ça doit être ça ouais.",
+          "response": "Salle d'arcade",
+          "nextId": -1,
+          "modifiers": []
+        }
+      ]
+    },
+  {
+    "id": 31,
+    "order": 1,
+    "end": "",
+    "machine": "",
+    "speaker": "Papa",
+    "need": [],
+    "speech": "Alors ça, regarde ! C’est une machine qui en jette ! Je l’ai achetée dans une boutique spécialisée en électronique en ville. Regarde ça, je te jure, c’est vraiment une pépite de technologie. Viens, tu peux l’essayer.",
+    "choices": [
+      {
+        "need": [],
+        "speech": "C’est quoi ce truc bizarre ? Comment ça peut afficher quelque chose ?",
+        "response": "Questionner l’utilité de la machine",
+        "nextId": 32,
+        "modifiers": []
+      },
+      {
+        "need": [],
+        "speech": "Ouaaah c’est marrant comme truc, et après ça sert à quoi ?",
+        "response": "S’intéresser à l’utilité de la machine",
+        "nextId": 33,
+        "modifiers": []
+      },
+      {
+        "need": [],
+        "alwaysVisible": true,
+        "speech": "A plus",
+        "response": "Partir",
+        "nextId": -1,
+        "modifiers": []
+      }
+    ]
+  },
+  {
+    "id": 32,
+    "order": 2,
+    "end": "",
+    "machine": "",
+    "speaker": "Papa",
+    "need": [],
+    "speech": "Alors tu vois, c’est une machine qui permet de faire plusieurs choses, mais il faut évidemment la connecter à un écran. J’allais justement le faire ! Par exemple, tu peux jouer — ça devrait te faire sourire —, mais aussi l’utiliser pour faire des calculs ou composer des documents, comme une machine à écrire, mais sans papier !",
+    "choices": [
+      {
+        "need": [],
+        "speech": "Jouer ? Avec un truc comme ça c’est des jeux bizarres ou de vieux, jamais ça ne peut rivaliser avec les bornes. Écoute papa mes amis m’attendent !",
+        "response": "Se montrer sceptique et pressé",
+        "nextId": 34,
+        "modifiers": [{"key": "Rpapa", "operator": "-", "value": 1}]
+      },
+      {
+        "need": [],
+        "speech": "Bon comme d’habitude il est beaucoup trop enthousiaste pour un de ses nouveaux joujoux, mais ça va lui faire plaisir si je m’intéresse un peu. Bon, montre-moi 2-3 trucs que tu peux faire avec ton truc.",
+        "response": "Faire semblant d’être intéressé",
+        "nextId": 35,
+        "modifiers": [{"key": "Rpapa", "operator": "+", "value": 1}]
+      }
+    ]
+  },
+  {
+    "id": 33,
+    "order": 2,
+    "end": "",
+    "machine": "",
+    "speaker": "Papa",
+    "need": [],
+    "speech": "Pleins de choses ! D’abord, tu peux écrire en éditant directement sur l’écran donc la machine à écrire ne va pas tenir longtemps la comparaison! Tu peux faire de la programmation bien sûr pour utiliser la logique de la machine pour qu’elle fasse des calculs à ta place et le meilleur enfin: tu peux jouer ! tu veux que je te montre ?",
+    "choices": [
+      {
+        "need": [],
+        "speech": "Oui avec plaisir tu peux jouer à quoi par exemple ? C’est comme la station au bar ?",
+        "response": "S’intéresser aux jeux",
+        "nextId": 36,
+        "modifiers": [{"key": "Rpapa", "operator": "+", "value": 1}]
+      },
+      {
+        "need": [],
+        "speech": "Tu me montreras la prochaine fois là mes potes m’attendent, je suis déjà en retard !",
+        "response": "Refuser gentiment pour partir",
+        "nextId": 37,
+        "modifiers": [{"key": "Rpapa", "operator": "-", "value": 1}]
+      }
+    ]
+  },
+  {
+    "id": 34,
+    "order": 3,
+    "end": "",
+    "machine": "",
+    "speaker": "Papa",
+    "need": [],
+    "speech": "Comme tu veux, mais tu sais parfois pour moi ça serait important que tu t’intéresses un peu à des choses que je te montre, je crois que je peux encore t’apprendre 2-3 choses…",
+    "choices": [
+      {
+        "need": [],
+        "speech": "Bye",
+        "response": "level1",
+        "nextId": -10,
+        "modifiers": []
+      }
+    ]
+  },
+  {
+    "id": 35,
+    "order": 3,
+    "end": "",
+    "machine": ["appleII.png",["space_invaders.mp4",120]],
+    "speaker": "Papa",
+    "need": [],
+     "speech": "Eh bien, l’enthousiasme peut aller se faire voir, mais regarde : je vais te faire changer d’avis !",
+    "choices": [
+      {
+        "need": [],
+        "speech": "Allez !",
+        "response": "voir la démo",
+        "nextId": 38,
+        "modifiers": []
+      }
+    ]
+  },
+  {
+    "id": 36,
+    "order": 3,
+    "end": "",
+    "machine": ["appleII.png",["space_invaders.mp4",120]],
+    "speaker": "Papa",
+    "need": [],
+    "speech": "Ah non, là les capacités de l’écran réduisent évidemment les possibilités, mais par contre il suffit de descendre au garage et tu as pas besoin d’utiliser mon argent de poche pour payer ta partie, allez regarde !",
+    "choices": [
+      {
+      "need": [],
+      "speech": "Allez !",
+      "response": "voir la démo",
+      "nextId": 38,
+      "modifiers": []
+    }]
+  },
+  {
+    "id": 37,
+    "order": 3,
+    "end": "",
+    "machine": "",
+    "speaker": "Papa",
+    "need": [],
+    "speech": "Aah les ados c’est toujours comme ça, jamais 10min pour se poser avec ses parents, mais pour les potes faut être là à la minute!",
+    "choices": [
+      {
+        "need": [],
+        "speech": "Bye",
+        "response": "level1",
+        "nextId": -10,
+        "modifiers": []
+      }
+    ]
+  },
+  {
+    "id": 38,
+    "order": 1,
+    "end": "",
+    "machine": ["appleII.png",["space_invaders.mp4",120]],
+    "speaker": "Papa",
+    "need": [],
+    "speech": "Regarde cette bête elle a pas la puissance de son successeur sorti le mois dernier, mais quand même 64kilos octets de mémoire enfermée dans une petite boîte comme ça c’est un petit miracle ! D’abord il faut insérer cette petite disquette juste ici et faire 2-3 manips, mais rien de sorcier et tadaaaam regarde ça !",
+    "choices": [
+      {
+        "need": [],
+        "speech": "Attends, c’est quoi la machine qui est sortie ? C’est pas ton caprice dont parle toujours maman ces derniers temps ? Je ne crois pas qu’elle partage ton amour des hocktey-trucs..",
+        "response": "Questionner la nouvelle machine et la réaction de maman",
+        "nextId": 39,
+        "modifiers": []
+      },
+      {
+        "need": [],
+        "speech": "Cool ! Mais tu m’as dit que tu peux jouer ?! Moi je croyais que c’était juste pour faire tes codes bizarres, tu me fais toujours des commentaires comme quoi il faut faire attention aux jeux quand je vais à la salle.",
+        "response": "S’étonner qu’on puisse jouer dessus",
+        "nextId": 40,
+        "modifiers": []
+      },
+      {
+        "need": [],
+        "speech": "Bon c’est bien gentil tout ça mais moi j’vais rejoindre mes potes je suis déjà en retard en fait..",
+        "response": "S’excuser pour partir",
+        "nextId": 41,
+        "modifiers": []
+      }
+    ]
+  },
+  {
+    "id": 39,
+    "order": 2,
+    "end": "",
+    "machine": ["appleII.png",["space_invaders.mp4",120]],
+    "speaker": "Papa",
+    "need": [],
+    "speech": "Aaah oui, ça… Tu vois, ce petit jeu-là, c’est rien de sorcier, mais moi, ça me détend, comme certains ont besoin de leur émission à la télévision ! Écoute, ta mère a parfois du mal à comprendre ce que cette passion représente pour moi.",
+    "choices": [
+      {
+        "need": [],
+        "speech": "Ouais je vois, eh c’est pas souvent que tu me dis tout ça, les machines on le pouvoir de te faire débiter plus on dirait. Mais là j’entends Maman qui rentre je file sinon elle va encore me demander de nettoyer ma chambre ou je ne sais pas quoi.. TU me laisseras essayer ton jeu pour technicien la prochaine fois!",
+        "response": "Montrer de l’intérêt et filer avant que maman arrive",
+        "nextId": 42,
+        "modifiers": []
+      },
+      {
+        "need": [],
+        "speech": "Ouais je vois, eh c’est pas souvent que tu me dis tout ça, les machines on le pouvoir de te faire débiter plus on dirait, alors c'est quoi ce jeu ? ",
+        "response": "Approver et lui demander de montrer le jeu",
+        "nextId": 40,
+        "modifiers": []
+      }
+    ]
+  },
+  {
+    "id": 40,
+    "order": 2,
+    "end": "",
+    "machine": ["appleII.png",["space_invaders.mp4",120]],
+    "speaker": "Papa",
+    "need": [],
+    "speech": "Et bien regarde, je lance Apple invaders, c’est une reprise de space invaders tu sais je crois que tu as connu quand à la salle ils l’avaient encore.. C’est une version ou tu peux aussi te faire tirer dessus, je crois, mais je suis pas très doué il faut dire que j’ai toujours plus étà un technicien qu’un gars qui aimait aller sur les terrains peut-être c’est pour ça je fais même pas de foot. Mais je t’encourage pour l’équipe de l’école on se revoit vite là-dessus !",
+    "choices": [
+      {
+        "need": [],
+        "speech": "Space Invaders, ah mais ça je connais bien, et que j’ai presque tout le temps fait un record, je me demande si tu peux m’impressionner avec ta version maison! Je te crois pas vraiment mais vas-y montre !",
+        "response": "Montrer de l'intérêt et comparer avec la borne d'arcade",
+        "nextId": 43,
+        "modifiers": []
+      },
+      {
+        "need": [],
+        "speech": "Ouais ça m'a l'air cool mais là mes potes m'attendent à la salle d'arcade pour faire quelques parties de Donkey Kong. La version maison a l'air bien mais rien ne vaut l'original!",
+        "response": "Accepter de jouer mais rester sceptique",
+        "nextId": 44,
+        "modifiers": [
+        ]
+      }
+    ]
+  },
+  {
+    "id": 41,
+    "order": 2,
+    "end": "",
+    "machine": "",
+    "speaker": "Papa",
+    "need": [],
+    "speech": "Ahh, tu as raison, file avant que ta mère te tombe dessus! Je te montrerai tout ça une autre fois, promets-moi juste de prendre un peu de temps pour ça la prochaine fois.",
+    "choices": [
+      {
+        "need": [],
+        "speech": "Bye",
+        "response": "level1",
+        "nextId": -10,
+        "modifiers": []
+      }
+    ]
+  },
+  {
+    "id": 42,
+    "order": 3,
+    "end": "",
+    "machine": ["appleII.png",["space_invaders.mp4",120]],
+    "speaker": "Papa",
+    "need": [],
+    "speech": "Héhé, d'accord, file avant que ça chauffe. La prochaine fois, c'est toi qui prends les commandes !",
+    "choices": [
+      {
+        "need": [],
+        "speech": "Bye",
+        "response": "level1",
+        "nextId": -10,
+        "modifiers": []
+      }
+    ]
+  },
+  {
+    "id": 43,
+    "order": 3,
+    "end": "",
+    "machine": ["appleII.png",["space_invaders.mp4",120]],
+    "speaker": "Papa",
+    "need": [],
+    "speech": "Ah tu vas voir, même la version maison peut te surprendre! Installe-toi et prépare-toi à défendre la Terre contre les envahisseurs!",
+    "choices": [
+      {
+        "need": [],
+        "speech": "Oh mais c'est trop cool, je crois que tu as réussi à me convaincre, cette machine en a dans le ventre !",
+        "response": "S'enthousiasmer",
+        "nextId": 45,
+        "modifiers": []
+      }
+    ]
+  },
+  {
+    "id": 44,
+    "order": 3,
+    "end": "level1",
+    "machine": ["appleII.png",["space_invaders.mp4",120]],
+    "speaker": "Papa",
+    "need": [],
+    "speech": "Je comprends, rien ne vaut une bonne partie entre potes. Passe un bon moment et on verra si cette version peut te convaincre une autre fois.",
+    "choices": [
+      {
+      "need": [],
+      "speech": "Bye",
+      "response": "level1",
+      "nextId": -10,
+      "modifiers": []
+    }
+    ]
+  },
+  {
+    "id": 45,
+    "order": 3,
+    "end": "level1",
+    "machine": ["appleII.png",["space_invaders.mp4",120]],
+    "speaker": "Papa",
+    "need": [],
+    "speech": "Ah-ha, tu vois ! Je t'avais bien dit : écouter son père et lui faire confiance, c'est souvent une bonne idée. Pour la peine, tu peux emporter la double page sur l'Apple II dans le magazine que j’ai reçu ce mois. Je te l’ai mise juste devant la grande télévision.",
+    "choices": [
+      {
+        "need": [],
+        "speech": "Aha toi et les grandes formules décidemment ! Merci je vais voir ça.",
+        "response": "Merci",
+        "nextId": -1,
+        "modifiers": []
+      }
+    ]
+  },
+  {
+    "id": 46,
+    "order": -1,
+    "end": "level0",
+    "machine": [],
+    "speaker": "",
+    "need": [],
+    "speech": "1986, petite ville du centre de l'Europe, Pierre est un jeune adolescent passioné d'électronique domaine dans lequel il effectue son apprentissage. Mais passé du temps derrière les bornes d'arcades et surtout, passé du temps avec sa bande d'amis derrière les bornes d'arcades de la salle de jeu de sa ville, ça c'est ce qui habite le plus joyeusement sa vie d'ado. Son père vient de l'appeler dans son garage, connu également comme son refuge pour bricoler ses câbles dont il a réussi à transmettre sa passion à son fils. Il veut lui montrer quelque chose...",
+    "choices": [
+    ]
+  },
+  {
+    "id": 47,
+    "order": -1,
+    "end": "level0",
+    "machine": [],
+    "speaker": "",
+    "need": [],
+    "speech": "Pierre enfile sa veste en cuir, attrape les clés de son appartement, et claque la porte derrière lui. En descendant les marches de l'escalier familier, il ressent une légère excitation monter en lui. La fraîcheur de la soirée lui pique le visage alors qu'il traverse le jardin de ses parents, éclairé par la lueur jaune des réverbères. Le grincement du portail en fer est presque couvert par le bruissement des feuilles agitées par le vent. Il marche d'un pas rapide le long des trottoirs qu'il connaît par cœur, ses chaussures frappant le pavé avec régularité. Les rires étouffés et les échos des conversations animées s'échappent des fenêtres entrouvertes, tandis que Pierre se dirige vers le bar où l'attendent déjà ses amis, sans doute déjà occupés derrière les bornes.",
+    "choices": [
+    ]
+  },
+  {
+    "id": 48,
+    "order": -1,
+    "end": "level2",
+    "machine": [],
+    "speaker": "",
+    "need": [],
+    "speech": "Il monte sur son vélomoteur allume le moteur, et se met en mouvement pour emprunter les 800 mètres de bitume qu'il connait par coeur et qui le sépare de chez lui. Les pétarades du peugeot s'éloignent dans la nuit tombante alors que le bruit des sticks matraqués, voix élecroniques annonçant un game over ou un meilleur score retentissent encore.",
+    "choices": [
+    ]
+  },
+    {
+      "id": 49,
+      "order": -1,
+      "end": "level2",
+      "machine": [],
+      "speaker": "Barman",
+      "music": "document",
+      "need": [],
+      "speech": "Bon, les gars, c’est pas que je veux vous foutre dehors, mais il se fait tard. Les bornes vont bientôt s’éteindre, et vous devriez penser à rentrer chez vous. C’est jamais une bonne idée de finir la soirée trop tard, même après un bon score !",
+      "choices": [
+        {
+          "need": [],
+          "speech": "[Rentrer à la maison]",
+          "response": "Rentrer",
+          "nextId": -20,
+          "modifiers": []
+        }
+      ]
+    },
+  {
+    "id": 995,
+    "order": 2,
+    "end": "",
+    "machine": "",
+    "speaker": "Éric",
+    "need": [],
+    "speech": "Effectivement, je n'ai jamais entendu parler de ce jeu, King's Quest, mais c'est exactement ce que je voulais dire par jeu qui propose un voyage, ici cela semble être dans un monde fantasy comme Donjons et Dragons. Merci de la découverte Pierrot !",
+    "choices": [
+      {
+        "need": [],
+        "alwaysVisible": true,
+        "speech": "Avec plaisir !",
+        "response": "Avec plaisir !",
+        "nextId": 13,
+        "modifiers": [{"key": "Réric", "operator": "+", "value": 2}]
+      }
+    ]
+  },
+  {
+    "id": 996,
+    "order": 2,
+    "end": "",
+    "machine": "",
+    "speaker": "Arnaud",
+    "need": [],
+    "speech": "Fantastique ! Je la garde si tu veux bien, rolala ça me donne encore plus envie de l'avoir entre mes mains cette console.",
+    "choices": [
+      {
+        "need": [],
+        "alwaysVisible": true,
+        "speech": "Avec plaisir !",
+        "response": "Avec plaisir !",
+        "nextId": -1,
+        "modifiers": [{"key": "Rarnaud", "operator": "+", "value": 2}]
+      }
+    ]
+  },
+  {
+        "id": 998,
+        "order": 2,
+        "end": "",
+        "machine": "",
+        "speaker": "Camille",
+        "need": [],
+        "speech": "Merci énormément c'est exactement le genre de pages que je collectionne, je suis touchée que tu aies pensé à moi.",
+        "choices": [
+          {
+            "need": [],
+            "speech": "Parler d'autre chose",
+            "alwaysVisible": true,
+            "response": "Lui promettre de l'emmener dans le garage de son père",
+            "nextId": 1,
+            "modifiers": [{"key": "Rcamille", "operator": "+", "value": 2}]
+          }
+      ]
+  },
+  {
+    "id": 999,
+    "order": 2,
+    "end": "",
+    "machine": "",
+    "speaker": "Thomas",
+    "need": [],
+    "speech": "Woaaa j'ai pas tout compris mais c'est de la balle ! Faudrait lire ça à l'école je viendrais plus souvent c'est sûr...",
+    "choices": [
+      {
+        "need": [],
+        "alwaysVisible": true,
+        "speech": "Parler d'autre chose",
+        "response": "Lui promettre de l'emmener dans le garage de son père",
+        "nextId": 27,
+        "modifiers": [{"key": "Rthomas", "operator": "+", "value": 2}]
+      }
+    ]
+  }
+],
+  "objets": [
+    {
+      "id": 999,
+      "order": 1,
+      "target": 18,
+      "activation": 6,
+      "end": "",
+      "machine": "",
+      "img": "construire.png",
+      "speaker": "np_construire",
+      "need": [],
+      "speech": "«Il y a un moment où tu ne penses plus tout à fait à ce que tu es en train de faire, bien que tu sentes que tu as une parfaite maîtrise de l’histoire. Tant que tu arrives à maintenir cet état, tu es au meilleur niveau. Tu es en phase avec la machine. Ce moment est fascinant. Cette extase devient un but en soi, et tu essaies de retrouver ce moment-là. » ",
+      "choices": [
+        {
+          "need": [],
+          "remember": true,
+          "speech": "C'est presque poétique comme journalisme dis donc, je crois que j'aime bien. [prendre]",
+          "nextId": -1
+        }
+      ]
+    },
+
+    {
+      "id": 998,
+      "target": 4,
+      "activation": 45,
+      "order": 1,
+      "end": "",
+      "machine": "",
+      "img": "appleII_mag.jpg",
+      "speaker": "np_appleII",
+      "need": [],
+      "speech": "«L'Apple II n'a pas été conçu comme un produit ordinaire. Il utilisait partout des astuces farfelues.»",
+      "choices": [
+        {
+          "need": [],
+          "remember": true,
+          "speech": "Du marketing efficace. [prendre]",
+          "nextId": -10
+        }
+      ]
+    },
+    {
+      "id": 997,
+      "order": 1,
+      "end": "",
+      "machine": "",
+      "img": "coin.png",
+      "speaker": "coin",
+      "need": [],
+      "speech": "«Pour s'amuser seulement, pas » ",
+      "choices": [
+        {
+          "need": [],
+          "remember": true,
+          "speech": "Hop, un petit crédit.",
+          "nextId": -1
+        }
+      ]
+    },
+    {
+      "id": 996,
+      "order": 1,
+      "end": "",
+      "machine": "",
+      "target": 29,
+      "activation": 13,
+      "img": "nesad.png",
+      "speaker": "Publicité de la  nouvelle console, la NES",
+      "need": [],
+      "speech": "«Maintenant la puissance est entre vos mains» ",
+      "choices": [
+        {
+          "need": [],
+          "remember": true,
+          "speech": "Il faut avouer que ça donne un peu envie. [prendre]",
+          "nextId": -1
+        }
+      ]
+    },
+    {
+      "id": 995,
+      "order": 1,
+      "end": "",
+      "target": 12,
+      "activation": 24,
+      "machine": "",
+      "img": "kingsquest.png",
+      "speaker": "Manuel de jeu",
+      "need": [],
+      "speech": "«Le chemin que vous devez emprunter est long et périlleux ; il est semé de nombreux êtres dangereux. Vous devez avoir la sagesse de savoir quand vous battre et quand fuir face à une force supérieure. Mais gardez courage — vous pourriez recevoir de l'aide de manière inattendue.» ",
+      "choices": [
+        {
+          "need": [],
+          "remember": true,
+          "speech": "L'appel de l'aventure... [prendre]",
+          "nextId": -1
+        }
+      ]
+    }
+  ]
+}

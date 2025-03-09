@@ -1,0 +1,525 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <meta charset="UTF-8">
+    <title>Test</title>
+</head>
+<style>
+
+    .heart-animation {
+        position: absolute;
+        font-size: 24px;
+        pointer-events: none;
+        z-index: 1000;
+        transition: transform 0.8s ease, opacity 0.8s ease;
+    }
+
+    .heart-animation.add {
+        color: red;
+    }
+
+    .heart-animation.remove {
+        color: gray;
+    }
+
+    body {
+        font-family: 'PS2P',serif;
+    }
+
+    button {
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+
+    @font-face {
+        font-family: PS2P;
+        src: url(fonts/PressStart2P-vaV7.ttf);
+    }
+
+    #app {
+        width: 100%;
+        height: 100%;
+        position: relative;
+    }
+
+    .ui-text-choices p{
+        cursor: pointer;
+    }
+
+    #textbox-container:hover {
+        cursor: pointer;
+    }
+
+    #dialogueUI {
+        display: none;
+        top: 5%;
+        right: 7%;
+
+    }
+
+    #dialogue {
+        animation: fadeIn 5s;
+    }
+
+    @keyframes fadeIn {
+        0% { opacity: 0; }
+        100% { opacity: 1; }
+    }
+
+    #choix {
+        animation: fadeIn 5s;
+        display: none;
+        right: 34%;
+        top: 64%;
+        align-items: center;
+        /* width: 163%; */
+        /* text-align: center; */
+        font-size: 12px;
+    }
+
+    .relation-img {
+        width: 24px;  /* Largeur de l'icône */
+        height: 24px; /* Hauteur de l'icône */
+        margin-right: 10px; /* Espace entre l'image et les cœurs */
+        vertical-align: middle; /* Aligne l'image au centre par rapport aux cœurs */
+    }
+
+    .choixVar:hover {
+        color: red;
+    }
+
+    #insp {
+        margin-left : 15px;
+    }
+
+    .arrow  {
+        width: 100%;
+        font-size: 30px;
+        color: red;
+        padding-right: 51px;
+        display: block;
+        text-align: right;
+    }
+    img.arrowChoice {
+        margin-right: 13px;
+        height: 27px;
+        /* width: 69px; */
+        float: left;
+        top: 35px;
+        /* height: auto; */
+    }
+
+    .ui-text-choices p:hover {
+        color: darkblue;
+    }
+
+    #textbox-container{
+    }
+
+    #info-container {
+        display: none;
+        width: 45%;
+        border: 4px dashed #f39c12; /* Bordure pixelisée orange pour un style rétro */
+        top: 94.5%;
+        margin-left: auto;
+        margin-right: auto;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        position: relative;
+        opacity: 0.9;
+        z-index: 80;
+        line-height: 1.3em;
+        background: #000; /* Fond noir */
+        color: #fff; /* Texte blanc */
+        padding: 10px; /* Espacement interne */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.8); /* Effet d'ombre */
+    }
+
+    img#question {
+        float: left;
+        width: 20px; /* Taille adaptée pour une meilleure intégration */
+        height: 20px;
+        margin-right: 8px; /* Espacement entre l'icône et le texte */
+    }
+
+    #info {
+        float: left; /* Alignement à gauche pour être proche de l'icône */
+        font-size: 0.9rem; /* Taille de texte ajustée */
+        margin-top: 1%; /* Ajustement pour aligner avec l'icône */
+    }
+
+    .textbox {
+        position: absolute;
+        max-width: 60%;
+        min-width: 24%;
+        z-index: 80;
+        align-self: end;
+        line-height:1.3em;
+        background: white;
+        box-sizing: border-box;
+        box-shadow: 0 -4px white,
+        0 -8px black,
+        4px 0 white,
+        4px -4px black,
+        8px 0 black,
+        0 4px white,
+        0 8px black,
+        -4px 0 white,
+        -4px  4px black,
+        -8px 0 black,
+        -4px -4px black,
+        4px 4px black;
+        outline-style: solid;
+        margin: auto;
+        padding: 1rem;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-items: flex-start;
+        word-spacing: 0.2rem;
+        filter: drop-shadow(0 0 0.75rem rgb(112, 112, 112));
+        /* overflow: auto; */
+    }
+
+    .textbox.left::after {
+        content: '';
+        position: absolute;
+        height: 4px;
+        width: 4px;
+        top: 47px;
+        left: -8px;
+        background: white;
+        box-shadow:
+        -4px -4px white,
+        -4px 0 white,
+        -8px 0 white,
+        0 -8px white,
+        -4px 4px black,
+        -8px 4px black,
+        -12px 4px black,
+        -16px 4px black,
+        -12px 0 black,
+        -8px -4px black,
+        -4px -8px black,
+        0 -4px white;
+    }
+
+    .textbox.right::after {
+        content: '';
+        position: absolute;
+        height: 4px;
+        width: 4px;
+        top: 47px;
+        right: -8px;
+        background: white;
+        box-shadow:
+                4px -4px white,
+                4px 0 white,
+                8px 0 white,
+                0 -8px white,
+                4px 4px black,
+                8px 4px black,
+                12px 4px black,
+                16px 4px black,
+                12px 0 black,
+                8px -4px black,
+                4px -8px black,
+                0 -4px white;
+    }
+
+    .textbox.center {
+        bottom: 10%;
+        margin-left: 3%;
+        text-align: justify;
+        max-width: 95vw !important;
+    }
+
+    .textbox.center p {
+        margin: 0;
+    }
+
+
+    #minigame, #game {
+        position: absolute;
+    }
+
+    #minigame {
+        display: none;
+        left: 25vw;
+    }
+
+    video {
+        position: absolute;
+        z-index: 65;
+    }
+
+    #inventory-container {
+        background: #1a1a1a; /* Fond sombre */
+        padding: 20px;
+        display: none;
+        left: 0;
+        top: 0;
+        width: 100%; /* Prend toute la largeur de la fenêtre */
+        height: 100%; /* Prend toute la hauteur de la fenêtre */
+        position: fixed; /* Fixé sur toute la fenêtre */
+        z-index: 1000;
+        border: none; /* Supprimer les bordures */
+        box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.7); /* Ombre interne */
+        overflow-y: auto; /* Permet le défilement si nécessaire */
+    }
+
+    /* Titre de l'inventaire */
+    .inventory-title {
+        text-align: center;
+        font-size: 3rem; /* Taille augmentée */
+        color: #f39c12; /* Teinte rétro dorée */
+        margin-bottom: 20px;
+        text-shadow: 3px 3px #000; /* Effet de profondeur */
+    }
+
+    /* Grille des objets de l'inventaire */
+    #inventaire {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* Adaptatif */
+        gap: 20px; /* Espacement entre les éléments */
+        padding: 20px;
+        max-width: 1200px; /* Limite la largeur totale */
+        margin: 0 auto; /* Centre la grille */
+    }
+
+    /* Image des objets */
+    .inventory-item img {
+        width: 100px; /* Taille augmentée */
+        height: auto;
+        border: 3px solid #f39c12; /* Bordure assortie au titre */
+        border-radius: 5px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5); /* Effet de profondeur */
+        transition: transform 0.2s ease;
+    }
+
+    .inventory-item img:hover {
+        transform: scale(1.1); /* Zoom léger au survol */
+    }
+
+    /* Séparation pixélisée au-dessus des relations */
+    #relations {
+        margin-top: 20px;
+        padding-top: 10px;
+        border-top: 8px dashed #f39c12; /* Ligne pixélisée rétro */
+        font-size: 3.5rem; /* Texte plus grand */
+        color: #f39c12;
+        text-shadow: 1px 1px #000;
+    }
+
+    /* Icônes de relations */
+    .relation-img {
+        width: 5%;
+        height: 5%;
+        margin: 10px 3% 10px 10px;
+        border: 3px solid #f39c12;
+        background-color: #1a1a1a;
+        border-radius: 5px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+        display: inline-block;
+    }
+
+    /* Texte affiché sous les relations */
+    #textInventory {
+        text-align: center;
+        color: #f39c12;
+        margin-top: 15px;
+        font-size: 1.2rem;
+    }
+
+    .close-button {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        font-size: 30px;
+        color: #f39c12; /* Orange rétro */
+        cursor: pointer;
+        text-shadow: 2px 2px #000; /* Ombre pour effet rétro */
+        background: none; /* Supprime tout fond */
+        border: none; /* Pas de bordure */
+        padding: 5px;
+        transition: transform 0.2s ease, color 0.2s ease; /* Animation pour le hover */
+    }
+
+    #close-button:hover {
+        transform: scale(1.2); /* Légère augmentation au survol */
+        color: #ffb74d; /* Une teinte légèrement plus claire pour effet */
+    }
+
+
+
+    #imgContainer img {
+        width: 35%;
+        left: 32%;
+        top: 12%;
+        background: #f39c12;
+        padding: 2%;
+        display: none;
+        position: absolute;
+        z-index: 50;
+        margin: auto;
+    }
+
+    #imgContainer {
+        align-self: end;
+    }
+
+    #machines img {
+        left: 0% !important;
+        top: 0% !important;
+    }
+
+    #magazines img {
+        width: 35%;
+        left: 0% !important;
+        top: 0% !important;
+        background: #f39c12;
+        padding: 2%;
+        display: none;
+        position: absolute;
+        z-index: 50;
+        margin: auto;
+    }
+
+
+    #container-all {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        display: grid;
+    }
+
+
+
+    #perso1 {
+        top:0 !important;
+        animation: fadeIn 3.5s;
+        left:0 !important;
+    }
+
+    #perso2 {
+        animation: fadeIn 3.5s;
+        left: auto !important;
+        top: auto !important;
+        bottom: 0;
+        right: 0;
+    }
+    #close {
+        display: none;
+    }
+
+    .btn-close-container {
+        margin-left: 95%;
+    }
+
+    /* CSS pour la lightbox */
+    .lightbox {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+    }
+
+    .lightbox-img {
+        max-width: 80%;
+        max-height: 80%;
+    }
+
+    .lightbox-close {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        font-size: 30px;
+        color: white;
+        cursor: pointer;
+    }
+
+    #showFullDialogue {
+        display: none;
+    }
+
+
+</style>
+<body>
+<div id="app">
+    <div>
+    </div>
+    <div id="inventory-container">
+        <h1 class="inventory-title">Inventaire</h1>
+        <div id="inventaire" class="inventory"></div>
+        <div id="textInventory"></div>
+        <div id="relations"></div>
+    </div>
+    <div id="container-all">
+        <div id="imgContainer">
+            <div id="videoContainer">
+                <video id="video" autoplay muted playsinline style>
+                    <source id="videoMachine" src='' type="video/mp4">
+                </video>
+            </div>
+            <div id="machines">
+                <img class="ui-machine" id="machine" src="">
+            </div>
+            <div id="magazines">
+                <img id="doc" class="doc" src="">
+            </div>
+            <div id="personnage">
+                <img id="perso1" class="perso" src="">
+                <img id="perso2" class="perso" src="">
+            </div>
+        </div>
+        <div id="textbox-container">
+                <div id="info-container">
+               <p id="info"></p>
+                </div>
+                <div id="dialogueUI" class="textbox left"><p id="dialogue"></p>
+                    <button id="showFullDialogue" style="display: none;">Afficher tout</button>
+                    <div id="next" class="arrow" style="display: none;">
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </div>
+            <div id="loadScrren" style="display: none;"  class="textbox center">
+                <p></p>
+                <div id="go" class="arrow" style="display: none;">
+                    <i class="fas fa-arrow-right"></i>
+                </div>
+            </div>
+            <div id="choix" class="textbox right"></div>
+        </div>
+    </div>
+    <canvas id="game"></canvas>
+    <!-- Interface du jeu BASIC -->
+    <div id="basic-game-container" style="display: none; position: absolute; text-align: center; padding: 20px; background-color: #0b3; color: #000; z-index: 100; margin-left: 39%; margin-top: 10%;">
+        <h2 style="font-family: monospace;">JEU : DEVINE LE NOMBRE</h2>
+        <p style="font-family: monospace;">J'ai choisi un nombre entre 1 et 100. Essaye de deviner !</p>
+        <input type="number" id="basic-input" style="padding: 5px; font-size: 16px; border: none; background-color: #000; color: #0b3;">
+        <button id="basic-submit" style="padding: 5px; font-size: 16px; margin-left: 10px; background-color: #000; color: #0b3;">OK</button>
+        <p id="basic-feedback" style="font-family: monospace; margin-top: 10px;"></p>
+        <button id="exit-basic-game" style="margin-top: 20px; padding: 5px 10px; background-color: #000; color: #0b3;">Quitter</button>
+    </div>
+</div>
+
+<div id="lightbox" class="lightbox" style="display: none;">
+    <span id="lightbox-close" class="lightbox-close">&times;</span>
+    <img id="lightbox-img" class="lightbox-img" src="" alt="Image en grand">
+</div>
+<script src="build.js">
+</script>
+</body>
+</html>

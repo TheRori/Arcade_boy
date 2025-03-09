@@ -1,0 +1,20 @@
+{
+  "name": "kaboomtest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "gh-pages -d .",
+    "build": "esbuild src/main.js --bundle --outfile=build.js"
+  },
+  "private": true,
+  "dependencies": {
+    "build": "^0.1.4",
+    "kaboom": "^3000.1.17"
+  },
+  "devDependencies": {
+    "esbuild": "^0.23.1",
+    "gh-pages": "^6.3.0"
+  }
+}

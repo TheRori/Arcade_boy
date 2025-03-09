@@ -1,0 +1,311 @@
+:: StoryTitle
+arcade boy
+
+
+:: StoryData
+{
+  "ifid": "D1C1F6C7-125C-4BC5-A08D-381C65AA6C88",
+  "format": "Harlowe",
+  "format-version": "3.3.8",
+  "start": "Salle d'arcade",
+  "zoom": 0.6
+}
+
+
+:: 3 jours plus tard visite d'une haute école qui présente ses ordinateurs maison les "smaky" {"position":"2450,1950","size":"100,100"}
+[[Regarder la demo smaky]]
+[[Aller parler avec ses amis]]
+
+
+:: Accepter d'aller découvrir avec lui la nouvelle console chez lui {"position":"925,2050","size":"100,100"}
+
+
+
+:: Accepter qu'il exagère et remercier Arnaud {"position":"1425,275","size":"100,100"}
+(set:$Rarnaud to $Rarnaud + 1)
+(set:$Rcamille to $Rcamille + 1)
+Arnaud : Allez courage, on va plutôt aller boire un coup et perdre deux trois pièces maintenant.
+
+[[Partant!|Salle d'arcade]] 
+
+
+:: Aimer le jeu {"position":"1775,550","size":"100,100"}
+(set: $Reric to $Reric + 1)
+Eric: Je me trompe jamais c'est comme quand tu es venu voir le film avec moi d'ailleurs, on est vraiment dans une époque cool si les films deviennet ensuite des jeux imagine un jour un jeu Mad Max...
+
+[[Le rêve...|Salle d'arcade]]
+
+
+:: Aller parler avec ses amis {"position":"2750,2075","size":"100,100"}
+
+
+
+:: Aller parler à ses amis {"position":"1200,2175","size":"100,100"}
+(if:$Rarnaud is >1)[
+[[Accepter d'aller découvrir avec lui la nouvelle console chez lui]]
+]
+(if:$Rthomas is >1 or $Reric is >1)[
+[[Dire qu'il se joint à eux pour l'inauguration de la nouvelle borne d'arcade]]
+]
+(if:$Rcamille is >1)[
+[[L'inviter chez lui pour aller voir les machines de son père]]
+]
+
+
+:: Aller rejoindre sa copine à la table\  {"position":"950,975","size":"100,100"}
+(if:$Rpapa is 1)[
+[[Mon vieux m'a montré sa nouvelle trouvaille, une machine ordinateur ou y a ses trucs à lui bizzares d'ingénieurs mais aussi un jeu !|Lui parler de la nouvelle passion de son père, en étant impressioné]]]
+(if:$Rpapa is < 0)[
+[[Mon père a denouveau essayé de me convaincre qu'il avait des passions qui pourraient m'intéresser... c'est fou à chaque fois je dois faire un peu semblant sinon il se vexe, moi ce que j'aime c'est être ici avec mes potes c'est tout..|Lui parler de la nouvelle passion de son père, en étant blasé]]]
+Camille: Eh bonjour toi, tu as même le temps de passer dire bonjour à une pauvre stressée par ses examens alors que tu es dans ton antre du plaisir.. c'est gentil
+[[Fais pas ta demoiselle en détresse perdue dans un endroit inconnu, je sais qu'au fond tu aimes bien être là. Comment ça se passe alors avec tes fiches ? |Lui demander comment vont ses révisions]]
+(if:$Reric < 0)[
+[[Eric commence vraiment à me gonfler, il a toujours besoin de se différencier même dans les jeux, toujours plus intéressants que les notres|Se plaindre d'Eric qui se la ramène trop]]
+]
+
+
+
+:: Aller voir à quoi joue Arnaud et Thomas {"position":"1000,550","size":"100,100"}
+Thomas: Salut mec! Regarde le nouveau score de malade que j'ai mis y a dix minutes, aha! ça méritait bien de taper dans l'argent de poche généreusement offert par le daron avocat pour me payer cette savoureuuse pinte hehe
+Arnaud: Oh ça va c'est le jeu je t'offre ta bière d'accord, mais t'es pas obligé d'en remettre une couche sur mon daron, t'es content de me retrouver ici quand le tien il distribue pas de l'argent mais des cris..
+Thomas: Va pas sur ce terrain ou je te mets le stick dans le nez...
+
+[[La vérité c'est que vous êtes les deux aussi ridicules l'un que l'autre ! ça fait des semaines que vous monopoliser cette borne la pauvre elle doit en avoir marre de voir vos tronches.|Se moquer car ils n'arrivent pas à passer à autre chose que ce jeu depuis 2mois]]
+[[ Toujours à vous foutre sur la gueule vous deux, si non quoi de neuf ? C'est quoi ce record ?|Leur demander quoi de neuf]]
+(if:$Rcamille < 1)[
+[[Tu sais on s'est de nouveau engueulé avec Camille, je comprends pas trop pourquoi elle prend personellement des choses qui la concernent pas du tout. Quand je viens là c'est pour me vider la tête pas la remplir de tensions en plus, tu comprends ?|Demander à Arnaud s'il peut lui parler de Camille qui est trop envahissante]]
+]
+
+
+:: Avouer qu'il aimerait bien l'emmener pour lui montrer si elle est intéressée {"position":"1375,1275","size":"100,100"}
+(set:$Rcamille to $Rcamille + 1)
+Camille : [[Ah ben tu vois quand tu veux, je vais volontairement ignorer les pointes d'ironie ci et là et accepter avec enthousiasme ton invitation|Salle d'arcade]]
+
+
+:: Botter en touche car gêné de lui faire voir le monde bizzare du papa {"position":"1025,1375","size":"100,100"}
+(set:$Rcamille to $Rcamille - 1)
+Camille: C'est bête de se dégonfler comme ça toujous au dernier moment… Je suis plutôt patiente mais pas en surplu d'attention tu as le droit de faire des efforts de temps en temps tu sais…
+[[Je sais… juste là c'est pas le moment|Salle d'arcade]]
+
+
+:: Continuer à regarder {"position":"2200,2300","size":"100,100"}
+[[Être admiratif de la passion de Camille pour la machine]]
+[[Se demander ce qu'elle trouve à ces machines, trop bizzare]]
+
+
+:: Demander ce que c'est cette nouvelle machine {"position":"350,625","size":"100,100"}
+(set:$Rconsole to $Rconsole + 1)
+Arnaud: C'est complètement fou apparemment ça pourait faire oublier le four de l'Atari, la machine permet d'afficher carrément des meilleures couleurs et plus de pixels et y aurait direcetemtn des jeux faits par les mêmes que ceux qui lancent la console, le Nintendo là. T'imagines avoir comme ici mais dans ton salon direct plus besoin de payer cent sous pour chaque partie ça serait infini !
+
+Thomas: Quelle horreur moi si je viens là c'est pour fuir la maison et le canapé ou mon vieux campe tout le temps, et de toute façon jamais de la vie mes parents me laissent avoir un truc comme ça chez moi et j'imagine pas le prix..
+
+Arnaud: C'est bon tu pourras venir chez moi t'inquiètes...
+
+[[Merci pour l'info, on va suivre ça de prêt c'est sûr!|Salle d'arcade]]
+
+
+:: Demander à Arnaud s'il peut lui parler de Camille qui est trop envahissante {"position":"1225,350","size":"100,100"}
+Arnaud : Pierrot je te connais, tu es à chaud mais je crois surtout qu'elle aimerait parfois avoir plus accès à ton univers et ça serait pas si compliqué que tu fasses quelques concessions parfois j'ai l'impression, je me trompe ?
+
+[[Ouais…t'as peut-être un peu raison, je vais y réfléchir|Accepter qu'il exagère et remercier Arnaud]]
+[[Ah ben super je cherche du soutien et je me retrouve à un contre deux, c'est de predre contre Thomas qui te mets dans cette humeure de contradiction|Se vexer et dire que de toute façon il comprend rien]]
+
+
+:: Dire qu'il se joint à eux pour l'inauguration de la nouvelle borne d'arcade {"position":"925,2225","size":"100,100"}
+
+
+
+:: Essayer soit-même {"position":"1575,700","size":"100,100"}
+Eric: Tu vois là tu peux même jouer avec les perspectives, je te jure c'est dingue ça change des jeux tout plats! Et là regarde les animations des ennemis comme c'est bien fait! Et la musique c'est la même que celle du film t'as remarqué! Je te jure j'ai jamais vu ça! Et les autres qui veulent pas décrocher de leur Tetris alala..
+[[Haha quand t'aimes un truc toi on t'arrête pas, mais là je dois bien reconnaître que tu es dans le vrai, ça va être encore plus dur de rentrer chez les vieux |Aimer le jeu]]
+[[Désolé de ne pas partager ton enthousiame mon gars mais moi mon truc c'est pas ces jeux ou tu dois rester des plombes pour avancer, il me faut des trucs plus grisants tu comprends ?|Ne pas aimer le jeu]]
+
+
+
+:: Faire une tape dans le dos à Arnaud de soutien et dire que lui aussi se demander quels jeux il y a dessus {"position":"1425,1775","size":"100,100"}
+(set:$Rarnaud to $Rarnaud + 1)
+(if:$Scamille is true)[
+[[Aller parler à ses amis]] 
+]
+(else:)[
+[[Être admiratif de la passion de Camille pour la machine]] 
+[[Se demander ce qu'elle trouve à ces machines, trop bizzare]] 
+]
+
+
+:: L'inviter chez lui pour aller voir les machines de son père {"position":"950,2425","size":"100,100"}
+
+
+
+:: Leur demander quoi de neuf {"position":"700,750","size":"100,100"}
+Thomas : 10580 mon gars, 10580! Faudra se lever tôt pour l'effacer celui-ci hehe. T'auraid du voir sa tête à Arnaud aussi rouge que quand une fille le regarde haha..
+Arnaud: Ouais c'est bon ferme là, regarde plutôt ça Pierrot, ça vient de sortir dans le magazine une nouvelle console de salon pour enfin peut être faire oublier le désastre Atari, incroyable non ?
+
+[[Quoi ? Dis en plus pour moi le salon c'était définitivement fini pour les jeux! déjà toute à l'heure mon daron à essayer de me monter qu'on pouvait s'amuser sur un ordinateur, tu imagines un ordinateur avec l'écrant en noir et blanc qui affiche des chiffres et des lettres?! |Demander ce que c'est cette nouvelle machine]]
+[[Oh moi vos trucs de connaisseurs là j'ai de la peine, je m'y intéresserais si c'est vraiment bien quand ça sera arrivé ici. Dans ces magazines il y a toujours tout qui fait super envie et au final on revient toujours ici..|N'est pas intéressé par ça , préfère aller voir ailleurs]]
+
+
+:: Lui demander comment vont ses révisions {"position":"800,1125","size":"100,100"}
+Camille: [[Ça va, c'est pas encore tout à fait au point mais je suis sûre de pouvoir y arriver, ça serait incroyable pour moi de pouvoir alle au Technicum, malgré ce qu'en pense mes parents d'ailleurs..|Aller rejoindre sa copine à la table ]]
+
+
+:: Lui parler de la nouvelle passion de son père, en étant blasé {"position":"1150,1150","size":"100,100"}
+Camille : Fidèle à toi même, toujours à trouver tout ennuyeux ou pas assez bien pour toit.. Je te préfère quand tu t'amuses juste sur une borne avec nous là au moins y a de la passion et moins de masque.. m'enfin si moi je te dis que toute "ces machines bizzares" ça peut m'intéresser beaucoup, je me prépare pour aller au Technicum si tu n'as pas oublié..
+[[Non si je te dis que vraiment ça m'intéresse pas et que vraiment je préfère être ici, c'est pas pour recevoir une deuxième leçon de toi, pfff|Lui promettre que c'est pas pour se donner un genre]]
+[[Écoute moi c'est pas trop mon truc et tu peux pas m'obliger à m'intéresser mais si tu me dis que toi tu aimerais d'aller causer petite boîte électronique et code avec mon père, c'est autre chose t'as qu'à passer une fois ça serait l'occasion de vous connaître autour de votre super passion de gros cerveaux|Avouer qu'il aimerait bien l'emmener pour lui montrer si elle est intéressée]]
+
+
+:: Lui parler de la nouvelle passion de son père, en étant impressioné {"position":"975,1150","size":"100,100"}
+Camille : Oh ça fait plaisir de te voir comme ça moi qui croyais que plus rien d'autres que les potes, les bières et les bornes pouvaient allumer de lumière dans tes yeux. Promets-moi que tu m'y emmèneras pour voir, tu sais à quel point la technologie ça m'intéresse !
+[[Tu t'oublies toi dans ta liste des supers choses… Oui allez c'est promis on ira dans la cabane du sorcier !|Lui promettre de l'emmener dans le garage de son père]]
+[[Je sais pas trop écoute…Tu sais comme parfois je suis pas encore vraiment à l'aise moi même avec mes parents ces temps alors t'y emmener…c'est un peu tôt je crois|Botter en touche car gêné de lui faire voir le monde bizzare du papa]]
+
+
+:: Lui promettre de l'emmener dans le garage de son père {"position":"750,1350","size":"100,100"}
+(set:$Rcamille to $Rcamille + 1)
+Camille : T'es vraiment le meilleur des mecs, j'en ai jamais eu aucun doute !
+[[*rougir*|Salle d'arcade]] 
+
+
+:: Lui promettre que c'est pas pour se donner un genre {"position":"1275,1350","size":"100,100"}
+(set:$Rcamille to $Rcamille - 1)
+Camille : Bon quand tu es comme ça on ne peut rien faire, je te connais, va te changer les idées avec un stick et des amis qui te comprennent mieux je t'en supplie.
+
+[[Pffff|Salle d'arcade]]
+
+
+:: N'est pas intéressé par ça , préfère aller voir ailleurs {"position":"250,800","size":"100,100"}
+(set:$Rconsole to $Rconsole -1)
+Arnaud: C'est pour plaire à Camille que tu te donnes ce genre mec blasé de tout ? Pourtant à chaque fois tu reviens ici c'est qu'on doit pas être si nazes...
+[[ça doit être ça ouais.|Salle d'arcade]]
+
+
+:: Ne pas aimer le jeu {"position":"1775,750","size":"100,100"}
+(set: $Reric to $Reric - 1)
+Eric: C'est bon j'ai compris tu vas rejoindre les deux autres qui sont bloiqués depuis la construction de ce bar devant la borne Tetris... Tu sais le jeu vidéo ça peut-être autre chose que battre des records et se tier la bourre toute la soirée, au moins Camille est d'accord avec moi sur ça...
+[[Il faut pas le prendre comme ça, pour moi le jeu ça doit juste être du jeu tu comprends, sinon je préfère lire ou voir un film...|Salle d'arcade]]
+
+
+:: Parler à l'homme en train de boire un verre au bar {"position":"1275,975","size":"100,100"}
+
+
+
+:: Poser des questions sur la machine et son fonctionnement {"position":"1800,1975","size":"100,100"}
+(set:$Rordi to $Rordi + 1)
+(set:$Reric to $Reric - 1)
+(set:$Rthomas to $Rthomas - 1)
+[[Faire une tape dans le dos à Arnaud de soutien et dire que lui aussi se demander quels jeux il y a dessus]]
+[[Se moquer d'Arnaud avec les autre]]
+
+
+
+:: Regarder Eric jouer à Indiana Jones and the temple of doom {"position":"1400,775","size":"100,100"}
+Eric: Eh salut Pierrot, tu viens d'arriver ? regarde ils viennent d'installer cette borne! C'est incroyable on se croirait vraiment dans le film c'est dingue ! Essaie toi même si t'as les 5 balles à mettre pour les 3 crédits.
+(if: $Reric is 0) [
+[[Essayer soit-même]] 
+]
+(else-if:$Reric is 1)[
+
+]
+
+
+:: Regarder la demo smaky {"position":"2150,2125","size":"100,100"}
+[[Poser des questions sur la machine et son fonctionnement]]
+[[Se moquer avec Thomas et Arnaud]]
+[[Continuer à regarder]]
+
+
+:: Rentrer à la maison {"position":"1650,1050","size":"100,100"}
+[[3 jours plus tard visite d'une haute école qui présente ses ordinateurs maison les "smaky"]]
+
+
+:: S'excuser auprès de Camille, comprendre que pour elle c'est important {"position":"1450,2300","size":"100,100"}
+(set:$Rcamille to $Rcamille + 1)
+(set:$Rthomas to $Rthomas - 1)
+(set:$Reric to $Reric - 1)
+[[Aller parler à ses amis]] 
+
+
+:: Salle d'arcade {"position":"1100,800","size":"100,100"}
+
+(set: $Reric to 0)
+(set:$Rpapa to 0)
+(set:$Rcamille to 0)
+(set:$Rarnaud to 0)
+(set:$Rconsole to 0)
+
+[[Regarder Eric jouer à Indiana Jones and the temple of doom]] 
+[[Aller rejoindre sa copine à la table ]]
+[[Aller voir à quoi joue Arnaud et Thomas]]
+[[Parler à l'homme en train de boire un verre au bar]]
+(if:$camille is not 0 or $Reric is not 0 or $Rconsole is not 0)[
+[[Rentrer à la maison]]
+]
+
+
+
+
+:: Se demander ce qu'elle trouve à ces machines, trop bizzare {"position":"2075,2600","size":"100,100"}
+(set:$Rcamille to $Rcamille - 1)
+
+(if:$Sarnaud is true)[
+[[Aller parler à ses amis]] 
+]
+(else:)[
+[[Faire une tape dans le dos à Arnaud de soutien et dire que lui aussi se demander quels jeux il y a dessus]] 
+[[Se moquer d'Arnaud avec les autre]] 
+]
+
+
+:: Se mettre en colère et lui dire qu'elle a qu'à aimer les même jeux que vous {"position":"1500,2450","size":"100,100"}
+(set:$Rcamille to $Rcamille - 1)
+(set:$Rthomas to $Rthomas + 1)
+(set:$Reric to $Reric + 1)
+[[Aller parler à ses amis]] 
+
+
+:: Se moquer avec Thomas et Arnaud {"position":"1925,2250","size":"100,100"}
+(set:$Rordi to $Rordi - 1)
+[[S'excuser auprès de Camille, comprendre que pour elle c'est important]]
+[[Se mettre en colère et lui dire qu'elle a qu'à aimer les même jeux que vous]]
+
+
+:: Se moquer car ils n'arrivent pas à passer à autre chose que ce jeu depuis 2mois {"position":"650,575","size":"100,100"}
+Arnaud: On t'emmerde Pierrot va plutôt te chercher une mousse, j'ai dééjà un vieux pour les leçons de morale... Bon d'ailleurs t'as vu la nouvelle de la machine de salon qui débarque bientôt ? C'est dans le magazine là.
+[[Quoi ? Dis en plus pour moi le salon c'était définitivement fini pour les jeux! déjà toute à l'heure mon daron à essayer de me monter qu'on pouvait s'amuser sur un ordinateur, tu imagines un ordinateur avec l'écrant en noir et blanc qui affiche des chiffres et des lettres?! |Demander ce que c'est cette nouvelle machine]]
+[[Oh moi vos trucs de connaisseurs là j'ai de la peine, je m'y intéresserais si c'est vraiment bien quand ça sera arrivé ici. Dans ces magazines il y a toujours tout qui fait super envie et au final on revient toujours ici..|N'est pas intéressé par ça , préfère aller voir ailleurs]]
+
+
+:: Se moquer d'Arnaud avec les autre {"position":"1450,2100","size":"100,100"}
+(set:$Rarnaud to $Rarnaud - 1)
+[[Être admiratif de la passion de Camille pour la machine]] 
+[[Se demander ce qu'elle trouve à ces machines, trop bizzare]] 
+(if:$SCamille is true)[
+[[Aller parler à ses amis]] 
+]
+(else:)[
+[[Être admiratif de la passion de Camille pour la machine]] 
+[[Se demander ce qu'elle trouve à ces machines, trop bizzare]] 
+]
+
+
+:: Se plaindre d'Eric qui se la ramène trop {"position":"500,1075","size":"100,100"}
+Camille: Oui je sais comment il est, mais juge le pas trop, c'est qu'il n'est pas aussi doué que vous sur les autres bornes et donc il trouve son compte ailleurs voilà tout
+
+[[Mouais|Aller rejoindre sa copine à la table ]] 
+
+
+:: Se vexer et dire que de toute façon il comprend rien {"position":"1450,500","size":"100,100"}
+(set:$Rarnaud to $Rarnaud - 1)
+[[Oui ça doit être ça, ça doit être ça… va plutot chercher un coup à boire va ça te changer les idées|Salle d'arcade]]
+
+
+:: Être admiratif de la passion de Camille pour la machine {"position":"1525,2675","size":"100,100"}
+(set:$Rcamille to $Rcamille + 1)
+(if:$Sarnaud is true)[
+[[Aller parler à ses amis]] 
+]
+(else:)[
+[[Faire une tape dans le dos à Arnaud de soutien et dire que lui aussi se demander quels jeux il y a dessus]] 
+[[Se moquer d'Arnaud avec les autre]] 
+]
