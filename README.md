@@ -78,7 +78,7 @@ Ce projet contient :
 
 Si vous avez hébergé le projet sur **GitHub Pages** ou **Netlify**, ajoutez ici le lien :
 
-🔗 [Démo du jeu](https://votre-lien-ici.com)
+🔗 [Démo du jeu](https://grand-faun-8d2d5f.netlify.app/)
 
 ---
 
