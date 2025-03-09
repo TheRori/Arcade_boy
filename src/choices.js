@@ -73,18 +73,43 @@ export function processChoiceModifiers(modifiers, mood) {
     if (!modifiers || modifiers.length === 0) return mood;
 
     modifiers.forEach(({ key, operator, value }) => {
+        console.log(key, operator, value);
         const stateValue = getPlayerStateValue(key);
-        const newValue = new Function('stateValue', 'value', `return stateValue ${operator} value;`)(stateValue, value);
+
+        let newValue;
+
+        // Vérifier si la valeur est un booléen
+        if (typeof value === "boolean") {
+            console.log('value',value);
+            if (operator === "==") newValue = stateValue === value;
+            else if (operator === "!=") newValue = stateValue !== value;
+            else if (operator === "&&") newValue = stateValue && value;
+            else if (operator === "||") newValue = stateValue || value;
+            else if (operator === "=") newValue = value; // Affectation directe
+            else {
+                console.error(`Opérateur non pris en charge pour les booléens : ${operator}`);
+                return;
+            }
+        } else {
+            // Si c'est un nombre, on utilise la fonction dynamique
+            newValue = new Function('stateValue', 'value', `return stateValue ${operator} value;`)(stateValue, value);
+        }
+
+        console.log(newValue);
         setPlayerStateValue(key, newValue);
 
-        if (newValue < stateValue) mood = '_angry';
-        else if (newValue > stateValue) mood = '_happy';
-        else mood = '';
+        // Gestion du mood uniquement si la valeur est numérique
+        if (typeof stateValue === "number" && typeof newValue === "number") {
+            if (newValue < stateValue) mood = '_angry';
+            else if (newValue > stateValue) mood = '_happy';
+            else mood = '';
+        }
         console.log(newValue, 'mood', mood);
     });
 
     return mood;
 }
+
 
 export function checkAndSetLevelEnd() {
     let changedKeysCount = 0;

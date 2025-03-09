@@ -4,7 +4,7 @@ import {
     dialogue,
     dialogueUI, direction, doc, getIsGameLaunched,
     imgHTMLContainer, infoUI, levelEnd, lvlMusic,
-    perso1, resize, setCurrentBackgroundMusic, setDirection, setInDialogue,
+    perso1, resize, setCurrentBackgroundMusic, setDirection, setInDialogue, setSpeakState,
     showFullDialogueButton
 } from "./globals";
 import {addChoices} from "./choices";
@@ -17,6 +17,12 @@ import {objs, map} from "./maps";
 let currentDialogueIndex = 0;
 
 export async function speak(categorie, idObj, idConv, endSpeech, mood) {
+    const relations = {
+        thomas: getPlayerStateValue("Sthomas"),
+        camille: getPlayerStateValue("Scamille"),
+        eric: getPlayerStateValue("Seric"),
+        arnaud: getPlayerStateValue("Sarnaud")
+    };
     const dials = await fetch("jsons/dials.json?" + Math.random()).then((res) => res.json());
     let data;
     currentDialogueIndex = 0;
@@ -29,6 +35,8 @@ export async function speak(categorie, idObj, idConv, endSpeech, mood) {
     choix.style.display = "none";
 
     console.log(categorie, idObj, idConv, endSpeech, mood);
+
+    console.log("Relation speak", relations);
 
     if (handleSpecialCases(idConv, endSpeech, categorie, idObj, mood)) return;
 
@@ -120,6 +128,8 @@ function handleGameEnding() {
     const maxRelation = Math.max(...Object.values(relations));
     const candidates = Object.keys(relations).filter(key => relations[key] === maxRelation);
 
+    console.log("Les candidats sont : ",candidates," avec ", maxRelation);
+
     // S'il y a plusieurs candidats, choisir au hasard
     const selectedEnding = candidates[Math.floor(Math.random() * candidates.length)];
 
@@ -199,7 +209,6 @@ export function resetDialogueUI() {
     perso1.src = '';
     dialogue.innerHTML = '';
     choix.innerHTML = '';
-
     // Arrêter la musique de dialogue
 
     // Reprendre la musique de fond actuelle si définie

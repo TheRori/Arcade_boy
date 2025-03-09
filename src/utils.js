@@ -1,9 +1,8 @@
 import {k} from "./kaboomCtx";
-import {imgHTMLContainer, isInDialogue, machineHTML, perso1, perso2, resize, statePlayer} from "./globals";
+import {imgHTMLContainer, isInDialogue, machineHTML, perso1, statePlayer} from "./globals";
 import {map} from "./maps";
 import {animateRelationChange} from "./inventory";
 import {set_video} from "./video";
-
 
 
 // Fonction pour découper un texte en segments
@@ -43,12 +42,17 @@ export function setPlayerStateValue(key, newValue) {
         animateRelationChange(key, newValue);
     } else {
         const oldValue = state[key];
-        const delta = newValue - oldValue;
-        // Met à jour la valeur
-        state[key] = newValue;
-        if (key !== 'Scamille' && key !== 'Sarnaud') {
+        if (typeof newValue !== "boolean") {
+            state[key] = newValue - oldValue;
+        }
+        else {
+            state[key] = newValue;
+        }
+
+        console.log(key,'a changé en', newValue);
+        if (typeof newValue !== "boolean") {
         console.log('rel changes',state[key],key);
-            animateRelationChange(key, delta);
+            animateRelationChange(key, newValue - oldValue);
         }}
 }
 

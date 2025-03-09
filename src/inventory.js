@@ -24,7 +24,7 @@ export function updateInventory() {
     relationElementContainer.innerHTML = '';
     statePlayer.forEach(rel => {
         Object.entries(rel).forEach(([key, value]) => {
-            if (value !== null) {
+            if (value !== null && typeof value !== 'boolean') {
                 const relationElement = createRelationElement(key, value);
                 relationElementContainer.appendChild(relationElement);
             }

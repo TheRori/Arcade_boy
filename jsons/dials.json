@@ -266,12 +266,12 @@
       "speech": "Le Smaky ouvre la voie à une nouvelle ère de l'informatique accessible : non seulement pour les professionnels, mais aussi pour les passionnés. Avec un peu de programmation, vous pouvez même développer des jeux ou des outils innovants !",
       "choices": [
         {
-          "speech": "Poser des questions sur la machine et son fonctionnement.",
+          "speech": "Comment fonctionne exactement l'intérieur ? Il y a déjà des programmes pré installés ?",
           "response": "Je décide d'approfondir mes connaissances.",
           "nextId": 306
         },
         {
-          "speech": "Se moquer avec Thomas et Arnaud.",
+          "speech": "Vous avez raison, c'est fou comme cela ne m'intéresse pas vraiment ces boites bizzares !",
           "response": "Je décide de me joindre aux moqueries.",
           "nextId": 307
         },
@@ -324,7 +324,8 @@
               "key": "Rcamille",
               "operator": "+",
               "value": 1
-            }
+            },
+            {"key": "Scamille", "operator": "=", "value": true}
           ]
         },
         {
@@ -337,7 +338,7 @@
               "operator": "-",
               "value": 2
             },
-            {"key": "Scamille", "operator": "==", "value": true}
+            {"key": "Scamille", "operator": "=", "value": true}
           ]
         }
       ]
@@ -409,6 +410,7 @@
             }
           ],
           "speech": "Aller parler à ses amis.",
+          "modifiers": [{"key": "Scamille", "operator": "=", "value": false},{"key": "Sarnaud", "operator": "=", "value": false}],
           "response": "Pierre décide d'aller discuter avec ses amis pour changer d'ambiance.",
           "nextId": 400
         }
@@ -522,10 +524,17 @@
       "speech": "Merci, Pierre. Ça me fait plaisir que tu comprennes. Parfois, j'ai l'impression d'être seule à rêver de quelque chose de différent, mais c'est important pour moi.",
       "choices": [
         {
-          "need": [],
+          "need": [{"key": "Sarnaud", "operator": "==", "value": true}],
           "speech": "Parler à ses amis.",
           "response": "Je vais rejoindre les autres pour discuter.",
           "nextId": 400
+        },
+        {
+          "need": [{"key": "Sarnaud", "operator": "==", "value": false}],
+          "modifiers": [{"key": "Sarnaud", "operator": "==", "value": true}],
+          "speech": "Retourner à écouter la démo.",
+          "response": "Pierre choisit d’ignorer la tension et retourne écouter la démonstration.",
+          "nextId": 311
         }
       ]
     },
@@ -539,10 +548,18 @@
       "speech": "C'est bon, Pierre ! Si tu ne veux pas essayer de comprendre, arrête au moins de juger. Ça m'énerve que tu ne prennes rien au sérieux en dehors des bornes d'arcade.",
       "choices": [
         {
-          "need": [],
+          "need": [{"key": "Sarnaud", "operator": "==", "value": true}],
           "speech": "Parler à ses amis.",
+
           "response": "Je vais rejoindre les autres pour discuter.",
           "nextId": 400
+        },
+        {
+          "need": [{"key": "Sarnaud", "operator": "==", "value": false}],
+          "modifiers": [{"key": "Sarnaud", "operator": "==", "value": true}],
+          "speech": "Retourner à écouter la démo.",
+          "response": "Pierre choisit d’ignorer la tension et retourne écouter la démonstration.",
+          "nextId": 311
         }
       ]
     },
@@ -558,12 +575,13 @@
         {
           "need": [{"key": "Scamille", "operator": "==", "value": true}],
           "speech": "Aller parler à ses amis.",
+          "modifiers": [{"key": "Scamille", "operator": "=", "value": false},{"key": "Sarnaud", "operator": "=", "value": false}],
           "response": "Pierre décide de changer de sujet et de parler à ses amis.",
           "nextId": 400
         },
         {
           "need": [{"key": "Scamille", "operator": "==", "value": false}],
-          "modifiers": [{"key": "Scamille", "operator": "==", "value": true}],
+          "modifiers": [{"key": "Scamille", "operator": "=", "value": true}],
           "speech": "Retourner à écouter la démo.",
           "response": "Pierre choisit d’ignorer la tension et retourne écouter la démonstration.",
           "nextId": 308
@@ -582,12 +600,13 @@
         {
           "need": [{"key": "Scamille", "operator": "==", "value": true}],
           "speech": "Aller parler à ses amis.",
+          "modifiers": [{"key": "Scamille", "operator": "=", "value": false},{"key": "Sarnaud", "operator": "=", "value": false}],
           "response": "Pierre décide de changer de sujet et de parler à ses amis.",
           "nextId": 400
         },
         {
           "need": [{"key": "Scamille", "operator": "==", "value": false}],
-          "modifiers": [{"key": "Scamille", "operator": "==", "value": true}],
+          "modifiers": [{"key": "Scamille", "operator": "=", "value": true}],
           "speech": "Retourner à écouter la démo.",
           "response": "Pierre choisit de revenir vers la démonstration et d’écouter Camille.",
           "nextId": 308
@@ -604,52 +623,71 @@
       "speech": "Prenez le temps de partager vos impressions ensemble. J'espère avoir éveillé votre curiosité et nourri votre enthousiasme pour l'avenir.",
       "choices": [
         {
-          "need": [{ "key": "Rarnaud", "operator": ">", "value": 0 }],
+          "need": [{ "key": "Rarnaud", "operator": ">", "value": 0 },
+            {
+            "key": "Sarnaud",
+            "operator": "==",
+            "value": false
+          }],
           "speech": "Arnaud ! Alors, ça t’a plu cette démo ? Toujours sceptique ou un peu impressionné ?",
           "response": "",
-          "nextId": 401
+          "nextId": 401,
+          "modifiers": [{"key": "Sarnaud", "operator": "=", "value": true}]
         },
         {
-          "need": [{ "key": "Rarnaud", "operator": "<=", "value": 0 }],
+          "need": [{ "key": "Rarnaud", "operator": "<=", "value": 0 },{"key": "Sarnaud", "operator": "==", "value": false}],
           "speech": "Arnaud, toujours en train de râler ou t’as trouvé un truc qui te plaît cette fois ?",
           "response": "",
-          "nextId": 402
+          "nextId": 402,
+          "modifiers": [{"key": "Sarnaud", "operator": "=", "value": true}]
         },
         {
-          "need": [{ "key": "Rcamille", "operator": ">", "value": 0 }],
+          "need": [{ "key": "Rcamille", "operator": ">", "value": 0 },{"key": "Scamille", "operator": "==", "value": false}],
           "speech": "Camille, ça t’a inspirée cette démonstration, non ? C’est tout à fait ton style.",
           "response": "",
+          "modifiers": [{"key": "Scamille", "operator": "=", "value": true}],
           "nextId": 403
         },
         {
-          "need": [{ "key": "Rcamille", "operator": "<=", "value": 0 }],
+          "need": [{ "key": "Rcamille", "operator": "<=", "value": 0 },{"key": "Scamille", "operator": "==", "value": false}],
           "speech": "Camille, je suppose que tu dois avoir plein de choses à dire sur cette démo, non ?",
           "response": "",
+          "modifiers": [{"key": "Scamille", "operator": "=", "value": true}],
           "nextId": 404
         },
         {
-          "need": [{ "key": "Rthomas", "operator": ">", "value": 0 }],
+          "need": [{ "key": "Rthomas", "operator": ">", "value": 0 },{"key": "Sthomas", "operator": "==", "value": false}],
           "speech": "Thomas, tu t’es déjà imaginé bidouiller ce genre de trucs ou c’est encore trop « intello » pour toi ?",
           "response": "",
+          "modifiers": [{"key": "Sthomas", "operator": "=", "value": true}],
           "nextId": 405
         },
         {
-          "need": [{ "key": "Rthomas", "operator": "<=", "value": 0 }],
+          "need": [{ "key": "Rthomas", "operator": "<=", "value": 0 },{"key": "Sthomas", "operator": "==", "value": false}],
           "speech": "Thomas, alors, toujours en train de critiquer ou cette fois tu t’intéresses un peu ?",
           "response": "",
+          "modifiers": [{"key": "Sthomas", "operator": "=", "value": true}],
           "nextId": 406
         },
         {
-          "need": [{ "key": "Réric", "operator": ">", "value": 0 }],
+          "need": [{ "key": "Réric", "operator": ">", "value": 0 },{"key": "Séric", "operator": "==", "value": false}],
           "speech": "Éric, alors, convaincu par cette démo ou tu préfères encore tes jeux de niche ?",
           "response": "",
+          "modifiers": [{"key": "Séric", "operator": "=", "value": true}],
           "nextId": 407
         },
         {
-          "need": [{ "key": "Réric", "operator": "<=", "value": 0 }],
+          "need": [{ "key": "Réric", "operator": "<=", "value": 0 },{"key": "Séric", "operator": "==", "value": false}],
           "speech": "Éric, toujours à critiquer ou tu as vu quelque chose qui t’a plu ?",
+          "modifiers": [{"key": "Séric", "operator": "=", "value": true}],
           "response": "",
           "nextId": 408
+        },
+        {
+          "need": [{"key": "Sarnaud", "operator": "==", "value": true},{"key": "Séric", "operator": "==", "value": true},{"key": "Scamille", "operator": "==", "value": true},{"key": "Sthomas", "operator": "==", "value": true}],
+          "speech": "S'en aller..",
+          "response": "",
+          "nextId": -100
         }
       ]
     },
@@ -665,7 +703,7 @@
         {
           "speech": "Continuer à parler avec Arnaud.",
           "response": "Tu échanges quelques commentaires avec Arnaud sur la démo.",
-          "nextId": -100
+          "nextId": 400
         }
       ]
     },
@@ -681,7 +719,7 @@
         {
           "speech": "Changer de sujet.",
           "response": "Tu décides de parler d’autre chose avec Arnaud.",
-          "nextId": -100
+          "nextId": 400
         }
       ]
     },
@@ -697,7 +735,7 @@
         {
           "speech": "C’est grâce à toi, Camille. T’as une manière de parler de tout ça qui donne envie d’en savoir plus.",
           "response": "Pierre, un peu ému, partage son admiration pour Camille.",
-          "nextId": -100,
+          "nextId": 400,
           "modifiers": []
         }
       ]
@@ -714,7 +752,7 @@
         {
           "speech": "Je suis désolé… Je vais essayer d’être plus attentif à l’avenir.",
           "response": "",
-          "nextId": -100
+          "nextId": 400
         }
       ]
     },
@@ -730,7 +768,7 @@
         {
           "speech": "Je savais que tu finirais par apprécier. On en parle autour d’une partie ?",
           "response": "",
-          "nextId": -100
+          "nextId": 400
         }
       ]
     },
@@ -746,7 +784,7 @@
         {
           "speech": "Allez, Thomas, essaye de voir au-delà des bornes pour une fois.",
           "response": "",
-          "nextId": -100
+          "nextId": 400
         }
       ]
     },
@@ -762,7 +800,7 @@
         {
           "speech": "Comme tu veux, Arnaud, mais tu devrais au moins leur laisser une chance.",
           "response": "",
-          "nextId": -100
+          "nextId": 400
         }
       ]
     },
@@ -778,7 +816,7 @@
         {
           "speech": "Content que tu sois un peu convaincu. On s’en reparle plus tard !",
           "response": "",
-          "nextId": -100
+          "nextId": 400
         }
       ]
     },

@@ -17,7 +17,7 @@ export const basicGame = document.getElementById('basic-game-container');
 // Game State
 export const selectedChoices = {};
 export let lvlMusic = '';
-export let statePlayer = [{"Rpapa" : 0},{"Rcamille" : 0},{"Réric" : 0},{"Rarnaud": 0},{"Rthomas": 0},{"Scamille" : false}, {"Sarnaud" : false}];
+export let statePlayer = [{"Rpapa" : 0},{"Rcamille" : 0},{"Réric" : 0},{"Rarnaud": 0},{"Rthomas": 0},{"Scamille" : false}, {"Sarnaud" : false}, {"Sthomas" : false}, {"Séric" : false}];
 export let statePlayerlvl2 = [];
 export let inventoryPlayer = [  ];
 export const resize = [];
@@ -100,3 +100,13 @@ export function setPlayerStatelvl2(playerState) {
         statePlayerlvl2.push(JSON.parse(JSON.stringify(state)));
     });
 }
+
+export function setSpeakState() {
+    statePlayer.forEach(state => {
+        if (state.hasOwnProperty("Sarnaud")) state["Sarnaud"] = false;
+        if (state.hasOwnProperty("Scamille")) state["Scamille"] = false;
+        if (state.hasOwnProperty("Sthomas")) state["Sthomas"] = false;
+        if (state.hasOwnProperty("Seric")) state["Seric"] = false;
+    });
+}
+

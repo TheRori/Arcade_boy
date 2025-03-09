@@ -3913,7 +3913,7 @@ vec4 frag(vec2 pos, vec2 uv, vec4 color, sampler2D tex) {
   var basicGame = document.getElementById("basic-game-container");
   var selectedChoices = {};
   var lvlMusic = "";
-  var statePlayer = [{ "Rpapa": 0 }, { "Rcamille": 0 }, { "R\xE9ric": 0 }, { "Rarnaud": 0 }, { "Rthomas": 0 }, { "Scamille": false }, { "Sarnaud": false }];
+  var statePlayer = [{ "Rpapa": 0 }, { "Rcamille": 0 }, { "R\xE9ric": 0 }, { "Rarnaud": 0 }, { "Rthomas": 0 }, { "Scamille": false }, { "Sarnaud": false }, { "Sthomas": false }, { "S\xE9ric": false }];
   var statePlayerlvl2 = [];
   var inventoryPlayer = [];
   var resize = [];
@@ -4033,11 +4033,15 @@ vec4 frag(vec2 pos, vec2 uv, vec4 color, sampler2D tex) {
       animateRelationChange(key, newValue);
     } else {
       const oldValue = state[key];
-      const delta = newValue - oldValue;
-      state[key] = newValue;
-      if (key !== "Scamille" && key !== "Sarnaud") {
+      if (typeof newValue !== "boolean") {
+        state[key] = newValue - oldValue;
+      } else {
+        state[key] = newValue;
+      }
+      console.log(key, "a chang\xE9 en", newValue);
+      if (typeof newValue !== "boolean") {
         console.log("rel changes", state[key], key);
-        animateRelationChange(key, delta);
+        animateRelationChange(key, newValue - oldValue);
       }
     }
   }
@@ -4188,12 +4192,30 @@ vec4 frag(vec2 pos, vec2 uv, vec4 color, sampler2D tex) {
   function processChoiceModifiers(modifiers, mood) {
     if (!modifiers || modifiers.length === 0) return mood;
     modifiers.forEach(({ key, operator, value }) => {
+      console.log(key, operator, value);
       const stateValue = getPlayerStateValue(key);
-      const newValue = new Function("stateValue", "value", `return stateValue ${operator} value;`)(stateValue, value);
+      let newValue;
+      if (typeof value === "boolean") {
+        console.log("value", value);
+        if (operator === "==") newValue = stateValue === value;
+        else if (operator === "!=") newValue = stateValue !== value;
+        else if (operator === "&&") newValue = stateValue && value;
+        else if (operator === "||") newValue = stateValue || value;
+        else if (operator === "=") newValue = value;
+        else {
+          console.error(`Op\xE9rateur non pris en charge pour les bool\xE9ens : ${operator}`);
+          return;
+        }
+      } else {
+        newValue = new Function("stateValue", "value", `return stateValue ${operator} value;`)(stateValue, value);
+      }
+      console.log(newValue);
       setPlayerStateValue(key, newValue);
-      if (newValue < stateValue) mood = "_angry";
-      else if (newValue > stateValue) mood = "_happy";
-      else mood = "";
+      if (typeof stateValue === "number" && typeof newValue === "number") {
+        if (newValue < stateValue) mood = "_angry";
+        else if (newValue > stateValue) mood = "_happy";
+        else mood = "";
+      }
       console.log(newValue, "mood", mood);
     });
     return mood;
@@ -4326,6 +4348,12 @@ vec4 frag(vec2 pos, vec2 uv, vec4 color, sampler2D tex) {
   // src/speak.js
   var currentDialogueIndex = 0;
   async function speak(categorie, idObj, idConv, endSpeech, mood) {
+    const relations = {
+      thomas: getPlayerStateValue("Sthomas"),
+      camille: getPlayerStateValue("Scamille"),
+      eric: getPlayerStateValue("Seric"),
+      arnaud: getPlayerStateValue("Sarnaud")
+    };
     const dials = await fetch("jsons/dials.json?" + Math.random()).then((res) => res.json());
     let data;
     currentDialogueIndex = 0;
@@ -4335,6 +4363,7 @@ vec4 frag(vec2 pos, vec2 uv, vec4 color, sampler2D tex) {
     dialogueUI.style.display = "block";
     choix.style.display = "none";
     console.log(categorie, idObj, idConv, endSpeech, mood);
+    console.log("Relation speak", relations);
     if (handleSpecialCases(idConv, endSpeech, categorie, idObj, mood)) return;
     if (categorie === "dialogues" || categorie === "objet") {
       data = dials.dialogues2.find((d) => d.id === idConv);
@@ -4409,6 +4438,7 @@ vec4 frag(vec2 pos, vec2 uv, vec4 color, sampler2D tex) {
     };
     const maxRelation = Math.max(...Object.values(relations));
     const candidates = Object.keys(relations).filter((key) => relations[key] === maxRelation);
+    console.log("Les candidats sont : ", candidates, " avec ", maxRelation);
     const selectedEnding = candidates[Math.floor(Math.random() * candidates.length)];
     switch (selectedEnding) {
       case "thomas":
@@ -4484,7 +4514,7 @@ vec4 frag(vec2 pos, vec2 uv, vec4 color, sampler2D tex) {
     relationElementContainer.innerHTML = "";
     statePlayer.forEach((rel) => {
       Object.entries(rel).forEach(([key, value]) => {
-        if (value !== null) {
+        if (value !== null && typeof value !== "boolean") {
           const relationElement = createRelationElement(key, value);
           relationElementContainer.appendChild(relationElement);
         }
@@ -5251,5 +5281,5 @@ vec4 frag(vec2 pos, vec2 uv, vec4 color, sampler2D tex) {
   );
   mainMenuScene();
   howToPlayScene();
-  k.go("loadScreen4");
+  k.go("mainMenu");
 })();

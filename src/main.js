@@ -130,4 +130,4 @@ howToPlayScene();
 // creditsScene();
 
 // Démarrer avec le menu principal
-k.go("loadScreen4");
+k.go("mainMenu");
