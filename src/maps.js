@@ -53,7 +53,7 @@ export async function createMap(numLVL, sprite, x, y) {
     loadedMaps[numLVL] = true;
 
     // Créer le joueur après avoir généré la carte
-    createPlayer();
+    createPlayer(x,y);
 }
 
 // Créer les frontières de la carte
@@ -66,9 +66,6 @@ function createBoundaries(layer) {
     layer.data.forEach((id) => {
         if (id !== 0) { // Si l'ID est non nul, c'est un mur
             map.add([
-                k.rect(tileSize, tileSize), // Rectangle de la taille d'une tuile
-                k.color(255, 0, 0), // Couleur rouge pour le débogage
-                k.outline(2, k.color(0, 0, 0)), // Bordure noire de 2px
                 k.area({
                     shape: new k.Rect(k.vec2(0), tileSize, tileSize),
                 }),

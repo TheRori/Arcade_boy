@@ -63,8 +63,6 @@ export function handleKeyboardEvents(player, stopAnimations, mapTransitions) {
     });
 }
 
-
-
 export function handleCollisions(player) {
     let currentObject = null; // Suivre l'objet actuellement en collision
     let isClickListenerAttached = false; // Suivre si un gestionnaire `click` est attaché
@@ -88,7 +86,7 @@ export function handleCollisions(player) {
 
                 if (!isClickListenerAttached) {
                     console.log("Ajout d'un événement click unique");
-                    info.addEventListener("click", handleClick); // Attacher le gestionnaire
+                    infoUI.addEventListener("click", handleClick); // Attacher le gestionnaire
                     isClickListenerAttached = true;
                 }
             }

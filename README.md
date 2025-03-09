@@ -1,34 +1,86 @@
-## Instructions d'Exécution
+# 🎮 Arcade boy
 
-Pour lancer le jeu, suivez ces étapes après avoir cloné le dépôt :
+## Description
 
-1. **Cloner le Dépôt** : Clonez ce dépôt ou téléchargez les fichiers nécessaires.
+Ce projet est un jeu narratif développé avec **Kaboom.js**. Il met en scène une borne d'arcade rétro où le joueur peut interagir avec différents personnages et objets pour faire évoluer les relations et progresser dans l’histoire.
 
-2. **Naviguer dans le Répertoire du Jeu** : Ouvrez votre terminal et naviguez jusqu'au répertoire contenant les fichiers du jeu.
+### **Fonctionnalités principales :**
 
-3. **Installer les Dépendances** : Exécutez la commande suivante pour installer les dépendances nécessaires :
-    ```bash
-    npm install
-    ```
-
-4. **Construire le Projet** : Exécutez la commande suivante pour regrouper et préparer les fichiers JavaScript :
-    ```bash
-    npm run build
-    ```
-
-5. **Démarrer un Serveur Local** : Ouvrez le fichier `index.html` sur un serveur local. Vous pouvez utiliser un outil comme Live Server dans Visual Studio Code pour cela.
-
-6. **Accéder au Jeu** : Ouvrez votre navigateur web et accédez à l'adresse :
-    ```
-    http://localhost:5500
-    ```
-   (ou le port que vous avez configuré dans Live Server)
+- 🎮 **Déplacement** avec les **touches fléchées**.
+- 🎒 **Interaction** via la **touche "I"** pour ouvrir l’inventaire/résumé des relations ; et en cliquant sur les zones de dialogues.
+- 🗨️ **Dialogue dynamique** influençant les relations avec les personnages.
+- 🎨 **Style 32 bits**, inspiré des classiques des années 80-90.
 
 ---
 
-### Remarques :
+## 📸 **Aperçu du Jeu**
 
-- **Live Server** : Si vous utilisez Visual Studio Code, vous pouvez installer l'extension "Live Server" pour lancer rapidement un serveur local en cliquant avec le bouton droit sur le fichier `index.html` et en sélectionnant "Open with Live Server".
-- **Dépôt** : Assurez-vous que tous les fichiers nécessaires sont présents dans le répertoire du jeu avant d'exécuter les commandes.
+![screenshoot.png](sprites/screenshoot.png)
 
-Ces instructions devraient vous guider à travers le processus de configuration et de démarrage du jeu. Si vous avez besoin d'aide supplémentaire ou de précisions, n'hésitez pas à demander !
+---
+
+## 🚀 **Instructions d’Installation et d’Exécution**
+
+### **1. Cloner le Dépôt**
+
+```bash
+git clone https://github.com/votre-utilisateur/nom-du-repo.git
+cd nom-du-repo
+```
+
+### **2. Installer les Dépendances**
+
+Assurez-vous d’avoir **Node.js** installé, puis exécutez :
+
+```bash
+npm install
+```
+
+### **3. Construire le Projet**
+
+```bash
+npm run build
+```
+
+### **4. Démarrer le Serveur Local**
+
+Si vous utilisez **Visual Studio Code**, ouvrez `index.html` avec **Live Server**.  
+Sinon, vous pouvez démarrer un serveur simple avec **Python** :
+
+```bash
+python -m http.server
+```
+
+Puis, ouvrez votre navigateur à **http://localhost:8000/** *(ou le port défini)*.
+
+---
+
+## 🛠 **Modules et Librairies Utilisés**
+
+- [**Kaboom.js**](https://kaboomjs.com/) – Moteur de jeu en JavaScript.
+- **Live Server** *(optionnel)* – Extension **Visual Studio Code** pour lancer un serveur local.
+
+---
+
+## 📝 **Sources et Licence**
+
+Ce projet contient :
+
+- Des éléments de **code réutilisé** avec modifications, provenant de la documentation officielle de **Kaboom.js**.
+- Des ressources graphiques **créées sur mesure**, sauf indication contraire dans le dossier `/sprites`.
+
+📜 **Licence : MIT**
+👨‍🎓 **Développé dans le cadre du cours** *Fiction interactive* dispensé par **Isaac Pante** (*Humanités numériques, Lettres, UNIL*).
+
+---
+
+### 🌍 **Démo en Ligne**
+
+Si vous avez hébergé le projet sur **GitHub Pages** ou **Netlify**, ajoutez ici le lien :
+
+🔗 [Démo du jeu](https://votre-lien-ici.com)
+
+---
+
+💡 *Si vous avez des questions ou suggestions, n'hésitez pas à ouvrir une issue !*  
+🚀 *Bon jeu !*

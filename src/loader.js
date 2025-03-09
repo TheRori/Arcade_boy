@@ -61,6 +61,7 @@ export function loadFonts() {
 export function loadSprites() {
     const sprites = [
         { name: "ld1", path: "sprites/ld1.png" },
+        { name: "menu", path: "sprites/menu.png" },
         { name: "ld2", path: "sprites/ld2.png" },
         { name: "ld3", path: "sprites/ld3.png" },
         { name: "ld4", path: "sprites/ld4.png" },

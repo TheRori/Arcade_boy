@@ -2,7 +2,7 @@
 import { k } from "./kaboomCtx";
 import { loadAllResources } from "./loader";
 import { fetchMapData } from "./maps";
-import { loadScene, levelScene, mainMenuScene, howToPlayScene } from "./scenes";
+import {loadScene, levelScene, mainMenuScene, howToPlayScene, creditsScene} from "./scenes";
 
 // Charger les ressources (sprites, sons, polices, etc.)
 loadAllResources();
@@ -83,7 +83,7 @@ levelScene(
     "garage", // Nom de la carte (pour JSON)
     "garage", // Sprite utilisé
     0, // Position X du joueur
-    400, // Position Y du joueur
+    k.height()/2, // Position Y du joueur
     "lvl1" // Musique associée
 );
 
@@ -92,7 +92,7 @@ levelScene(
     "thomas_bar",
     "thomas_bar",
     k.width() / 2,
-    k.height()
+    k.height()/2
 );
 
 levelScene(
@@ -100,7 +100,7 @@ levelScene(
     "bar",
     "bar",
     k.width() / 2,
-    k.height(),
+    k.height()/2,
     "lvl2"
 );
 
@@ -109,7 +109,7 @@ levelScene(
     "eric_bar",
     "eric_bar",
     k.width() / 2,
-    k.height()
+    k.height()/2
 );
 
 levelScene(
@@ -117,6 +117,7 @@ levelScene(
     "university",
     "university",
     k.width() / 2,
+    k.height()/2,
     'lvl3'
 );
 
@@ -126,5 +127,7 @@ mainMenuScene();
 // Définir la scène "Comment jouer"
 howToPlayScene();
 
+// creditsScene();
+
 // Démarrer avec le menu principal
-k.go("loadScreen4");
+k.go("mainMenu");

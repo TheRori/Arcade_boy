@@ -17,15 +17,9 @@ export const basicGame = document.getElementById('basic-game-container');
 // Game State
 export const selectedChoices = {};
 export let lvlMusic = '';
-export let statePlayer = [{"Rpapa" : 1},{"Rcamille" : 0},{"Réric" : 0},{"Rarnaud": 0},{"Rthomas": 0},{"Scamille" : false}, {"Sarnaud" : false}];
+export let statePlayer = [{"Rpapa" : 0},{"Rcamille" : 0},{"Réric" : 0},{"Rarnaud": 0},{"Rthomas": 0},{"Scamille" : false}, {"Sarnaud" : false}];
 export let statePlayerlvl2 = [];
-export let inventoryPlayer = [    {
-    "id": 998,
-    "speech": "«L'Apple II n'a pas été conçu comme un produit ordinaire. Il utilisait partout des astuces farfelues.»",
-    "activation": 45,
-    "targetObj": 4,
-    "img": "sprites/appleII_mag.jpg"
-}];
+export let inventoryPlayer = [  ];
 export const resize = [];
 export let levelEnd = false;
 export let currentLevel;

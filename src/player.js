@@ -4,10 +4,10 @@ import { handleCollisions } from "./events.js";
 import {map, mapX} from "./maps";
 import {direction} from "./globals";
 
-export function createPlayer() {
+export function createPlayer(x,y) {
     // Créez le personnage avec un sprite, une position et une échelle initiale
     let posx;
-    let posy = map.height -400;
+    let posy = y;
     if (direction === 'left'){
         posx = k.width();
     }
@@ -15,7 +15,7 @@ export function createPlayer() {
         posx = 0;
     }
     else {
-        posx = mapX;
+        posx = x;
     }
     const player = k.add([
         k.sprite("teen"),
