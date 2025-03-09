@@ -76,8 +76,6 @@ Ce projet contient :
 
 ### 🌍 **Démo en Ligne**
 
-Si vous avez hébergé le projet sur **GitHub Pages** ou **Netlify**, ajoutez ici le lien :
-
 🔗 [Démo du jeu](https://67cdbd41e690ab000838f7f5--therori.netlify.app/)
 
 ---
