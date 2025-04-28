@@ -4689,39 +4689,58 @@ vec4 frag(vec2 pos, vec2 uv, vec4 color, sampler2D tex) {
 
   // src/events.js
   function handleKeyboardEvents(player, stopAnimations, mapTransitions) {
-    k.onKeyDown((key) => {
+    let lastKeyPressed = null;
+    k.onKeyPress((key) => {
+      if (["right", "left", "up", "down"].includes(key)) {
+        lastKeyPressed = key;
+      }
+    });
+    k.onKeyRelease((key) => {
+      if (["right", "left", "up", "down"].includes(key)) {
+        if (!k.isKeyDown(lastKeyPressed)) {
+          if (k.isKeyDown("right")) lastKeyPressed = "right";
+          else if (k.isKeyDown("left")) lastKeyPressed = "left";
+          else if (k.isKeyDown("up")) lastKeyPressed = "up";
+          else if (k.isKeyDown("down")) lastKeyPressed = "down";
+          else lastKeyPressed = null;
+        }
+      }
+      if (!["right", "left", "up", "down"].some(k.isKeyDown)) {
+        stopAnimations();
+      }
+    });
+    k.onUpdate(() => {
       const keyMap = {
         right: "walksR",
         left: "walksL",
         up: "walksU",
         down: "walksD"
       };
-      if (k.isKeyDown("right")) {
-        player.flipX = true;
-        if (player.curAnim() !== keyMap.right) player.play(keyMap.right);
-        player.move(player.speed, 0);
-        if (player.pos.x >= k.width() && mapR) {
-          setDirection("right");
-          k.go(mapR);
+      if (lastKeyPressed) {
+        if (lastKeyPressed === "right") {
+          player.flipX = true;
+          if (player.curAnim() !== keyMap.right) player.play(keyMap.right);
+          player.move(player.speed, 0);
+          if (player.pos.x >= k.width() && mapR) {
+            setDirection("right");
+            k.go(mapR);
+          }
+        } else if (lastKeyPressed === "left") {
+          player.flipX = false;
+          if (player.curAnim() !== keyMap.left) player.play(keyMap.left);
+          player.move(-player.speed, 0);
+          if (player.pos.x < 0 && mapL) {
+            setDirection("left");
+            k.go(mapL);
+          }
+        } else if (lastKeyPressed === "up") {
+          if (player.curAnim() !== keyMap.up) player.play(keyMap.up);
+          player.move(0, -player.speed);
+        } else if (lastKeyPressed === "down") {
+          if (player.curAnim() !== keyMap.down) player.play(keyMap.down);
+          player.move(0, player.speed);
         }
-      } else if (k.isKeyDown("left")) {
-        player.flipX = false;
-        if (player.curAnim() !== keyMap.left) player.play(keyMap.left);
-        player.move(-player.speed, 0);
-        if (player.pos.x < 0 && mapL) {
-          setDirection("left");
-          k.go(mapL);
-        }
-      } else if (k.isKeyDown("up")) {
-        if (player.curAnim() !== keyMap.up) player.play(keyMap.up);
-        player.move(0, -player.speed);
-      } else if (k.isKeyDown("down")) {
-        if (player.curAnim() !== keyMap.down) player.play(keyMap.down);
-        player.move(0, player.speed);
       }
-    });
-    k.onKeyRelease(() => {
-      stopAnimations();
     });
     k.onKeyPress("i", () => {
       playSound("toggleUI");
