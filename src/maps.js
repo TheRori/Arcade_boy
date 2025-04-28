@@ -207,9 +207,30 @@ export async function markObjectAsDeleted(name) {
 
 // Fonction pour redimensionner la carte
 export function resizeBackground(map) {
+    if (!map || !map.width || !map.height) return;
+    
     const scaleX = k.width() / map.width;
     const scaleY = k.height() / map.height;
-
-
     map.scale = k.vec2(scaleX, scaleY);
+    console.log("Carte redimensionnée:", scaleX, scaleY);
+}
+
+// Fonction pour redimensionner toutes les cartes actives
+export function resizeAllBackgrounds() {
+    // Redimensionner la carte principale si elle existe
+    if (map && map.width && map.height) {
+        console.log("Redimensionnement de la carte principale");
+        resizeBackground(map);
+    }
+    
+    // Redimensionner également la carte de la scène actuelle si elle est différente
+    if (window.currentSceneMap && window.currentSceneMap.width && window.currentSceneMap.height) {
+        console.log("Redimensionnement de la carte de scène");
+        resizeBackground(window.currentSceneMap);
+    }
+    
+    // Forcer la mise à jour de l'affichage
+    k.debug.inspect = false;
+    k.debug.paused = false;
+    k.debug.timeScale = 1;
 }

@@ -129,3 +129,39 @@ aboutScene();
 
 // Démarrer avec le menu principal
 k.go("mainMenu");
+
+// --- Redimensionnement par rechargement de la page ---
+let resizeTimeout;
+let currentSceneName = "mainMenu"; // Variable pour suivre la scène actuelle
+
+// Intercepter les changements de scène
+const originalGo = k.go;
+k.go = (sceneName) => {
+    currentSceneName = sceneName;
+    console.log("Changement de scène vers:", sceneName);
+    return originalGo(sceneName);
+};
+
+window.addEventListener('resize', () => {
+    // Utiliser un délai pour éviter les rechargements multiples pendant le redimensionnement
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+        // Sauvegarder la scène actuelle dans l'URL
+        window.location.href = window.location.pathname + '?scene=' + currentSceneName;
+    }, 500); // Attendre 500ms après la fin du redimensionnement
+});
+
+// Vérifier s'il faut restaurer une scène au chargement (depuis l'URL)
+window.addEventListener('DOMContentLoaded', () => {
+    // Récupérer le paramètre de scène depuis l'URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const sceneParam = urlParams.get('scene');
+    
+    if (sceneParam && sceneParam !== 'mainMenu') {
+        console.log("Restauration de la scène depuis l'URL:", sceneParam);
+        // Attendre que tout soit initialisé
+        setTimeout(() => {
+            k.go(sceneParam);
+        }, 1000);
+    }
+});

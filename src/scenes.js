@@ -18,10 +18,21 @@ export function loadScene(name, sprite, textContent, nextScene, music = null) {
         // Create the sprite and apply resizing after initialization
         const map = k.add([k.sprite(sprite), k.pos(0), k.scale(1)]);
         setlevelLoaded(false);
+        
+        // Rendre la map accessible globalement pour le redimensionnement
+        window.currentSceneMap = map;
+        
         // Use `k.onUpdate` to ensure dimensions are available
         k.onUpdate(() => {
             if (map.width && map.height) {
                 resizeBackground(map); // Resize only when dimensions are available
+            }
+        });
+        
+        // Réagir aux événements de redimensionnement
+        k.on("resize_event", () => {
+            if (map && map.width && map.height) {
+                resizeBackground(map);
             }
         });
 
@@ -80,33 +91,52 @@ export function loadScene(name, sprite, textContent, nextScene, music = null) {
 // Fonction pour créer une scène de niveau
 export function levelScene(levelNumber, mapName, sprite, posX, posY, music = null) {
     k.scene(`level${levelNumber}`, () => {
-        // Réinitialiser l'état global si nécessaire
-        if (music){
-            stopCurrentLoop()
-            setLvlMusic(music);
-            setCurrentBackgroundMusic(music);
-            playLoop();
-        }
+        // Initialiser le niveau
         setCurrentLevel(levelNumber);
-        console.log(getCurrentLevel())
-        if (getCurrentLevel()===2 && !levelLoaded){
+        console.log("Niveau actuel :", getCurrentLevel());
+        
+        // Gestion de l'état du niveau
+        if (getCurrentLevel() === 2 && !levelLoaded) {
             console.log("level loaded");
             setPlayerStatelvl2(statePlayer);
         }
         if (getCurrentLevel() === 0 || getCurrentLevel() === 2 || getCurrentLevel() === 4) {
             setlevelLoaded(true);
         }
+        
+        // Réinitialiser les éléments UI
         const doc = document.getElementById("doc");
         const imgHTMLContainer = document.getElementById("imgContainer");
         const choix = document.getElementById("choix");
         const machine = document.getElementById("machine");
-
+        
         doc.src = "";
         imgHTMLContainer.style.display = "none";
+        dialogue.innerHTML = "";
         choix.style.display = "none";
         machine.src = "";
-
+        
+        // Musique
+        if (music){
+            stopCurrentLoop()
+            setLvlMusic(music);
+            setCurrentBackgroundMusic(music);
+            playLoop();
+        }
+        
+        // Créer la carte et les objets interactifs
         createMap(levelNumber, sprite, posX, posY);
+        
+        // Réagir aux événements de redimensionnement
+        k.on("resize_event", () => {
+            // Redimensionner la carte du niveau
+            import('./maps').then(module => {
+                if (module.map && module.map.width && module.map.height) {
+                    module.resizeBackground(module.map);
+                }
+            });
+        });
+        
         updateInventory();
         setupDialogueOverlay();
     });
