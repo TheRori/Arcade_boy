@@ -126,16 +126,18 @@
 
     #info-container {
         display: none;
-        width: 45%;
+        min-width: 180px;
+        max-width: 60vw;
         border: 4px dashed #f39c12; /* Bordure pixelisée orange pour un style rétro */
-        top: 94.5%;
-        margin-left: auto;
-        margin-right: auto;
+        left: 50%;
+        bottom: 2.5vh;
+        transform: translateX(-50%);
+        margin: 0;
         justify-content: center;
         align-items: center;
         text-align: center;
-        position: relative;
-        opacity: 0.9;
+        position: fixed;
+        opacity: 0.95;
         z-index: 80;
         line-height: 1.3em;
         background: #000; /* Fond noir */
@@ -144,17 +146,11 @@
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.8); /* Effet d'ombre */
     }
 
-    img#question {
-        float: left;
-        width: 20px; /* Taille adaptée pour une meilleure intégration */
-        height: 20px;
-        margin-right: 8px; /* Espacement entre l'icône et le texte */
-    }
-
     #info {
-        float: left; /* Alignement à gauche pour être proche de l'icône */
-        font-size: 0.9rem; /* Taille de texte ajustée */
-        margin-top: 1%; /* Ajustement pour aligner avec l'icône */
+        float: none;
+        font-size: 1rem;
+        margin: 0;
+        word-break: break-word;
     }
 
     .textbox {
