@@ -86,7 +86,9 @@ export async function speak(categorie, idObj, idConv, endSpeech, mood) {
 
         nextArrow.style.display = "block";
         nextArrow.addEventListener("click", onNext);
-        k.onKeyPress("e", onNext);}
+        k.onKeyPress("e", onNext);
+        k.onKeyPress("space", onNext);
+        }
     } else {
         resetDialogueUI();
     }
@@ -226,4 +228,3 @@ export function transitionLevel(screen) {
     setDirection('');
     k.go(screen);
 }
-

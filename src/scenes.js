@@ -48,10 +48,19 @@ export function loadScene(name, sprite, textContent, nextScene, music = null) {
 
             // Remove this event listener to avoid duplicates
             nextArrow.removeEventListener("click", onNext);
+            window.removeEventListener("keydown", onSpace);
 
             // Transition to the next scene
             k.go(nextScene);
         };
+
+        // Permettre de passer avec ESPACE
+        function onSpace(e) {
+            if (e.code === "Space" || e.key === " ") {
+                onNext();
+            }
+        }
+        window.addEventListener("keydown", onSpace);
 
         // Add the event listener
         nextArrow.addEventListener("click", onNext);
@@ -61,6 +70,7 @@ export function loadScene(name, sprite, textContent, nextScene, music = null) {
             textBox.style.display = "none";
             nextArrow.style.display = "none";
             nextArrow.removeEventListener("click", onNext);
+            window.removeEventListener("keydown", onSpace);
         });
     });
 }
@@ -278,8 +288,14 @@ export function howToPlayForcedScene() {
             k.text(
                 "Utilisez les touches fléchées.\n" +
                 "Appuyez sur 'I' pour ouvrir l'inventaire.\n" +
-                "Interagissez avec les personnages et objets pour progresser dans le jeu.",
-                { font: "PressStart2P", size: 16 }
+                "Quand une seule action est possible à l'écran (ex : parler), validez-la directement avec Entrée ou Espace.\n" +
+                "Appuyez sur Espace pour passer cet écran.\n" +
+                "Sinon, cliquez ou utilisez la souris pour choisir.\n" +
+                "Interagissez avec les personnages et objets pour progresser.\n",
+                {
+                    font: "PressStart2P",
+                    size: 16,
+                }
             ),
             k.pos(50, 100),
             k.color(255, 255, 255),
@@ -315,6 +331,13 @@ export function howToPlayForcedScene() {
         k.onClick("continueButton", () => {
             playSound("choice");
             k.go("loadScreen1"); // Lancer le jeu après l'aide
+        });
+        // Avancer avec espace sur l'aide obligatoire
+        k.onKeyPress((key) => {
+            if (key === "space" || key === " ") {
+                playSound("choice");
+                k.go("loadScreen1");
+            }
         });
     });
 }
@@ -374,4 +397,3 @@ export function aboutScene() {
         });
     });
 }
-

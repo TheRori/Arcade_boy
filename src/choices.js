@@ -32,6 +32,7 @@ export function addChoices(dial, categorie, speaker, idConv, idObj, endSpeech) {
     }).join('');
 
     setupChoiceEventListeners(choices, categorie, idConv, idObj, speaker, endSpeech);
+    setupSingleChoiceKeyboard(choices, categorie, idConv, idObj, speaker, endSpeech);
 }
 
 function ensureSelectedChoicesEntry(idConv) {
@@ -67,6 +68,24 @@ function setupChoiceEventListeners(choices, categorie, idConv, idObj, speaker, e
         el.addEventListener('click', () => handleChoiceClick(el, choices, categorie, idConv, idObj, speaker, endSpeech, mood));
         el.addEventListener('mouseover', () => k.play('choice'));
     });
+}
+
+function setupSingleChoiceKeyboard(choices, categorie, idConv, idObj, speaker, endSpeech, mood) {
+    // Si un seul choix visible, permettre validation par Entrée ou Espace
+    const visibleChoices = choices.filter((choice, i) => !isChoiceSkipped(choice, idConv, i) && (!choice.need || areAllConditionsMet(choice.need)));
+    if (visibleChoices.length === 1) {
+        function onKeyDown(e) {
+            if (e.key === "Enter" || e.key === " ") {
+                // Simule un clic sur le seul choix visible
+                const el = document.querySelector('.choixVar');
+                if (el) {
+                    handleChoiceClick(el, choices, categorie, idConv, idObj, speaker, endSpeech, mood);
+                }
+                window.removeEventListener('keydown', onKeyDown);
+            }
+        }
+        window.addEventListener('keydown', onKeyDown);
+    }
 }
 
 export function processChoiceModifiers(modifiers, mood) {
@@ -177,4 +196,3 @@ function executeAction(action, endSpeech) {
         displayBasicGame();
     }
 }
-

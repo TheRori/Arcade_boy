@@ -89,6 +89,15 @@ export function handleCollisions(player) {
                     infoUI.addEventListener("click", handleClick); // Attacher le gestionnaire
                     isClickListenerAttached = true;
                 }
+
+                // Ajout : valider interaction avec ESPACE
+                function onSpace(e) {
+                    if (e.code === "Space") {
+                        handleInteraction(currentObject);
+                        window.removeEventListener("keydown", onSpace);
+                    }
+                }
+                window.addEventListener("keydown", onSpace);
             }
         }
     });
@@ -128,6 +137,3 @@ function handleInteraction(obj) {
         speak("documents", obj.idObjs, obj.idConv, () => console.log("Dialogue terminé"));
     }
 }
-
-
-

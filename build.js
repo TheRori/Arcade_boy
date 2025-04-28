@@ -4159,6 +4159,7 @@ vec4 frag(vec2 pos, vec2 uv, vec4 color, sampler2D tex) {
       return buildChoiceHTML(choice, i2);
     }).join("");
     setupChoiceEventListeners(choices, categorie, idConv, idObj, speaker, endSpeech);
+    setupSingleChoiceKeyboard(choices, categorie, idConv, idObj, speaker, endSpeech);
   }
   function ensureSelectedChoicesEntry(idConv) {
     if (!selectedChoices[idConv]) {
@@ -4188,6 +4189,21 @@ vec4 frag(vec2 pos, vec2 uv, vec4 color, sampler2D tex) {
       el.addEventListener("click", () => handleChoiceClick(el, choices, categorie, idConv, idObj, speaker, endSpeech, mood));
       el.addEventListener("mouseover", () => k.play("choice"));
     });
+  }
+  function setupSingleChoiceKeyboard(choices, categorie, idConv, idObj, speaker, endSpeech, mood) {
+    const visibleChoices = choices.filter((choice, i2) => !isChoiceSkipped(choice, idConv, i2) && (!choice.need || areAllConditionsMet(choice.need)));
+    if (visibleChoices.length === 1) {
+      let onKeyDown = function(e) {
+        if (e.key === "Enter" || e.key === " ") {
+          const el = document.querySelector(".choixVar");
+          if (el) {
+            handleChoiceClick(el, choices, categorie, idConv, idObj, speaker, endSpeech, mood);
+          }
+          window.removeEventListener("keydown", onKeyDown);
+        }
+      };
+      window.addEventListener("keydown", onKeyDown);
+    }
   }
   function processChoiceModifiers(modifiers, mood) {
     if (!modifiers || modifiers.length === 0) return mood;
@@ -4404,6 +4420,7 @@ vec4 frag(vec2 pos, vec2 uv, vec4 color, sampler2D tex) {
         nextArrow.style.display = "block";
         nextArrow.addEventListener("click", onNext);
         k.onKeyPress("e", onNext);
+        k.onKeyPress("space", onNext);
       }
     } else {
       resetDialogueUI();
@@ -4724,6 +4741,12 @@ vec4 frag(vec2 pos, vec2 uv, vec4 color, sampler2D tex) {
     k.onCollide("player", "*", (player2, obj) => {
       if (obj.idConv !== void 0) {
         if (currentObject !== obj) {
+          let onSpace = function(e) {
+            if (e.code === "Space") {
+              handleInteraction(currentObject);
+              window.removeEventListener("keydown", onSpace);
+            }
+          };
           currentObject = obj;
           updateInteractionUI(obj);
           if (!isClickListenerAttached) {
@@ -4731,6 +4754,7 @@ vec4 frag(vec2 pos, vec2 uv, vec4 color, sampler2D tex) {
             infoUI2.addEventListener("click", handleClick);
             isClickListenerAttached = true;
           }
+          window.addEventListener("keydown", onSpace);
         }
       }
     });
@@ -5006,13 +5030,21 @@ vec4 frag(vec2 pos, vec2 uv, vec4 color, sampler2D tex) {
         textBox.style.display = "none";
         nextArrow.style.display = "none";
         nextArrow.removeEventListener("click", onNext);
+        window.removeEventListener("keydown", onSpace);
         k.go(nextScene);
       };
+      function onSpace(e) {
+        if (e.code === "Space" || e.key === " ") {
+          onNext();
+        }
+      }
+      window.addEventListener("keydown", onSpace);
       nextArrow.addEventListener("click", onNext);
       k.onDestroy(() => {
         textBox.style.display = "none";
         nextArrow.style.display = "none";
         nextArrow.removeEventListener("click", onNext);
+        window.removeEventListener("keydown", onSpace);
       });
     });
   }
@@ -5064,7 +5096,6 @@ vec4 frag(vec2 pos, vec2 uv, vec4 color, sampler2D tex) {
       ]);
       const startOption = addInteractiveMenuOption("JOUER", k.vec2(k.width() / 2 - 200, k.height() / 2 - 80), "start", k.rgb(255, 255, 0), k.rgb(255, 50, 50));
       const aboutOption = addInteractiveMenuOption("A PROPOS DU JEU", k.vec2(k.width() / 2 - 200, k.height() / 2 + 20), "about", k.rgb(255, 255, 0), k.rgb(255, 50, 50));
-      const creditsOption = addInteractiveMenuOption("CREDITS", k.vec2(k.width() / 2 - 200, k.height() / 2 + 120), "credits", k.rgb(255, 255, 0), k.rgb(255, 50, 50));
       k.onUpdate(() => {
         if (title.pulsating) {
           title.timer += k.dt();
@@ -5092,10 +5123,6 @@ vec4 frag(vec2 pos, vec2 uv, vec4 color, sampler2D tex) {
       k.onClick("about", () => {
         playSound("choice");
         k.go("about");
-      });
-      k.onClick("credits", () => {
-        playSound("choice");
-        k.go("credits");
       });
     });
   }
@@ -5177,7 +5204,7 @@ vec4 frag(vec2 pos, vec2 uv, vec4 color, sampler2D tex) {
     k.scene("howToPlayForced", () => {
       k.setBackground(k.BLACK);
       k.add([
-        k.text("AIDE - D\xC9PLACEMENT", {
+        k.text("AIDE - DEPLACEMENT", {
           font: "PressStart2P",
           size: 24
         }),
@@ -5186,8 +5213,11 @@ vec4 frag(vec2 pos, vec2 uv, vec4 color, sampler2D tex) {
       ]);
       k.add([
         k.text(
-          "Utilisez les touches fl\xE9ch\xE9es ou la souris pour vous d\xE9placer.\nAppuyez sur 'I' pour ouvrir l'inventaire.\nInteragissez avec les personnages et objets pour progresser dans le jeu.",
-          { font: "PressStart2P", size: 16 }
+          "Utilisez les touches fl\xE9ch\xE9es.\nAppuyez sur 'I' pour ouvrir l'inventaire.\nQuand une seule action est possible \xE0 l'\xE9cran (ex : parler), validez-la directement avec Entr\xE9e ou Espace.\nAppuyez sur Espace pour passer cet \xE9cran.\nSinon, cliquez ou utilisez la souris pour choisir.\nInteragissez avec les personnages et objets pour progresser.\n",
+          {
+            font: "PressStart2P",
+            size: 16
+          }
         ),
         k.pos(50, 100),
         k.color(255, 255, 255)
@@ -5222,6 +5252,12 @@ vec4 frag(vec2 pos, vec2 uv, vec4 color, sampler2D tex) {
       k.onClick("continueButton", () => {
         playSound("choice");
         k.go("loadScreen1");
+      });
+      k.onKeyPress((key) => {
+        if (key === "space" || key === " ") {
+          playSound("choice");
+          k.go("loadScreen1");
+        }
       });
     });
   }
@@ -5273,68 +5309,6 @@ vec4 frag(vec2 pos, vec2 uv, vec4 color, sampler2D tex) {
       });
       k.onClick("backButton", () => {
         playSound("choice");
-        k.go("mainMenu");
-      });
-    });
-  }
-  function creditsScene() {
-    k.scene("credits", () => {
-      k.setBackground(k.BLACK);
-      k.add([
-        k.text("CREDITS", {
-          font: "PressStart2P",
-          size: 24
-        }),
-        k.pos(k.width() / 2, 30),
-        k.color(0, 255, 30)
-      ]);
-      const creditsText = k.add([
-        k.text(
-          "D\xC9VELOPPEMENT\n\nNicolas Bovet\n\n" + {
-            font: "PressStart2P",
-            size: 16,
-            align: "center"
-          }
-        ),
-        k.pos(k.width() / 2, 120),
-        k.color(255, 255, 255),
-        {
-          defaultColor: k.rgb(255, 255, 255),
-          timer: 0,
-          scrolling: true
-        }
-      ]);
-      k.add([
-        k.text("RETOUR", {
-          font: "PressStart2P",
-          size: 16
-        }),
-        k.pos(k.width() / 2, k.height() - 50),
-        k.area(),
-        k.color(255, 255, 0),
-        {
-          defaultColor: k.rgb(255, 255, 0),
-          hoverColor: k.rgb(255, 50, 50)
-        },
-        "backButton",
-        "menuOption"
-      ]);
-      k.onUpdate(() => {
-        if (creditsText.scrolling) {
-          creditsText.timer += k.dt();
-          const colorPulse = Math.sin(creditsText.timer * 2) * 0.2 + 0.8;
-          creditsText.color = k.rgb(
-            creditsText.defaultColor.r * colorPulse,
-            creditsText.defaultColor.g * colorPulse,
-            creditsText.defaultColor.b * colorPulse
-          );
-        }
-      });
-      k.onClick("backButton", () => {
-        playSound("choice");
-        k.go("mainMenu");
-      });
-      k.onKeyPress("escape", () => {
         k.go("mainMenu");
       });
     });
@@ -5454,6 +5428,5 @@ vec4 frag(vec2 pos, vec2 uv, vec4 color, sampler2D tex) {
   howToPlayScene();
   howToPlayForcedScene();
   aboutScene();
-  creditsScene();
   k.go("mainMenu");
 })();
