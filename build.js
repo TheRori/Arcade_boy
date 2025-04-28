@@ -5062,8 +5062,9 @@ vec4 frag(vec2 pos, vec2 uv, vec4 color, sampler2D tex) {
           pulsating: true
         }
       ]);
-      const startOption = addInteractiveMenuOption("START", k.vec2(k.width() / 2 - 200, k.height() / 2 - 80), "start", k.rgb(255, 255, 0), k.rgb(255, 50, 50));
-      const howToPlayOption = addInteractiveMenuOption("COMMENT JOUER ?", k.vec2(k.width() / 2 - 200, k.height() / 2 + 20), "howToPlay", k.rgb(255, 255, 0), k.rgb(255, 50, 50));
+      const startOption = addInteractiveMenuOption("JOUER", k.vec2(k.width() / 2 - 200, k.height() / 2 - 80), "start", k.rgb(255, 255, 0), k.rgb(255, 50, 50));
+      const aboutOption = addInteractiveMenuOption("A PROPOS DU JEU", k.vec2(k.width() / 2 - 200, k.height() / 2 + 20), "about", k.rgb(255, 255, 0), k.rgb(255, 50, 50));
+      const creditsOption = addInteractiveMenuOption("CREDITS", k.vec2(k.width() / 2 - 200, k.height() / 2 + 120), "credits", k.rgb(255, 255, 0), k.rgb(255, 50, 50));
       k.onUpdate(() => {
         if (title.pulsating) {
           title.timer += k.dt();
@@ -5086,11 +5087,15 @@ vec4 frag(vec2 pos, vec2 uv, vec4 color, sampler2D tex) {
       });
       k.onClick("start", () => {
         playSound("choice");
-        k.go("loadScreen1");
+        k.go("howToPlayForced");
       });
-      k.onClick("howToPlay", () => {
+      k.onClick("about", () => {
         playSound("choice");
-        k.go("howToPlay");
+        k.go("about");
+      });
+      k.onClick("credits", () => {
+        playSound("choice");
+        k.go("credits");
       });
     });
   }
@@ -5164,6 +5169,172 @@ vec4 frag(vec2 pos, vec2 uv, vec4 color, sampler2D tex) {
         k.go("mainMenu");
       });
       k.onKeyPress(() => {
+        k.go("mainMenu");
+      });
+    });
+  }
+  function howToPlayForcedScene() {
+    k.scene("howToPlayForced", () => {
+      k.setBackground(k.BLACK);
+      k.add([
+        k.text("AIDE - D\xC9PLACEMENT", {
+          font: "PressStart2P",
+          size: 24
+        }),
+        k.pos(k.width() / 2.8, 30),
+        k.color(0, 255, 30)
+      ]);
+      k.add([
+        k.text(
+          "Utilisez les touches fl\xE9ch\xE9es ou la souris pour vous d\xE9placer.\nAppuyez sur 'I' pour ouvrir l'inventaire.\nInteragissez avec les personnages et objets pour progresser dans le jeu.",
+          { font: "PressStart2P", size: 16 }
+        ),
+        k.pos(50, 100),
+        k.color(255, 255, 255)
+      ]);
+      k.add([
+        k.text("CONTINUER", {
+          font: "PressStart2P",
+          size: 16
+        }),
+        k.pos(k.width() / 2, k.height() - 80),
+        k.area(),
+        k.color(0, 255, 0),
+        {
+          defaultColor: k.rgb(0, 255, 0),
+          hoverColor: k.rgb(255, 50, 50),
+          timer: 0
+        },
+        "continueButton",
+        "menuOption"
+      ]);
+      k.onUpdate("continueButton", (button) => {
+        button.timer += k.dt();
+        if (button.isHovering()) {
+          button.scale = k.vec2(
+            1 + Math.sin(button.timer * 5) * 0.05,
+            1 + Math.sin(button.timer * 5) * 0.05
+          );
+        } else {
+          button.scale = k.vec2(1, 1);
+        }
+      });
+      k.onClick("continueButton", () => {
+        playSound("choice");
+        k.go("loadScreen1");
+      });
+    });
+  }
+  function aboutScene() {
+    k.scene("about", () => {
+      k.setBackground(k.BLACK);
+      k.add([
+        k.text("\xC0 PROPOS DU JEU", {
+          font: "PressStart2P",
+          size: 24
+        }),
+        k.pos(k.width() / 2.8, 30),
+        k.color(0, 255, 30)
+      ]);
+      k.add([
+        k.text(
+          "Arcade Boy est un jeu narratif sur la d\xE9couverte de l'informatique et du jeu vid\xE9o dans les ann\xE9es 80.\n\nCon\xE7u et d\xE9velopp\xE9 par Nicolas Bovet.\n\nCe jeu vise \xE0 transmettre la passion de l'\xE9poque et l'intention de montrer l'\xE9volution des usages num\xE9riques.",
+          { font: "PressStart2P", size: 16 }
+        ),
+        k.pos(50, 100),
+        k.color(255, 255, 255)
+      ]);
+      k.add([
+        k.text("RETOUR", {
+          font: "PressStart2P",
+          size: 16
+        }),
+        k.pos(k.width() / 2, k.height() - 80),
+        k.area(),
+        k.color(255, 255, 0),
+        {
+          defaultColor: k.rgb(255, 255, 0),
+          hoverColor: k.rgb(255, 50, 50),
+          timer: 0
+        },
+        "backButton",
+        "menuOption"
+      ]);
+      k.onUpdate("backButton", (button) => {
+        button.timer += k.dt();
+        if (button.isHovering()) {
+          button.scale = k.vec2(
+            1 + Math.sin(button.timer * 5) * 0.05,
+            1 + Math.sin(button.timer * 5) * 0.05
+          );
+        } else {
+          button.scale = k.vec2(1, 1);
+        }
+      });
+      k.onClick("backButton", () => {
+        playSound("choice");
+        k.go("mainMenu");
+      });
+    });
+  }
+  function creditsScene() {
+    k.scene("credits", () => {
+      k.setBackground(k.BLACK);
+      k.add([
+        k.text("CREDITS", {
+          font: "PressStart2P",
+          size: 24
+        }),
+        k.pos(k.width() / 2, 30),
+        k.color(0, 255, 30)
+      ]);
+      const creditsText = k.add([
+        k.text(
+          "D\xC9VELOPPEMENT\n\nNicolas Bovet\n\n" + {
+            font: "PressStart2P",
+            size: 16,
+            align: "center"
+          }
+        ),
+        k.pos(k.width() / 2, 120),
+        k.color(255, 255, 255),
+        {
+          defaultColor: k.rgb(255, 255, 255),
+          timer: 0,
+          scrolling: true
+        }
+      ]);
+      k.add([
+        k.text("RETOUR", {
+          font: "PressStart2P",
+          size: 16
+        }),
+        k.pos(k.width() / 2, k.height() - 50),
+        k.area(),
+        k.color(255, 255, 0),
+        {
+          defaultColor: k.rgb(255, 255, 0),
+          hoverColor: k.rgb(255, 50, 50)
+        },
+        "backButton",
+        "menuOption"
+      ]);
+      k.onUpdate(() => {
+        if (creditsText.scrolling) {
+          creditsText.timer += k.dt();
+          const colorPulse = Math.sin(creditsText.timer * 2) * 0.2 + 0.8;
+          creditsText.color = k.rgb(
+            creditsText.defaultColor.r * colorPulse,
+            creditsText.defaultColor.g * colorPulse,
+            creditsText.defaultColor.b * colorPulse
+          );
+        }
+      });
+      k.onClick("backButton", () => {
+        playSound("choice");
+        k.go("mainMenu");
+      });
+      k.onKeyPress("escape", () => {
         k.go("mainMenu");
       });
     });
@@ -5281,5 +5452,8 @@ vec4 frag(vec2 pos, vec2 uv, vec4 color, sampler2D tex) {
   );
   mainMenuScene();
   howToPlayScene();
+  howToPlayForcedScene();
+  aboutScene();
+  creditsScene();
   k.go("mainMenu");
 })();

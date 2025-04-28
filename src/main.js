@@ -2,7 +2,7 @@
 import { k } from "./kaboomCtx";
 import { loadAllResources } from "./loader";
 import { fetchMapData } from "./maps";
-import {loadScene, levelScene, mainMenuScene, howToPlayScene, creditsScene} from "./scenes";
+import {loadScene, levelScene, mainMenuScene, howToPlayScene, howToPlayForcedScene, aboutScene} from "./scenes";
 
 // Charger les ressources (sprites, sons, polices, etc.)
 loadAllResources();
@@ -123,11 +123,9 @@ levelScene(
 
 // Définir le menu principal
 mainMenuScene();
-
-// Définir la scène "Comment jouer"
 howToPlayScene();
-
-// creditsScene();
+howToPlayForcedScene();
+aboutScene();
 
 // Démarrer avec le menu principal
 k.go("mainMenu");

@@ -122,13 +122,11 @@ export function mainMenuScene() {
         ]);
 
         // Option de menu START avec effets interactifs
-        const startOption = addInteractiveMenuOption("START", k.vec2(k.width() / 2 - 200, k.height() / 2 - 80), "start", k.rgb(255, 255, 0), k.rgb(255, 50, 50));
+        const startOption = addInteractiveMenuOption("JOUER", k.vec2(k.width() / 2 - 200, k.height() / 2 - 80), "start", k.rgb(255, 255, 0), k.rgb(255, 50, 50));
 
-        // Option COMMENT JOUER avec effets interactifs
-        const howToPlayOption = addInteractiveMenuOption("COMMENT JOUER ?", k.vec2(k.width() / 2 - 200, k.height() / 2 + 20), "howToPlay", k.rgb(255, 255, 0), k.rgb(255, 50, 50));
+        // Option A PROPOS avec effets interactifs
+        const aboutOption = addInteractiveMenuOption("A PROPOS DU JEU", k.vec2(k.width() / 2 - 200, k.height() / 2 + 20), "about", k.rgb(255, 255, 0), k.rgb(255, 50, 50));
 
-        // Ajouter une option CREDITS
-        //const creditsOption = addInteractiveMenuOption("CREDITS", k.vec2(k.width() / 2 - 200, k.height() / 2 + 120), "credits", k.rgb(255, 255, 0), k.rgb(255, 50, 50));
 
         // Pulsation du titre
         k.onUpdate(() => {
@@ -158,19 +156,15 @@ export function mainMenuScene() {
 
         // Actions des boutons
         k.onClick("start", () => {
-            playSound("choice"); // Assurez-vous d'avoir cette fonction dans sounds.js
-            k.go("loadScreen1");
-        });
-
-        k.onClick("howToPlay", () => {
             playSound("choice");
-            k.go("howToPlay");
+            k.go("howToPlayForced"); // Passage obligé par l'aide
         });
 
-        // k.onClick("credits", () => {
-        //     playSound("choice");
-        //     k.go("credits"); // Vous devrez créer cette scène
-        // });
+        k.onClick("about", () => {
+            playSound("choice");
+            k.go("about");
+        });
+
     });
 }
 
@@ -266,81 +260,118 @@ export function howToPlayScene() {
     });
 }
 
-// Nouvelle scène de crédits
-export function creditsScene() {
-    k.scene("credits", () => {
+// Nouvelle scène d'aide obligatoire avant le jeu
+export function howToPlayForcedScene() {
+    k.scene("howToPlayForced", () => {
         k.setBackground(k.BLACK);
-
-        // Titre des crédits
+        // Titre
         k.add([
-            k.text("CREDITS", {
+            k.text("AIDE - DEPLACEMENT", {
                 font: "PressStart2P",
                 size: 24,
             }),
-            k.pos(k.width() / 2, 30),
+            k.pos(k.width() / 2.8, 30),
             k.color(0, 255, 30),
         ]);
-
-        // Contenu des crédits
-        const creditsText = k.add([
+        // Instructions
+        k.add([
             k.text(
-                "DÉVELOPPEMENT\n\n" +
-                "Nicolas Bovet\n\n" +
-                {
-                    font: "PressStart2P",
-                    size: 16,
-                    align: "center"
-                }
+                "Utilisez les touches fléchées.\n" +
+                "Appuyez sur 'I' pour ouvrir l'inventaire.\n" +
+                "Interagissez avec les personnages et objets pour progresser dans le jeu.",
+                { font: "PressStart2P", size: 16 }
             ),
-            k.pos(k.width() / 2, 120),
+            k.pos(50, 100),
             k.color(255, 255, 255),
-            {
-                defaultColor: k.rgb(255, 255, 255),
-                timer: 0,
-                scrolling: true
-            }
         ]);
+        // Bouton Continuer
+        k.add([
+            k.text("CONTINUER", {
+                font: "PressStart2P",
+                size: 16,
+            }),
+            k.pos(k.width() / 2, k.height() - 80),
+            k.area(),
+            k.color(0, 255, 0),
+            {
+                defaultColor: k.rgb(0, 255, 0),
+                hoverColor: k.rgb(255, 50, 50),
+                timer: 0
+            },
+            "continueButton",
+            "menuOption",
+        ]);
+        k.onUpdate("continueButton", (button) => {
+            button.timer += k.dt();
+            if (button.isHovering()) {
+                button.scale = k.vec2(
+                    1 + Math.sin(button.timer * 5) * 0.05,
+                    1 + Math.sin(button.timer * 5) * 0.05
+                );
+            } else {
+                button.scale = k.vec2(1, 1);
+            }
+        });
+        k.onClick("continueButton", () => {
+            playSound("choice");
+            k.go("loadScreen1"); // Lancer le jeu après l'aide
+        });
+    });
+}
 
-        // Bouton de retour
+// Nouvelle scène "À propos du jeu"
+export function aboutScene() {
+    k.scene("about", () => {
+        k.setBackground(k.BLACK);
+        k.add([
+            k.text("À PROPOS DU JEU", {
+                font: "PressStart2P",
+                size: 24,
+            }),
+            k.pos(k.width() / 2.8, 30),
+            k.color(0, 255, 30),
+        ]);
+        k.add([
+            k.text(
+                "Arcade Boy est un jeu narratif sur la découverte de l'informatique et du jeu vidéo dans les années 80.\n\n" +
+                "Conçu et développé par Nicolas Bovet.\n\n" +
+                "Ce jeu vise à transmettre la passion de l'époque et l'intention de montrer l'évolution des usages numériques.",
+                { font: "PressStart2P", size: 16 }
+            ),
+            k.pos(50, 100),
+            k.color(255, 255, 255),
+        ]);
         k.add([
             k.text("RETOUR", {
                 font: "PressStart2P",
                 size: 16,
             }),
-            k.pos(k.width() / 2, k.height() - 50),
+            k.pos(k.width() / 2, k.height() - 80),
             k.area(),
             k.color(255, 255, 0),
             {
                 defaultColor: k.rgb(255, 255, 0),
-                hoverColor: k.rgb(255, 50, 50)
+                hoverColor: k.rgb(255, 50, 50),
+                timer: 0
             },
             "backButton",
             "menuOption",
         ]);
-
-        // Animation du texte des crédits
-        k.onUpdate(() => {
-            // Animation du texte des crédits
-            if (creditsText.scrolling) {
-                creditsText.timer += k.dt();
-                const colorPulse = Math.sin(creditsText.timer * 2) * 0.2 + 0.8;
-                creditsText.color = k.rgb(
-                    creditsText.defaultColor.r * colorPulse,
-                    creditsText.defaultColor.g * colorPulse,
-                    creditsText.defaultColor.b * colorPulse
+        k.onUpdate("backButton", (button) => {
+            button.timer += k.dt();
+            if (button.isHovering()) {
+                button.scale = k.vec2(
+                    1 + Math.sin(button.timer * 5) * 0.05,
+                    1 + Math.sin(button.timer * 5) * 0.05
                 );
+            } else {
+                button.scale = k.vec2(1, 1);
             }
         });
-
-        // Action du bouton de retour
         k.onClick("backButton", () => {
             playSound("choice");
             k.go("mainMenu");
         });
-
-        // Retour au menu avec une touche (pour facilité)
-        k.onKeyPress("escape", () => {
-            k.go("mainMenu");
-        });
     });
 }
+
